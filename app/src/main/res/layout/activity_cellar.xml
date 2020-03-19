@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_background"
+    tools:context=".vue.CellarActivity">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_ajout"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="325dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_add_black_24dp"
+        app:elevation="1dp"
+        app:backgroundTint="@color/grey_light"
+        app:fabSize="normal" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CELLAR" />
+
+    <com.luseen.spacenavigation.SpaceNavigationView
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        app:active_item_color="@color/grey_light"
+        app:centre_button_color="@color/white"
+        app:inactive_item_color="@color/grey_very_light"
+        app:space_background_color="@color/white"
+        app:centre_button_icon="@drawable/ic_photo_camera_black_24dp"
+        app:active_centre_button_background_color="@color/grey_light"
+        app:space_item_icon_size="30dp"
+        app:space_item_icon_only_size="@dimen/space_item_icon_only_size"
+        app:space_item_text_size="@dimen/space_item_text_default_size" />
+
+</RelativeLayout>
