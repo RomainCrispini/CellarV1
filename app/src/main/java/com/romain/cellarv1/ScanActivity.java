@@ -1,4 +1,4 @@
-package com.romain.cellarv1.vue;
+package com.romain.cellarv1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceOnClickListener;
-import com.romain.cellarv1.R;
 
 
 public class ScanActivity extends AppCompatActivity {

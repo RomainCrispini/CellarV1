@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.romain.cellarv1">
 
+    <!-- PERSMISSIONS POUR DONNEES CARTOGRAPHIQUES -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,25 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".vue.AddActivity"></activity>
-        <activity android:name=".vue.SearchActivity" />
-        <activity android:name=".vue.LikeActivity" />
-        <activity android:name=".vue.ScanActivity" />
-        <activity android:name=".vue.MainActivity">
+        <activity android:name=".AddActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".LikeActivity" />
+        <activity android:name=".ScanActivity" />
+        <activity android:name=".UserActivity" />
+        <activity android:name=".CellarActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vue.UserActivity" />
-        <activity
-            android:name=".vue.CellarActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
+        <!-- API GOOGLE MAPS KEY -->
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBKGJeoNXT27cA5LAkQj6bd8rKP51VzvYU" />
+
     </application>
 
 </manifest>

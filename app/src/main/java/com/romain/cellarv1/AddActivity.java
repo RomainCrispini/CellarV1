@@ -1,10 +1,8 @@
-package com.romain.cellarv1.vue;
+package com.romain.cellarv1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
-import com.romain.cellarv1.R;
 
 public class AddActivity extends AppCompatActivity {
 

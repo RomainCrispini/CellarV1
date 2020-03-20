@@ -7,4 +7,7 @@
     <string name="like_fragment">Hello LIKE fragment</string>
     <string name="search_fragment">Hello SEARCH fragment</string>
     <string name="home_fragment">Hello HOME fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

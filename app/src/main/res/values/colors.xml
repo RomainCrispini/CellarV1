@@ -2,7 +2,7 @@
 <resources>
 
     <color name="colorPrimary">#C8E6C9</color>
-    <color name="colorPrimaryDark">#97B498</color>
+    <color name="colorPrimaryDark">#144147</color>
     <color name="colorPrimaryLight">#FBFFFC</color>
     <color name="colorSecondary">#81C784</color>
     <color name="colorSecondaryDark">#519657</color>
@@ -11,7 +11,10 @@
     <!-- CUSTOM COLORS NAVBAR -->
     <color name="grey_very_light">#ECECEC</color>
     <color name="grey_light">#CDCDCD</color>
-    <color name="grey_dark">#3C3C3C</color>
+    <color name="green_very_dark">#144147</color>
+    <color name="green_dark">#226D78</color>
+    <color name="grey_dark">#4C4C4C</color>
+    <color name="green">#35B1C4</color>
     <color name="white">#FFF</color>
     <color name="blue_light">#22C2DD</color>
 

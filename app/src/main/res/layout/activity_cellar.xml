@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/gradient_background"
-    tools:context=".vue.CellarActivity">
+    tools:context=".CellarActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/float_ajout"

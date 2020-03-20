@@ -1,4 +1,4 @@
-package com.romain.cellarv1.vue;
+package com.romain.cellarv1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,9 +9,8 @@ import android.widget.Toast;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
-import com.romain.cellarv1.R;
 
-public class CellarActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity {
 
     SpaceNavigationView navigationView;
 
@@ -19,18 +18,19 @@ public class CellarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_cellar);
+        setContentView(R.layout.activity_user);
 
         navigationView = findViewById(R.id.space);
+        //navigationView.initWithSaveInstanceState(savedInstanceState);
         navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_person_outline_black_24dp));
         navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_view_list_black_24dp));
         navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_favorite_border_black_24dp));
         navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_search_black_24dp));
-        
+
         navigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {
-                Toast.makeText(CellarActivity.this,"SCAN", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserActivity.this,"SCAN", Toast.LENGTH_SHORT).show();
                 navigationView.setCentreButtonSelectable(true);
 
             }
@@ -39,24 +39,24 @@ public class CellarActivity extends AppCompatActivity {
             public void onItemClick(int itemIndex, String itemName) {
 
                 if (itemIndex == 0){
-                    Toast.makeText(CellarActivity.this, "USER", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(CellarActivity.this, UserActivity.class);
+                    Toast.makeText(UserActivity.this, "USER", Toast.LENGTH_SHORT).show();
+                } else if (itemIndex == 1) {
+                    Toast.makeText(UserActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(UserActivity.this, CellarActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_up, R.anim.slide_out_up);
-                } else if (itemIndex == 1) {
-                    Toast.makeText(CellarActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
                 } else if (itemIndex == 2) {
-                    Toast.makeText(CellarActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(CellarActivity.this, LikeActivity.class);
+                    Toast.makeText(UserActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(UserActivity.this, LikeActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_up, R.anim.slide_out_up);
                 } else if (itemIndex == 3) {
-                    Toast.makeText(CellarActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(CellarActivity.this, SearchActivity.class);
+                    Toast.makeText(UserActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(UserActivity.this, SearchActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_up, R.anim.slide_out_up);
                 } else {
-                    Toast.makeText(CellarActivity.this, "BUG", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserActivity.this, "BUG", Toast.LENGTH_SHORT).show();
                 }
 
                 // switch(itemIndex){
