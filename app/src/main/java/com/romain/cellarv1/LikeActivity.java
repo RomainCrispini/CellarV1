@@ -21,7 +21,7 @@ public class LikeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_like);
 
         navigationView = findViewById(R.id.space);
-        //navigationView.initWithSaveInstanceState(savedInstanceState);
+        navigationView.initWithSaveInstanceState(savedInstanceState);
         navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_person_outline_black_24dp));
         navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_view_list_black_24dp));
         navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_favorite_border_black_24dp));

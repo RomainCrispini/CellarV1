@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private MapFragment mapFragment;
     private GoogleMap googleMap;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    //@RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onResume() {
         super.onResume();
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 MainActivity.this.googleMap = googleMap;
-                googleMap.moveCamera(CameraUpdateFactory.zoomBy(5));
+                googleMap.moveCamera(CameraUpdateFactory.zoomBy(10));
                 googleMap.setMyLocationEnabled(true);
                 googleMap.addMarker(new MarkerOptions().position(new LatLng(48.6833, 6.2))
                                                        .title("C'est bien ici !!!"));
@@ -150,11 +150,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
-            boolean success = googleMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.mapstyle));
+            boolean success = true;
+            success = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle));
 
-            if (!success) {
+            if (success = false) {
                 Log.e("MapsActivity", "Style parsing failed.");
             }
         } catch (Resources.NotFoundException e) {
