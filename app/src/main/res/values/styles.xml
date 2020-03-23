@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorSecondary</item>
     </style>
 
+    <style name="TextLabel" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textColorHint">@color/green</item>
+        <item name="colorControlNormal">@color/green_dark</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
+    <style name="customAnimFab">
+        <item name="background">@color/green_dark</item>
+        <item name="android:textColor">@color/green</item>
+    </style>
+
 </resources>

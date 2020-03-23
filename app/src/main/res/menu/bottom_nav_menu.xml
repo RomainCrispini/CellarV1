@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/user"
+    android:icon="@drawable/ic_person_outline_black_24dp"
+    android:title="" />
+
+    <item android:id="@+id/cellar"
+        android:icon="@drawable/ic_view_list_black_24dp"
+        android:title="" />
+
+    <item android:id="@+id/scan"
+        android:icon="@drawable/ic_favorite_border_black_24dp"
+        android:title="" />
+
+    <item android:id="@+id/like"
+        android:icon="@drawable/ic_favorite_border_black_24dp"
+        android:title="" />
+
+    <item android:id="@+id/search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="" />
+
+</menu>

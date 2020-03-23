@@ -1,37 +1,43 @@
 package com.romain.cellarv1;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-
 import android.Manifest;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.luseen.spacenavigation.SpaceItem;
-import com.luseen.spacenavigation.SpaceNavigationView;
-import com.luseen.spacenavigation.SpaceOnClickListener;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.romain.cellarv1.vue.CurvedBottomNavigationView;
+
+import java.io.IOException;
+import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements LocationListener {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
 
     /**
      * AUTRES METHODES
@@ -46,16 +52,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private static final int PERMS_CALL_ID = 1234;
 
     private LocationManager locmanager;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private MapFragment mapFragment;
     private GoogleMap googleMap;
-
-    //@RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    protected void onResume() {
-        super.onResume();
-        validationPermissions();
-    }
 
     private void validationPermissions() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -76,17 +76,24 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             return;
         }
 
-        locmanager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (locmanager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            locmanager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
-        }
-        if(locmanager.isProviderEnabled(LocationManager.PASSIVE_PROVIDER)){
-            locmanager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 10000, 0, this);
-        }
-        if(locmanager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
-            locmanager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0, this);
-        }
-        loadMap();
+        //locmanager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        //if (locmanager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        //    locmanager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
+        //}
+        //if(locmanager.isProviderEnabled(LocationManager.PASSIVE_PROVIDER)){
+        //    locmanager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 10000, 0, this);
+        //}
+        //if(locmanager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+        //    locmanager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0, this);
+        //}
+        //loadMap();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        validationPermissions();
     }
 
     // Méthode activée quand une demande d'activation des permissions est proposée
@@ -101,163 +108,232 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     protected void onPause() {
         super.onPause();
-
         if(locmanager != null){
             locmanager.removeUpdates(this);
         }
     }
 
-    private void loadMap() {
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                MainActivity.this.googleMap = googleMap;
-                googleMap.moveCamera(CameraUpdateFactory.zoomBy(10));
-                googleMap.setMyLocationEnabled(true);
-                googleMap.addMarker(new MarkerOptions().position(new LatLng(48.6833, 6.2))
-                                                       .title("C'est bien ici !!!"));
-            }
-        });
-    }
+    //private void loadMap() {
 
-    // Ces quatre méthodes issues de l'implémentation sont à redéfinir :
+    //    mapFragment.getMapAsync(new OnMapReadyCallback() {
+    //@Override
+    //        public void onMapReady(GoogleMap googleMap) {
+    //            MainActivity.this.googleMap = googleMap;
+    //            googleMap.moveCamera(CameraUpdateFactory.zoomBy(9));
+    //            googleMap.setMyLocationEnabled(true);
+    //            googleMap.addMarker(new MarkerOptions().position(new LatLng(48.6833, 6.2))
+    //                                                   .title("C'est bien ici !!!"));
+    //        }
+    //    });
+
+    //}
+
+
+    // Ces quatre méthodes issues de l'implémentation LocationListener sont à redéfinir :
     @Override
     public void onProviderEnabled(String provider) {
-
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        double lattitude = location.getLatitude();
-        double longitude = location.getLongitude();
+        //double lattitude = location.getLatitude();
+        //double longitude = location.getLongitude();
 
-        Toast.makeText(this, "Location" + lattitude + "/" + longitude, Toast.LENGTH_LONG).show();
-        if(googleMap != null) {
-            LatLng googleLocation = new LatLng(48.6833, 6.2);
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(googleLocation));
-        }
-
-        try {
-            // Customise the styling of the base map using a JSON object defined
-            // in a raw resource file.
-            boolean success = true;
-            success = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle));
-
-            if (success = false) {
-                Log.e("MapsActivity", "Style parsing failed.");
-            }
-        } catch (Resources.NotFoundException e) {
-            Log.e("MapsActivity", "Can't find style. Error: ", e);
-        }
-
-
+        //Toast.makeText(this, "Location" + lattitude + "/" + longitude, Toast.LENGTH_LONG).show();
+        //if(googleMap != null) {
+        //LatLng googleLocation = new LatLng(48.6833, 6.2);
+        //    googleMap.moveCamera(CameraUpdateFactory.newLatLng(googleLocation));
+        //}
     }
 
-    /**
-     * BOTTOM NAVIGATION VIEW
-     */
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
 
-    SpaceNavigationView navigationView;
+        // Personnalisation des options d'affichage
+        UiSettings mapSettings = googleMap.getUiSettings();
+        mapSettings.setZoomControlsEnabled(true);
+
+        // Personnalisation de la map liée à res/raw/mapstyle.json
+        try {
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.mapstyle));
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
+
+        MainActivity.this.googleMap = googleMap;
+        googleMap.moveCamera(CameraUpdateFactory.zoomBy(10));
+        googleMap.setMyLocationEnabled(true);
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(48.6833, 6.2))
+                .title("C'est bien ici !!!"));
+    }
+
+    public void searchLocation(View view) {
+        EditText locationSearch = (EditText) findViewById(R.id.editText);
+        String location = locationSearch.getText().toString();
+        List<Address> addressList = null;
+
+        location = "nancy";
+
+        if(location == null || location.equals("")) {
+            Toast.makeText(MainActivity.this, "Merci d'entrer une localité", Toast.LENGTH_SHORT).show();
+        }
+        else if (location != null || !location.equals("")) {
+            Geocoder geocoder = new Geocoder(this);
+            try {
+                addressList = geocoder.getFromLocationName(location, 10);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Address address = addressList.get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
+            googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            Toast.makeText(getApplicationContext(),address.getLatitude() + " " + address.getLongitude(),Toast.LENGTH_LONG).show();
+        }
+    }
+
+    //public void addBottle(View view) {
+
+    //    Intent intent = new Intent(MainActivity.this, AddActivity.class);
+    //    startActivity(intent);
+        //setContentView(R.layout.activity_add);
+    //}
+
+
+    /**
+     * CUSTOM BOTTOM NAVIGATION VIEW
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
+        // Map Fragment
         FragmentManager fragmentManager = getFragmentManager();
         mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
-        navigationView = findViewById(R.id.space);
-        //navigationView.initWithSaveInstanceState(savedInstanceState);
-        navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_person_outline_black_24dp));
-        navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_view_list_black_24dp));
-        navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_favorite_border_black_24dp));
-        navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_search_black_24dp));
+        CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
+        curvedBottomNavigationView.setOnNavigationItemSelectedListener(customBottomNavListener);
 
-        navigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
+
+
+
+
+
+
+
+        FloatingActionButton fabRed = (FloatingActionButton) findViewById(R.id.fab_red);
+        fabRed.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCentreButtonClick() {
-                Toast.makeText(MainActivity.this,"SCAN", Toast.LENGTH_SHORT).show();
-                navigationView.setCentreButtonSelectable(true);
-
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "ROUGE",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent);
             }
+        });
 
+        FloatingActionButton fabRose = (FloatingActionButton) findViewById(R.id.fab_rose);
+        fabRose.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(int itemIndex, String itemName) {
-
-                if (itemIndex == 0){
-                    Toast.makeText(MainActivity.this, "USER", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, UserActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_up, R.anim.slide_out_up);
-                } else if (itemIndex == 1) {
-                    Toast.makeText(MainActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, CellarActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_up, R.anim.slide_out_up);
-                } else if (itemIndex == 2) {
-                    Toast.makeText(MainActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, LikeActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_up, R.anim.slide_out_up);
-                } else if (itemIndex == 3) {
-                    Toast.makeText(MainActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_up, R.anim.slide_out_up);
-                } else {
-                    Toast.makeText(MainActivity.this, "BUG", Toast.LENGTH_SHORT).show();
-                }
-
-               // switch(itemIndex){
-             //       case 0:
-              //          Toast.makeText(MainActivity.this, "USER", Toast.LENGTH_SHORT).show();
-               //         Intent intent = new Intent(MainActivity.this, UserActivity.class);
-              //          intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-               //         startActivityForResult(intent, 0);
-                //        break;
-                //    case 1:
-                //        Toast.makeText(MainActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
-                //        Intent intent = new Intent(MainActivity.this, CellarActivity.class);
-                //        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                //        startActivityForResult(intent, 0);
-                //        break;
-                //    case 2:
-                //        Toast.makeText(MainActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
-                 //       Intent intent = new Intent(MainActivity.this, LikeActivity.class);
-                  //      intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                 //       startActivityForResult(intent, 0);
-                 //       break;
-                 //   case 3:
-                 //       Toast.makeText(MainActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
-                  //      Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                 //       intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                 //       startActivityForResult(intent, 0);
-                 //       break;
-                 //   default:
-                 //       Toast.makeText(MainActivity.this, "BUG", Toast.LENGTH_SHORT).show();
-               // }
-
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "ROSE",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent);
             }
+        });
 
+        FloatingActionButton fabGrey = (FloatingActionButton) findViewById(R.id.fab_grey);
+        fabGrey.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemReselected(int itemIndex, String itemName) {
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "GRIS",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        FloatingActionButton fabWhite = (FloatingActionButton) findViewById(R.id.fab_white);
+        fabWhite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "BLANC",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        FloatingActionButton fabChamp = (FloatingActionButton) findViewById(R.id.fab_champagne);
+        fabChamp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "EFFERVESCENT",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent);
             }
         });
 
 
+
+
+
+
+
+
     }
+
+    private CurvedBottomNavigationView.OnNavigationItemSelectedListener customBottomNavListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                    switch(item.getItemId()){
+                        case R.id.user:
+                            Toast.makeText(MainActivity.this, "USER", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(getApplicationContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            //overridePendingTransition(0, 0);
+                            return true;
+                        case R.id.cellar:
+                            Toast.makeText(MainActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            //overridePendingTransition(0, 0);
+                            return true;
+                        case R.id.scan:
+                            Toast.makeText(MainActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            //overridePendingTransition(0, 0);
+                            return true;
+                        case R.id.like:
+                            Toast.makeText(MainActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(getApplicationContext(), LikeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            //overridePendingTransition(0, 0);
+                            return true;
+                        case R.id.search:
+                            Toast.makeText(MainActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(getApplicationContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            //overridePendingTransition(0, 0);
+                            return true;
+                        default:
+                            Toast.makeText(MainActivity.this, "BUG", Toast.LENGTH_SHORT).show();
+                     }
+                    return false;
+                }
+            };
 
 }
