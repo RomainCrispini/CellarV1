@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,8 +30,8 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.romain.cellarv1.vue.CurvedBottomNavigationView;
 
 import java.io.IOException;
@@ -38,6 +39,11 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
+
+    // Déclaration de la Custom FAB et de ses caractéristiques
+    FloatingActionButton fabMenu, fabOne, fabTwo, fabThree, fabFour;
+    OvershootInterpolator interpolator = new OvershootInterpolator();
+    Boolean isFABMenuOpen = false;
 
     /**
      * AUTRES METHODES
@@ -232,71 +238,99 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
         curvedBottomNavigationView.setOnNavigationItemSelectedListener(customBottomNavListener);
 
+        initFabMenu();
 
-
-
-
-
-
-
-        FloatingActionButton fabRed = (FloatingActionButton) findViewById(R.id.fab_red);
-        fabRed.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabMenu = (FloatingActionButton) findViewById(R.id.fabMenu);
+        fabMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "ROUGE",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(intent);
+                if(isFABMenuOpen) {
+                    closeFabMenu();
+                } else {
+                    openFabMenu();
+                }
+                Toast.makeText(MainActivity.this, "FAB MENU",Toast.LENGTH_SHORT).show();
             }
         });
 
-        FloatingActionButton fabRose = (FloatingActionButton) findViewById(R.id.fab_rose);
-        fabRose.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabOne = (FloatingActionButton) findViewById(R.id.fabOne);
+        fabOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "ROSE",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(intent);
+                Toast.makeText(MainActivity.this, "FAB ONE",Toast.LENGTH_SHORT).show();
             }
         });
 
-        FloatingActionButton fabGrey = (FloatingActionButton) findViewById(R.id.fab_grey);
-        fabGrey.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabTwo = (FloatingActionButton) findViewById(R.id.fabTwo);
+        fabTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "GRIS",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(intent);
+                Toast.makeText(MainActivity.this, "FAB TWO",Toast.LENGTH_SHORT).show();
             }
         });
 
-        FloatingActionButton fabWhite = (FloatingActionButton) findViewById(R.id.fab_white);
-        fabWhite.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabThree = (FloatingActionButton) findViewById(R.id.fabThree);
+        fabThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "BLANC",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(intent);
+                Toast.makeText(MainActivity.this, "FAB THREE",Toast.LENGTH_SHORT).show();
             }
         });
 
-        FloatingActionButton fabChamp = (FloatingActionButton) findViewById(R.id.fab_champagne);
-        fabChamp.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabFour = (FloatingActionButton) findViewById(R.id.fabFour);
+        fabFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "EFFERVESCENT",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(intent);
+                Toast.makeText(MainActivity.this, "FAB FOUR",Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
-
-
-
 
     }
+
+    private void initFabMenu() {
+
+        fabMenu = findViewById(R.id.fabMenu);
+        fabOne = findViewById(R.id.fabOne);
+        fabTwo = findViewById(R.id.fabTwo);
+        fabThree = findViewById(R.id.fabThree);
+        fabFour = findViewById(R.id.fabFour);
+
+        fabMenu.setAlpha(1f);
+        fabOne.setAlpha(1f);
+        fabTwo.setAlpha(1f);
+        fabThree.setAlpha(1f);
+        fabFour.setAlpha(1f);
+
+        fabOne.setTranslationY(-190f);
+        fabTwo.setTranslationY(-340f);
+        fabThree.setTranslationY(-510f);
+        fabFour.setTranslationY(-670f);
+    }
+
+    private void openFabMenu() {
+        isFABMenuOpen = !isFABMenuOpen;
+
+        fabMenu.animate().setInterpolator(interpolator).rotation(135f).setDuration(300).start();
+
+        fabOne.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabTwo.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabThree.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabFour.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+    }
+
+    private void closeFabMenu() {
+        isFABMenuOpen = !isFABMenuOpen;
+
+        fabMenu.animate().setInterpolator(interpolator).rotation(0f).setDuration(300).start();
+
+        fabOne.animate().translationY(-190f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabTwo.animate().translationY(-340f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabThree.animate().translationY(-510f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabFour.animate().translationY(-670f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+    }
+
+
+
 
     private CurvedBottomNavigationView.OnNavigationItemSelectedListener customBottomNavListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {

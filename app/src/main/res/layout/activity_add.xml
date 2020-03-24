@@ -37,4 +37,36 @@
     </LinearLayout>
 
 
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="640dp"
+        android:src="@drawable/ic_photo_camera_black_24dp"
+        app:backgroundTint="@color/green_very_dark"
+        app:borderWidth="0dp"
+        app:elevation="10dp"
+        app:fabSize="normal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        app:tint="@color/green_dark" />
+
+
+    <com.romain.cellarv1.vue.CurvedBottomNavigationView
+        android:id="@+id/curvedBottomNavigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="635dp"
+        app:labelVisibilityMode="unlabeled"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu">
+
+    </com.romain.cellarv1.vue.CurvedBottomNavigationView>
+
 </RelativeLayout>
