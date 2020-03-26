@@ -1,72 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/dark_gradient_background"
     tools:context=".AddActivity">
 
 
 
 
-    <LinearLayout
+    <com.romain.cellarv1.vue.CurvedBottomNavigationView
+        android:id="@+id/curvedBottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="false"
+        android:layout_centerHorizontal="true"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"
+        app:itemIconTint="@drawable/selector_curved_bottom_nav_view"
+        app:menu="@menu/bottom_nav_menu">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/green_very_dark"
+            android:tint="@color/green_dark"
+            android:src="@drawable/ic_add_black_24dp"
+            app:borderWidth="1.5dp"
+            app:elevation="10dp"
+            app:fabSize="normal" />
+    </com.romain.cellarv1.vue.CurvedBottomNavigationView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout2"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/text_input_country"
-            android:layout_width="match_parent"
+            android:id="@+id/textCountry"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="left"
+            m
             android:hint="Pays"
-            app:errorEnabled="true" />
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="100dp"
-
-            android:text="Stocker"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:layout_height="wrap_content" />
-
+        <EditText
+            android:id="@+id/textRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:hint="Région"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </LinearLayout>
 
 
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="640dp"
-        android:src="@drawable/ic_photo_camera_black_24dp"
-        app:backgroundTint="@color/green_very_dark"
-        app:borderWidth="0dp"
-        app:elevation="10dp"
-        app:fabSize="normal"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0dp"
-        app:tint="@color/green_dark" />
-
-
-    <com.romain.cellarv1.vue.CurvedBottomNavigationView
-        android:id="@+id/curvedBottomNavigationView"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="635dp"
-        app:labelVisibilityMode="unlabeled"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
 
-    </com.romain.cellarv1.vue.CurvedBottomNavigationView>
+        <EditText
+            android:id="@+id/textDomain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Domaine"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/textAppellation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Appellation"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <ImageButton
+            android:id="@+id/redWineButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/space_transparent"
+            android:onClick="wineColorSelector"
+            android:scaleType="centerCrop"
+            android:src="@drawable/red_wine" />
+
+        <ImageButton
+            android:id="@+id/roseWineButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/space_transparent"
+            android:onClick="wineColorSelector"
+            android:scaleType="centerCrop"
+            android:src="@drawable/rose_wine" />
+
+        <ImageButton
+            android:id="@+id/whiteWineButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/space_transparent"
+            android:onClick="wineColorSelector"
+            android:scaleType="centerCrop"
+            android:src="@drawable/white_wine" />
+
+        <ImageButton
+            android:id="@+id/champWineButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/space_transparent"
+            android:onClick="wineColorSelector"
+            android:scaleType="centerCrop"
+            android:src="@drawable/champ_wine" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <EditText
+            android:id="@+id/nbYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Année"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <EditText
+            android:id="@+id/nbAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Quantité"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCountry" />
+
+        <EditText
+            android:id="@+id/nbEstimate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Estimation"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCountry" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="Ajouter"
+        app:layout_constraintBottom_toTopOf="@id/curvedBottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/dark_gradient_background"
     tools:context=".SearchActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -19,4 +19,12 @@
         <item name="android:textColor">@color/green</item>
     </style>
 
+    <style name="darkMode">
+
+    </style>
+
+    <style name="lightMode">
+
+    </style>
+
 </resources>

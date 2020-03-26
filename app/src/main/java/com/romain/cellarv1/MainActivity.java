@@ -40,10 +40,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
 
-    // Déclaration de la Custom FAB et de ses caractéristiques
-    FloatingActionButton fabMenu, fabOne, fabTwo, fabThree, fabFour;
+    // Initialisation de la Custom FAB et de ses caractéristiques
+    FloatingActionButton fabWineMenu, fabRed, fabRose, fabWhite, fabChamp;
     OvershootInterpolator interpolator = new OvershootInterpolator();
-    Boolean isFABMenuOpen = false;
+    Boolean isFABWineMenuOpen = false;
 
     /**
      * AUTRES METHODES
@@ -166,12 +166,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Personnalisation des options d'affichage
         UiSettings mapSettings = googleMap.getUiSettings();
         mapSettings.setZoomControlsEnabled(true);
+        mapSettings.setMyLocationButtonEnabled(false);
 
-        // Personnalisation de la map liée à res/raw/mapstyle.json
+        // Personnalisation de la map liée à res/raw/mapstyle_dark.json par défaut
         try {
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.mapstyle));
+                            this, R.raw.mapstyle_dark));
 
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
@@ -215,10 +216,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //public void addBottle(View view) {
 
-    //    Intent intent = new Intent(MainActivity.this, AddActivity.class);
-    //    startActivity(intent);
+        //Intent intent = new Intent(MainActivity.this, AddActivity.class);
+        //startActivity(intent);
         //setContentView(R.layout.activity_add);
-    //}
+    //
 
 
     /**
@@ -238,95 +239,111 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
         curvedBottomNavigationView.setOnNavigationItemSelectedListener(customBottomNavListener);
 
-        initFabMenu();
+        initFabWineMenu();
 
-        FloatingActionButton fabMenu = (FloatingActionButton) findViewById(R.id.fabMenu);
-        fabMenu.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabWineMenu = (FloatingActionButton) findViewById(R.id.fabWineMenu);
+        fabWineMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isFABMenuOpen) {
-                    closeFabMenu();
+                if(isFABWineMenuOpen) {
+                    closeFabWineMenu();
                 } else {
-                    openFabMenu();
+                    openFabWineMenu();
                 }
-                Toast.makeText(MainActivity.this, "FAB MENU",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "FAB WINE MENU",Toast.LENGTH_SHORT).show();
             }
         });
 
-        FloatingActionButton fabOne = (FloatingActionButton) findViewById(R.id.fabOne);
-        fabOne.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabRed = (FloatingActionButton) findViewById(R.id.fabRed);
+        fabRed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "FAB ONE",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("redWine", "redWine");
+                startActivity(intent);
+                Toast.makeText(MainActivity.this, "FAB ROUGE",Toast.LENGTH_SHORT).show();
             }
         });
 
-        FloatingActionButton fabTwo = (FloatingActionButton) findViewById(R.id.fabTwo);
-        fabTwo.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabRose = (FloatingActionButton) findViewById(R.id.fabRose);
+        fabRose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "FAB TWO",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("roseWine", "roseWine");
+                startActivity(intent);
+                Toast.makeText(MainActivity.this, "FAB ROSE",Toast.LENGTH_SHORT).show();
             }
         });
 
-        FloatingActionButton fabThree = (FloatingActionButton) findViewById(R.id.fabThree);
-        fabThree.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabWhite = (FloatingActionButton) findViewById(R.id.fabWhite);
+        fabWhite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "FAB THREE",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("whiteWine", "whiteWine");
+                startActivity(intent);
+                Toast.makeText(MainActivity.this, "FAB BLANC",Toast.LENGTH_SHORT).show();
             }
         });
 
-        FloatingActionButton fabFour = (FloatingActionButton) findViewById(R.id.fabFour);
-        fabFour.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabChamp = (FloatingActionButton) findViewById(R.id.fabChamp);
+        fabChamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "FAB FOUR",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("champWine", "champWine");
+                startActivity(intent);
+                Toast.makeText(MainActivity.this, "FAB CHAMP",Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
-    private void initFabMenu() {
+    private void initFabWineMenu() {
 
-        fabMenu = findViewById(R.id.fabMenu);
-        fabOne = findViewById(R.id.fabOne);
-        fabTwo = findViewById(R.id.fabTwo);
-        fabThree = findViewById(R.id.fabThree);
-        fabFour = findViewById(R.id.fabFour);
+        fabWineMenu = findViewById(R.id.fabWineMenu);
+        fabRed = findViewById(R.id.fabRed);
+        fabRose = findViewById(R.id.fabRose);
+        fabWhite = findViewById(R.id.fabWhite);
+        fabChamp = findViewById(R.id.fabChamp);
 
-        fabMenu.setAlpha(1f);
-        fabOne.setAlpha(1f);
-        fabTwo.setAlpha(1f);
-        fabThree.setAlpha(1f);
-        fabFour.setAlpha(1f);
+        fabWineMenu.setAlpha(1f);
+        fabRed.setAlpha(1f);
+        fabRose.setAlpha(1f);
+        fabWhite.setAlpha(1f);
+        fabChamp.setAlpha(1f);
 
-        fabOne.setTranslationY(-190f);
-        fabTwo.setTranslationY(-340f);
-        fabThree.setTranslationY(-510f);
-        fabFour.setTranslationY(-670f);
+        fabRed.setTranslationY(-190f);
+        fabRose.setTranslationY(-340f);
+        fabWhite.setTranslationY(-510f);
+        fabChamp.setTranslationY(-670f);
     }
 
-    private void openFabMenu() {
-        isFABMenuOpen = !isFABMenuOpen;
+    private void openFabWineMenu() {
+        isFABWineMenuOpen = !isFABWineMenuOpen;
 
-        fabMenu.animate().setInterpolator(interpolator).rotation(135f).setDuration(300).start();
+        fabWineMenu.animate().setInterpolator(interpolator).rotation(135f).setDuration(300).start();
 
-        fabOne.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabTwo.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabThree.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabFour.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabRed.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabRose.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabWhite.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabChamp.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
     }
 
-    private void closeFabMenu() {
-        isFABMenuOpen = !isFABMenuOpen;
+    private void closeFabWineMenu() {
+        isFABWineMenuOpen = !isFABWineMenuOpen;
 
-        fabMenu.animate().setInterpolator(interpolator).rotation(0f).setDuration(300).start();
+        fabWineMenu.animate().setInterpolator(interpolator).rotation(0f).setDuration(300).start();
 
-        fabOne.animate().translationY(-190f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabTwo.animate().translationY(-340f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabThree.animate().translationY(-510f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabFour.animate().translationY(-670f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabRed.animate().translationY(-190f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabRose.animate().translationY(-340f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabWhite.animate().translationY(-510f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabChamp.animate().translationY(-670f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
     }
 
 
@@ -340,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     switch(item.getItemId()){
                         case R.id.user:
                             Toast.makeText(MainActivity.this, "USER", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            startActivity(new Intent(getApplicationContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                             //overridePendingTransition(0, 0);
                             return true;
                         case R.id.cellar:
