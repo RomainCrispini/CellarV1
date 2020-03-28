@@ -25,20 +25,6 @@
         android:layout_height="wrap_content"
         android:text="SEARCH" />
 
-    <com.luseen.spacenavigation.SpaceNavigationView
-        android:id="@+id/space"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        app:active_item_color="@color/grey_light"
-        app:centre_button_color="@color/white"
-        app:inactive_item_color="@color/grey_very_light"
-        app:space_background_color="@color/white"
-        app:centre_button_icon="@drawable/ic_photo_camera_black_24dp"
-        app:active_centre_button_background_color="@color/grey_light"
-        app:space_item_icon_size="30dp"
-        app:space_item_icon_only_size="@dimen/space_item_icon_only_size"
-        app:space_item_text_size="@dimen/space_item_text_default_size" />
+
 
 </RelativeLayout>

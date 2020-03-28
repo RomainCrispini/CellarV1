@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             return true;
                         case R.id.cellar:
                             Toast.makeText(MainActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                             //overridePendingTransition(0, 0);
                             return true;
                         case R.id.scan:

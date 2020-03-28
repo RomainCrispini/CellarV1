@@ -14,13 +14,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".LikeActivity" />
-        <activity android:name=".ScanActivity" />
-        <activity android:name=".UserActivity" />
-        <activity android:name=".CellarActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".AddActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".SearchActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".LikeActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ScanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CellarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
