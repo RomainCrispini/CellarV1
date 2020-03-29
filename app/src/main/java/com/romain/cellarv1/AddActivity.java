@@ -60,7 +60,7 @@ public class AddActivity extends AppCompatActivity {
      * Ajout d'une nouvelle bouteille
      */
     private void addWineBottle() {
-        txtCountry.setText(controle.(););
+    //    txtCountry.setText(controle.(););
 
     }
 

@@ -9,6 +9,45 @@
     android:clickable="true">
 
 
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="30dp"
+    app:helperText=""
+    app:hintTextColor="#fff"
+    android:background="@drawable/fond_textinput"
+    android:backgroundTint="@color/green_dark" >
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/layoutEssaiText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:hint="Essai"
+        android:textColorHint="#fff"
+        android:drawableRight="@drawable/ic_euro_symbol_black_24dp"
+        android:paddingRight="10dp"
+        android:backgroundTint="@color/transparent"/>
+</com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:boxBackgroundMode="outline"
+        app:counterEnabled="true"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green_dark"
+            android:hint="kjjlhjlhlj" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 
 </RelativeLayout>

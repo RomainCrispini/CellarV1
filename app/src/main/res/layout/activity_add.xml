@@ -8,9 +8,6 @@
     android:background="@drawable/dark_gradient_background"
     tools:context=".AddActivity">
 
-
-
-
     <com.romain.cellarv1.vue.CurvedBottomNavigationView
         android:id="@+id/curvedBottomNavigationView"
         android:layout_width="match_parent"
@@ -43,8 +40,8 @@
             app:fabSize="normal" />
     </com.romain.cellarv1.vue.CurvedBottomNavigationView>
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutPays"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -52,34 +49,64 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:helperText=""
+        app:hintTextColor="@color/green_light"
+        android:background="@drawable/fond_textinput"
+        android:backgroundTint="@color/green_dark">
 
         <AutoCompleteTextView
             android:id="@+id/textCountry"
-            android:layout_width="180dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Pays"
+            android:gravity="left"
+            android:textColor="@color/green_light"
+            android:textCursorDrawable="@color/green_light"
+            android:padding="8dp"
+            android:textColorHint="@color/green_light"
+            android:textSize="14dp"
             android:inputType="text"
+            android:backgroundTint="@color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutRegion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:helperText=""
+        app:hintTextColor="@color/green_light"
+        android:background="@drawable/fond_textinput"
+        android:backgroundTint="@color/green_dark"
+        app:layout_constraintTop_toBottomOf="@+id/layoutPays">
 
         <EditText
             android:id="@+id/textRegion"
-            android:layout_width="180dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Région"
-            android:gravity="right"
+            android:gravity="left"
+            android:textColor="@color/green_light"
+            android:textCursorDrawable="@color/green_light"
+            android:padding="8dp"
+            android:textColorHint="@color/green_light"
+            android:textSize="14dp"
             android:inputType="text"
+            android:backgroundTint="@color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </LinearLayout>
+            app:layout_constraintStart_toStartOf="parent"  />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/layoutWineColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -87,7 +114,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+        app:layout_constraintTop_toBottomOf="@+id/layoutRegion">
 
         <ImageButton
             android:id="@+id/redWineButton"
@@ -128,33 +155,63 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/layoutDomain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
         android:orientation="horizontal"
+        app:helperText=""
+        app:hintTextColor="#fff"
+        android:background="@drawable/fond_textinput"
+        android:backgroundTint="@color/green_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/layoutWineColor">
 
         <EditText
             android:id="@+id/textDomain"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:gravity="left"
+            android:padding="10dp"
+            android:textColorHint="@color/green_light"
+            android:textSize="12dp"
             android:hint="Domaine"
+            android:backgroundTint="@color/transparent"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutAppellation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:helperText=""
+        app:hintTextColor="#fff"
+        android:background="@drawable/fond_textinput"
+        android:backgroundTint="@color/green_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutDomain">
 
         <EditText
             android:id="@+id/textAppellation"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:gravity="left"
+            android:padding="10dp"
+            android:textColorHint="@color/green_light"
+            android:textSize="12dp"
             android:hint="Appellation"
+            android:backgroundTint="@color/transparent"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
@@ -164,7 +221,7 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/layoutValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -172,7 +229,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/layoutAppellation">
 
         <EditText
             android:id="@+id/nbYear"
@@ -196,15 +253,18 @@
             app:layout_constraintTop_toBottomOf="@+id/textCountry" />
 
         <EditText
-        android:id="@+id/nbEstimate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Estimation"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textCountry" />
+            android:id="@+id/nbEstimate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Prix"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:drawableEnd="@drawable/ic_euro_symbol_black_24dp"
+            android:paddingRight="10dp"
+            android:backgroundTint="@color/transparent"
+            app:layout_constraintTop_toBottomOf="@+id/textCountry" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -219,7 +279,7 @@
         android:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout4"
+        app:layout_constraintTop_toBottomOf="@id/layoutValue"
         app:fabSize="normal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
