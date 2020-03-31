@@ -40,6 +40,22 @@
             app:fabSize="normal" />
     </com.romain.cellarv1.vue.CurvedBottomNavigationView>
 
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/layoutPays"
+        android:layout_marginBottom="10dp"
+        android:progressTint="@color/orange"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        >
+
+    </ProgressBar>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutPays"
         android:layout_width="match_parent"
@@ -47,27 +63,27 @@
         android:layout_margin="10dp"
         android:layout_gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:helperText=""
         app:hintTextColor="@color/green_light"
+        android:textColorHint="@color/green_light"
         android:background="@drawable/fond_textinput"
-        android:backgroundTint="@color/green_dark">
+        android:backgroundTint="@color/green_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressBar">
 
         <AutoCompleteTextView
             android:id="@+id/textCountry"
+            android:hint="Pays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Pays"
+            android:backgroundTint="@color/transparent"
             android:gravity="left"
-            android:textColor="@color/green_light"
+            android:textColor="@color/orange"
             android:textCursorDrawable="@color/green_light"
             android:padding="8dp"
-            android:textColorHint="@color/green_light"
             android:textSize="14dp"
             android:inputType="text"
-            android:backgroundTint="@color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -79,29 +95,29 @@
         android:layout_margin="10dp"
         android:layout_gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:helperText=""
         app:hintTextColor="@color/green_light"
+        android:textColorHint="@color/green_light"
         android:background="@drawable/fond_textinput"
         android:backgroundTint="@color/green_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutPays">
 
         <EditText
             android:id="@+id/textRegion"
+            android:hint="Région"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Région"
+            android:backgroundTint="@color/transparent"
             android:gravity="left"
-            android:textColor="@color/green_light"
+            android:textColor="@color/orange"
             android:textCursorDrawable="@color/green_light"
             android:padding="8dp"
-            android:textColorHint="@color/green_light"
             android:textSize="14dp"
             android:inputType="text"
-            android:backgroundTint="@color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"  />
+            app:layout_constraintStart_toStartOf="parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -154,15 +170,16 @@
     </LinearLayout>
 
 
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutDomain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:gravity="center"
+        android:layout_gravity="center"
         android:orientation="horizontal"
         app:helperText=""
-        app:hintTextColor="#fff"
+        app:hintTextColor="@color/green_light"
+        android:textColorHint="@color/green_light"
         android:background="@drawable/fond_textinput"
         android:backgroundTint="@color/green_dark"
         app:layout_constraintEnd_toEndOf="parent"
@@ -171,30 +188,30 @@
 
         <EditText
             android:id="@+id/textDomain"
+            android:hint="Domaine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="left"
-            android:padding="10dp"
-            android:textColorHint="@color/green_light"
-            android:textSize="12dp"
-            android:hint="Domaine"
             android:backgroundTint="@color/transparent"
+            android:gravity="left"
+            android:textColor="@color/orange"
+            android:textCursorDrawable="@color/green_light"
+            android:padding="8dp"
+            android:textSize="14dp"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent" />
-    </LinearLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutAppellation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:gravity="center"
+        android:layout_gravity="center"
         android:orientation="horizontal"
         app:helperText=""
-        app:hintTextColor="#fff"
+        app:hintTextColor="@color/green_light"
+        android:textColorHint="@color/green_light"
         android:background="@drawable/fond_textinput"
         android:backgroundTint="@color/green_dark"
         app:layout_constraintEnd_toEndOf="parent"
@@ -203,69 +220,119 @@
 
         <EditText
             android:id="@+id/textAppellation"
+            android:hint="Appellation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="left"
-            android:padding="10dp"
-            android:textColorHint="@color/green_light"
-            android:textSize="12dp"
-            android:hint="Appellation"
             android:backgroundTint="@color/transparent"
+            android:gravity="left"
+            android:textColor="@color/orange"
+            android:textCursorDrawable="@color/green_light"
+            android:padding="8dp"
+            android:textSize="14dp"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent" />
-    </LinearLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-
-
-    <LinearLayout
-        android:id="@+id/layoutValue"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:gravity="center"
+        android:layout_gravity="center"
         android:orientation="horizontal"
+        app:helperText=""
+        app:hintTextColor="@color/green_light"
+        android:textColorHint="@color/green_light"
+        android:background="@drawable/fond_textinput"
+        android:backgroundTint="@color/green_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutAppellation">
 
         <EditText
             android:id="@+id/nbYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:hint="Année"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/transparent"
+            android:gravity="left"
+            android:textColor="@color/orange"
+            android:textCursorDrawable="@color/green_light"
+            android:padding="8dp"
+            android:textSize="14dp"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintStart_toStartOf="parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        app:helperText=""
+        app:hintTextColor="@color/green_light"
+        android:textColorHint="@color/green_light"
+        android:background="@drawable/fond_textinput"
+        android:backgroundTint="@color/green_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutYear">
 
         <EditText
             android:id="@+id/nbNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="Quantité"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/transparent"
+            android:gravity="left"
+            android:textColor="@color/orange"
+            android:textCursorDrawable="@color/green_light"
+            android:padding="8dp"
             android:inputType="number"
+            android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textCountry" />
+            app:layout_constraintStart_toStartOf="parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutEstimate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        app:helperText=""
+        app:hintTextColor="@color/green_light"
+        android:textColorHint="@color/green_light"
+        android:background="@drawable/fond_textinput"
+        android:backgroundTint="@color/green_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutNumber">
 
         <EditText
             android:id="@+id/nbEstimate"
-            android:layout_width="wrap_content"
+            android:hint="Estimation"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Prix"
-            android:inputType="number"
+            android:gravity="left"
+            android:textColor="@color/orange"
+            android:textCursorDrawable="@color/green_light"
+            android:padding="8dp"
+            android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:ems="10"
+            android:inputType="number"
             android:drawableEnd="@drawable/ic_euro_symbol_black_24dp"
+            android:drawableTint="@color/green_light"
             android:paddingRight="10dp"
-            android:backgroundTint="@color/transparent"
-            app:layout_constraintTop_toBottomOf="@+id/textCountry" />
-    </LinearLayout>
+            android:backgroundTint="@color/transparent" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"
@@ -279,7 +346,7 @@
         android:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutValue"
+        app:layout_constraintTop_toBottomOf="@id/layoutEstimate"
         app:fabSize="normal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
