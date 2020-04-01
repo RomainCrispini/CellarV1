@@ -1,29 +1,20 @@
 package com.romain.cellarv1;
 
-import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.ObjectAnimator;
-import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.romain.cellarv1.controleur.Controle;
@@ -35,12 +26,11 @@ import org.json.JSONArray;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import pl.bclogic.pulsator4droid.library.PulsatorLayout;
+
 
 public class AddActivity extends AppCompatActivity {
-
 
     /**
      * Propriétés
@@ -131,7 +121,6 @@ public class AddActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countrylist);
         textCountries.setAdapter(adapter);
 
-
         ImageButton redWineButton = (ImageButton) findViewById(R.id.redWineButton);
         ImageButton roseWineButton = (ImageButton) findViewById(R.id.roseWineButton);
         ImageButton whiteWineButton = (ImageButton) findViewById(R.id.whiteWineButton);
@@ -163,6 +152,10 @@ public class AddActivity extends AppCompatActivity {
             }
 
         }
+
+        PulsatorLayout pulsatorLayout = (PulsatorLayout) findViewById(R.id.pulsator);
+        pulsatorLayout.start();
+
     }
 
 
@@ -207,6 +200,7 @@ public class AddActivity extends AppCompatActivity {
     private void progressBar() {
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        //holder.progressBar.isIndeterminate(false);
         progressBar.setMax(7);
 
         txtCountry = (AutoCompleteTextView) findViewById(R.id.textCountry);
@@ -220,12 +214,15 @@ public class AddActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(s.length() > 0) {
                     if(check) {
-                        progressBar.setProgress(progressBar.getProgress() + 1);
+                        progressBar.incrementProgressBy(1);
+                        //progressBar.setProgress(progressBar.getProgress() + 1);
                         check = false;
                     }
                 }
                 else {
-                    progressBar.setProgress(progressBar.getProgress() - 1);
+                    progressBar.incrementProgressBy(-1);
+                    //progressBar.setProgress(progressBar.getProgress() - 1);
+                    progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#282828"), android.graphics.PorterDuff.Mode.SRC_IN);
                     check = true;
                 }
             }
@@ -246,7 +243,7 @@ public class AddActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(s.length() > 0) {
                     if(check) {
-                        progressBar.setProgress(progressBar.getProgress() + 1);
+                        progressBar.incrementProgressBy(1);
                         check = false;
                     }
                 }
@@ -365,6 +362,9 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+        if(!txtCountry.getText().toString().isEmpty() && !txtRegion.getText().toString().isEmpty()) {
+            progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#159700"), android.graphics.PorterDuff.Mode.SRC_IN);
+        }
         nbEstimate = (EditText) findViewById(R.id.nbEstimate);
         nbEstimate.addTextChangedListener(new TextWatcher() {
             @Override
@@ -391,14 +391,20 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+        //txtCountry.getText().toString().isEmpty();
+        //txtRegion.getText().toString().isEmpty();
+        //txtDomain.getText().toString().isEmpty();
+        //txtAppellation.getText().toString().isEmpty();
+        //nbYear.getText().toString().isEmpty();
+        //nbNumber.getText().toString().isEmpty();
+        //nbEstimate.getText().toString().isEmpty();
+        if(!txtCountry.getText().toString().isEmpty() && !txtRegion.getText().toString().isEmpty()) {
+            progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#159700"), android.graphics.PorterDuff.Mode.SRC_IN);
+        }
 
-
-        //if(progressBar.getProgressBar() == 7) {
-         //   progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#2a4c6b"), android.graphics.PorterDuff.Mode.SRC_IN);
-            //progressBar.setProgressBackgroundTintList(ColorStateList.valueOf(Color.RED));
-            //progressBar.setProgressTint(ColorStateList.valueOf(Color.RED));
-        //}
     }
+
+
 
 
 }

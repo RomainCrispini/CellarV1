@@ -313,10 +313,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         fabChamp = findViewById(R.id.fabChamp);
 
         fabWineMenu.setAlpha(1f);
-        fabRed.setAlpha(1f);
-        fabRose.setAlpha(1f);
-        fabWhite.setAlpha(1f);
-        fabChamp.setAlpha(1f);
+        fabRed.setAlpha(0f);
+        fabRose.setAlpha(0f);
+        fabWhite.setAlpha(0f);
+        fabChamp.setAlpha(0f);
 
         fabRed.setTranslationY(-190f);
         fabRose.setTranslationY(-340f);
@@ -340,10 +340,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         fabWineMenu.animate().setInterpolator(interpolator).rotation(0f).setDuration(300).start();
 
-        fabRed.animate().translationY(-190f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabRose.animate().translationY(-340f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabWhite.animate().translationY(-510f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabChamp.animate().translationY(-670f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabRed.animate().translationY(-190f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fabRose.animate().translationY(-340f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fabWhite.animate().translationY(-510f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fabChamp.animate().translationY(-670f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
     }
 
 

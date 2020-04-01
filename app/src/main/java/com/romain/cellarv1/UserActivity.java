@@ -92,9 +92,9 @@ public class UserActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     setTheme(R.style.AppTheme);
-                    Toast.makeText(UserActivity.this, "Switch ON",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserActivity.this, "Switch DARK",Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(UserActivity.this, "Switch OFF",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserActivity.this, "Switch LIGHT",Toast.LENGTH_SHORT).show();
                     setTheme(R.style.AppTheme);
                 }
             }
@@ -111,10 +111,10 @@ public class UserActivity extends AppCompatActivity {
         fabChamp = findViewById(R.id.fabChamp);
 
         fabWineMenu.setAlpha(1f);
-        fabRed.setAlpha(1f);
-        fabRose.setAlpha(1f);
-        fabWhite.setAlpha(1f);
-        fabChamp.setAlpha(1f);
+        fabRed.setAlpha(0f);
+        fabRose.setAlpha(0f);
+        fabWhite.setAlpha(0f);
+        fabChamp.setAlpha(0f);
 
         fabRed.setTranslationY(-190f);
         fabRose.setTranslationY(-340f);
@@ -138,10 +138,10 @@ public class UserActivity extends AppCompatActivity {
 
         fabWineMenu.animate().setInterpolator(interpolator).rotation(0f).setDuration(300).start();
 
-        fabRed.animate().translationY(-190f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabRose.animate().translationY(-340f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabWhite.animate().translationY(-510f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabChamp.animate().translationY(-670f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabRed.animate().translationY(-190f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fabRose.animate().translationY(-340f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fabWhite.animate().translationY(-510f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fabChamp.animate().translationY(-670f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
     }
 
     private CurvedBottomNavigationView.OnNavigationItemSelectedListener customBottomNavListener =

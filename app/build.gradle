@@ -31,8 +31,11 @@ dependencies {
     // Material Design
     implementation 'com.google.android.material:material:1.1.0'
 
-    // Librairie cartographie
+    // Librairie Cartographie
     implementation 'com.google.android.gms:play-services-maps:11.0.2'
+
+    // Librairie PulseButton
+    implementation 'pl.bclogic:pulsator4droid:1.0.3'
 
 
 }
