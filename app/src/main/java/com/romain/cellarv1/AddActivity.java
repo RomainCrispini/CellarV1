@@ -398,9 +398,9 @@ public class AddActivity extends AppCompatActivity {
         //nbYear.getText().toString().isEmpty();
         //nbNumber.getText().toString().isEmpty();
         //nbEstimate.getText().toString().isEmpty();
-        if(!txtCountry.getText().toString().isEmpty() && !txtRegion.getText().toString().isEmpty()) {
-            progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#159700"), android.graphics.PorterDuff.Mode.SRC_IN);
-        }
+        //if(!txtCountry.getText().toString().isEmpty() && !txtRegion.getText().toString().isEmpty()) {
+        //    progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#159700"), android.graphics.PorterDuff.Mode.SRC_IN);
+        //}
 
     }
 

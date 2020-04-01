@@ -10,7 +10,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     // Propriétés
     private String creation="create table bottle ("
-            + "datemesure TEXT PRIMARY_KEY," // Que 4 types dispos sur SQLite, pas de format Date
+            + "datemesure TEXT PRIMARY KEY," // Que 4 types dispos sur SQLite, pas de format Date
             + "country TEXT,"
             + "region TEXT,"
             + "winecolor INTEGER,"

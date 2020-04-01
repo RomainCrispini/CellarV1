@@ -37,5 +37,8 @@ dependencies {
     // Librairie PulseButton
     implementation 'pl.bclogic:pulsator4droid:1.0.3'
 
+    // Résoud un bug avec un vrai téléphone
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+
 
 }

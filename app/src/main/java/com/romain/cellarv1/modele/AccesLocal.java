@@ -31,7 +31,7 @@ public class AccesLocal {
     public void ajout(WineBottle wineBottle) {
         bd = accesBD.getWritableDatabase();
         String requete = "insert into wineBottle (datemesure, country, region, winecolor, domain, appellation, year, number, estimate, image) values ";
-        requete += "(\""+wineBottle.getDate()+"\", \""+wineBottle.getCountry()+"\", \""+wineBottle.getRegion()+"\", "+wineBottle.getWineColor()+", \""+wineBottle.getDomain()+"\", \""+wineBottle.getAppellation()+"\", "+wineBottle.getYear()+", "+wineBottle.getNumber()+", "+wineBottle.getEstimate()+", \""+wineBottle.getImage()+"\")";
+        requete += "(\""+wineBottle.getDateMesure()+"\", \""+wineBottle.getCountry()+"\", \""+wineBottle.getRegion()+"\", "+wineBottle.getWineColor()+", \""+wineBottle.getDomain()+"\", \""+wineBottle.getAppellation()+"\", "+wineBottle.getYear()+", "+wineBottle.getNumber()+", "+wineBottle.getEstimate()+", \""+wineBottle.getImage()+"\")";
         bd.execSQL(requete);
     }
 

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.Loader;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,6 +38,14 @@ public class UserActivity extends AppCompatActivity {
 
         CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
         curvedBottomNavigationView.setOnNavigationItemSelectedListener(customBottomNavListener);
+
+        FloatingActionButton fabMapBack = (FloatingActionButton) findViewById(R.id.fabMapBack);
+        fabMapBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         initFabWineMenu();
 

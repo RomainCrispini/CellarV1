@@ -30,51 +30,92 @@ public class WineBottle {
         this.image = image;
     }
 
-    // Getters
-    public Date getDate() {
+    // Getters et setters
+    public Date getDateMesure() {
         return dateMesure;
+    }
+
+    public void setDateMesure(Date dateMesure) {
+        this.dateMesure = dateMesure;
     }
 
     public String getCountry() {
         return country;
     }
 
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public String getRegion() {
         return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public Integer getWineColor() {
         return wineColor;
     }
 
+    public void setWineColor(Integer wineColor) {
+        this.wineColor = wineColor;
+    }
+
     public String getDomain() {
         return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
     public String getAppellation() {
         return appellation;
     }
 
+    public void setAppellation(String appellation) {
+        this.appellation = appellation;
+    }
+
     public Integer getYear() {
         return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
     public Integer getNumber() {
         return number;
     }
 
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
     public Integer getEstimate() {
         return estimate;
+    }
+
+    public void setEstimate(Integer estimate) {
+        this.estimate = estimate;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getImage() {
         return image;
     }
 
+
     @Override
     public String toString() {
         return "WineBottle{" +
-                "date=" + dateMesure +
+                "dateMesure=" + dateMesure +
                 ", country='" + country + '\'' +
                 ", region='" + region + '\'' +
                 ", wineColor=" + wineColor +
