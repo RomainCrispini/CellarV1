@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
-    // Propriétés
+    // Propriétés : requête de création de la BDD
     private String creation="create table bottle ("
             + "datemesure TEXT PRIMARY KEY," // Que 4 types dispos sur SQLite, pas de format Date
             + "country TEXT,"
@@ -35,7 +35,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Si changement de BDD
+     * Méthode qui ne s'exécute que si changement de BDD
      * @param db
      */
     @Override
@@ -45,7 +45,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Si changement de version
+     * Méthode qui ne s'exécute que si changement de version
      * @param db
      * @param oldVersion
      * @param newVersion

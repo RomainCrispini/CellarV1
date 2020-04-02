@@ -1,4 +1,4 @@
-package com.romain.cellarv1;
+package com.romain.cellarv1.vue;
 
 import android.Manifest;
 import android.app.FragmentManager;
@@ -32,7 +32,10 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.romain.cellarv1.vue.CurvedBottomNavigationView;
+import com.romain.cellarv1.AddActivity;
+import com.romain.cellarv1.CellarActivity;
+import com.romain.cellarv1.R;
+import com.romain.cellarv1.UserActivity;
 
 import java.io.IOException;
 import java.util.List;

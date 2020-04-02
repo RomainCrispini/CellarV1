@@ -17,7 +17,7 @@ public class AccesLocal {
     private SQLiteDatabase bd;
 
     /**
-     * Constructeur
+     * Constructeur, quand on instanciera cette classe, il faudra y envoyer le context
      * @param context
      */
     public AccesLocal(Context context) {
@@ -28,7 +28,7 @@ public class AccesLocal {
      * Ajout d'une bouteille dans la BDD
      * @param wineBottle
      */
-    public void ajout(WineBottle wineBottle) {
+    public void add(WineBottle wineBottle) {
         bd = accesBD.getWritableDatabase();
         String requete = "insert into wineBottle (datemesure, country, region, winecolor, domain, appellation, year, number, estimate, image) values ";
         requete += "(\""+wineBottle.getDateMesure()+"\", \""+wineBottle.getCountry()+"\", \""+wineBottle.getRegion()+"\", "+wineBottle.getWineColor()+", \""+wineBottle.getDomain()+"\", \""+wineBottle.getAppellation()+"\", "+wineBottle.getYear()+", "+wineBottle.getNumber()+", "+wineBottle.getEstimate()+", \""+wineBottle.getImage()+"\")";
@@ -37,28 +37,28 @@ public class AccesLocal {
 
     /**
      * Récupération de la dernière bouteille de la BDD
-     * @return
+     * @return wineBottle
      */
-    public WineBottle recupDerniere() {
+    public WineBottle getLastWineBottle() {
         bd = accesBD.getReadableDatabase();
         WineBottle wineBottle = null;
         String requete = "select * from cellar";
-        Cursor curseur = bd.rawQuery(requete, null);
-        curseur.moveToLast();
-        if(!curseur.isAfterLast()) {
+        Cursor cursor = bd.rawQuery(requete, null);
+        cursor.moveToLast();
+        if(!cursor.isAfterLast()) {
             Date date = new Date();
-            String country = curseur.getString(1);
-            String region = curseur.getString(2);
-            Integer winecolor = curseur.getInt(3);
-            String domain = curseur.getString(4);
-            String appellation = curseur.getString(5);
-            Integer year = curseur.getInt(6);
-            Integer number = curseur.getInt(7);
-            Integer estimate = curseur.getInt(8);
-            String image = curseur.getString(9);
+            String country = cursor.getString(1);
+            String region = cursor.getString(2);
+            Integer winecolor = cursor.getInt(3);
+            String domain = cursor.getString(4);
+            String appellation = cursor.getString(5);
+            Integer year = cursor.getInt(6);
+            Integer number = cursor.getInt(7);
+            Integer estimate = cursor.getInt(8);
+            String image = cursor.getString(9);
             wineBottle = new WineBottle(date, country, region, winecolor, domain, appellation, year, number, estimate, image);
         }
-        curseur.close();
+        cursor.close();
         return wineBottle;
     }
 }

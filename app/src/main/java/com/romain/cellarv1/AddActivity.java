@@ -39,14 +39,11 @@ public class AddActivity extends AppCompatActivity {
     // Liste pays
     ArrayList<String> countrylist = new ArrayList<>();
 
-    Controle controle;
-
     // ProgessBar
     int counter = 0;
     private ProgressBar progressBar;
     private int progressBarStatus = 0;
     private Handler handler = new Handler();
-
 
     // Champs texte
     AutoCompleteTextView txtCountry;
@@ -54,6 +51,9 @@ public class AddActivity extends AppCompatActivity {
     EditText nbYear, nbNumber, nbEstimate;
     ImageButton btnRed, btnRose, btnWhite, btnChamp;
     FloatingActionButton btnAdd;
+
+    // Accès à la BDD
+    Controle controle;
 
     /**
      * Initialisation des liens avec les objets graphiques
@@ -79,9 +79,18 @@ public class AddActivity extends AppCompatActivity {
      * Ajout d'une nouvelle bouteille
      */
     private void addWineBottle() {
-        //    txtCountry.setText(controle.(););
-
+        //txtCountry.setText(controle.getCountry().toString());
+        //txtRegion.setText(controle.getRegion().toString());
     }
+
+
+
+    private void afficheResult(String country, String region, Integer wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
+        this.controle.createWineBottle(country, region, wineColor, domain, appellation, year, number, estimate, image);
+    }
+
+
+
 
     /**
      * Chargement et récupération des infos du fichier JSon

@@ -9,12 +9,22 @@ import java.util.Date;
 
 public class Controle {
 
+    // Pour générer une instance de cette classe
+    // Static car accessible par la classe et non pas par une instance de la classe
     private static Controle instance = null;
+
     private static WineBottle wineBottle;
     private static AccesLocal accesLocal;
 
     /**
-     * Création de l'instance
+     * On créé un constructeur privé de manière à ne pas pouvoir en créer de nouveaux avec new
+     */
+    private Controle() {
+        super();
+    }
+
+    /**
+     * Pattern Singleton qui permet de ne créer qu'une seule instance de cette classe et retourne un objet de type Controle
      * @param context
      * @return instance
      */
@@ -22,14 +32,26 @@ public class Controle {
         if(Controle.instance == null) {
             Controle.instance = new Controle();
             accesLocal = new AccesLocal(context);
-            wineBottle = accesLocal.recupDerniere();
+            wineBottle = accesLocal.getLastWineBottle();
         }
         return Controle.instance;
     }
 
-    public void ajoutWineBottle(String country, String region, Integer wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
+    /**
+     *
+     * @param country
+     * @param region
+     * @param wineColor
+     * @param domain
+     * @param appellation
+     * @param year
+     * @param number
+     * @param estimate
+     * @param image
+     */
+    public void createWineBottle(String country, String region, Integer wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
         wineBottle = new WineBottle(new Date(), country, region, wineColor, domain, appellation, year, number, estimate, image);
-        accesLocal.ajout(wineBottle);
+        accesLocal.add(wineBottle);
     }
 
 }
