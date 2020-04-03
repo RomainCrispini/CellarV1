@@ -13,11 +13,11 @@ public class AccesLocal {
     // Propriétés
     private String nomBase = "cellar.sqlite";
     private Integer versionBase = 1;
-    private MySQLiteOpenHelper accesBD;
-    private SQLiteDatabase bd;
+    private MySQLiteOpenHelper accesBD; // Accès à la BDD SQLite
+    private SQLiteDatabase bd; // Propriété qui permet de créer des canaux pour lire et/ou écrire dans la BDD
 
     /**
-     * Constructeur, quand on instanciera cette classe, il faudra y envoyer le context
+     * Constructeur, quand on instanciera cette classe (il faudra y envoyer le context)
      * @param context
      */
     public AccesLocal(Context context) {
@@ -30,8 +30,8 @@ public class AccesLocal {
      */
     public void add(WineBottle wineBottle) {
         bd = accesBD.getWritableDatabase();
-        String requete = "insert into wineBottle (datemesure, country, region, winecolor, domain, appellation, year, number, estimate, image) values ";
-        requete += "(\""+wineBottle.getDateAddNewBottle()+"\", \""+wineBottle.getCountry()+"\", \""+wineBottle.getRegion()+"\", "+wineBottle.getWineColor()+", \""+wineBottle.getDomain()+"\", \""+wineBottle.getAppellation()+"\", "+wineBottle.getYear()+", "+wineBottle.getNumber()+", "+wineBottle.getEstimate()+", \""+wineBottle.getImage()+"\")";
+        String requete = "insert into bottle (dateaddnewbottle, country, region, winecolor, domain, appellation, year, number, estimate, image) values ";
+        requete += "(\""+ wineBottle.getDateAddNewBottle() +"\", \""+wineBottle.getCountry()+"\", \""+wineBottle.getRegion()+"\", "+wineBottle.getWineColor()+", \""+wineBottle.getDomain()+"\", \""+wineBottle.getAppellation()+"\", "+wineBottle.getYear()+", "+wineBottle.getNumber()+", "+wineBottle.getEstimate()+", \""+wineBottle.getImage()+"\")";
         bd.execSQL(requete);
     }
 

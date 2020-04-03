@@ -1,7 +1,6 @@
 package com.romain.cellarv1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.content.Intent;
 import android.text.Editable;
@@ -9,11 +8,9 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.romain.cellarv1.controleur.Controle;
@@ -76,7 +73,7 @@ public class AddActivity extends AppCompatActivity {
         btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
         this.controle = Controle.getInstance(this); // Création d'une instance de type Controle
         addWineBottle();
-        //recoverWineBottle();
+        recoverWineBottle();
         recoverFABWineColor();
         recoverJsonCountries();
         pulsar();
@@ -105,7 +102,8 @@ public class AddActivity extends AppCompatActivity {
                     region = txtRegion.getText().toString();
                     domain = txtDomain.getText().toString();
                     appellation = txtAppellation.getText().toString();
-                    if(btnRed.isSelected()) {
+                    wineColor = null;
+                    /*if(btnRed.isSelected()) { ///                        FAUX
                         wineColor = "Rouge";
                     } else if(btnRose.isSelected()) {
                         wineColor = "Rose";
@@ -113,7 +111,7 @@ public class AddActivity extends AppCompatActivity {
                         wineColor = "Blanc";
                     } else {
                         wineColor = "Effervescent";
-                    }
+                    }*/
                     year = Integer.parseInt(nbYear.getText().toString());
                     number = Integer.parseInt(nbNumber.getText().toString());
                     estimate = Integer.parseInt(nbEstimate.getText().toString());

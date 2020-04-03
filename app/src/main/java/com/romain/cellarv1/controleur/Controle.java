@@ -15,8 +15,7 @@ public class Controle {
 
     private static WineBottle wineBottle;
     private static String serializableFile = "saveWineBottle";
-
-    private static AccesLocal accesLocal;
+    private static AccesLocal accesLocal; // Permet d'accéder à la classe AccesLocal
 
     /**
      * On créé un constructeur privé de manière à ne pas pouvoir en créer de nouveaux avec new
@@ -34,6 +33,8 @@ public class Controle {
         if(Controle.instance == null) {
             Controle.instance = new Controle();
             //recoverSerialize(context);
+            accesLocal = new AccesLocal(context);
+            //wineBottle = accesLocal.getLastWineBottle();
         }
         return Controle.instance;
     }
@@ -51,8 +52,8 @@ public class Controle {
      */
     public void createWineBottle(String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image, Context context) {
         wineBottle = new WineBottle(new Date(), country, region, wineColor, domain, appellation, year, number, estimate, image);
-        Serializer.serialize(serializableFile, wineBottle, context);
-        //accesLocal.add(wineBottle);
+        //Serializer.serialize(serializableFile, wineBottle, context);
+        accesLocal.add(wineBottle);
     }
 
     /**

@@ -3,19 +3,19 @@ package com.romain.cellarv1.outils;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-import androidx.annotation.Nullable;
 
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     // Propriétés : requête de création de la BDD
     private String creation="create table bottle ("
-            + "datemesure TEXT PRIMARY KEY," // Que 4 types dispos sur SQLite, pas de format Date
+            + "dateaddnewbottle TEXT PRIMARY KEY," // Que 4 types dispos sur SQLite, pas de format Date
             + "country TEXT,"
             + "region TEXT,"
-            + "winecolor INTEGER,"
-            + "domain,"
-            + "appelation TEXT,"
+            + "winecolor TEXT,"
+            + "domain TEXT,"
+            + "appellation TEXT,"
             + "year INTEGER,"
             + "number INTEGER,"
             + "estimate INTEGER,"
@@ -30,7 +30,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
      * @param factory
      * @param version
      */
-    public MySQLiteOpenHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public MySQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
@@ -40,8 +40,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.i("BDD", "Creation");
         db.execSQL(creation);
-
+        Log.i("BDD", "Fin Creation");
     }
 
     /**
