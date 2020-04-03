@@ -49,7 +49,7 @@ public class AccesLocal {
             Date date = new Date();
             String country = cursor.getString(1);
             String region = cursor.getString(2);
-            Integer winecolor = cursor.getInt(3);
+            String winecolor = cursor.getString(3);
             String domain = cursor.getString(4);
             String appellation = cursor.getString(5);
             Integer year = cursor.getInt(6);

@@ -13,7 +13,7 @@ public class Controle {
     // Static car accessible par la classe et non pas par une instance de la classe
     private static Controle instance = null;
 
-    private static WineBottle wineBottle;
+    private WineBottle wineBottle;
     private static AccesLocal accesLocal;
 
     /**
@@ -25,21 +25,18 @@ public class Controle {
 
     /**
      * Pattern Singleton qui permet de ne créer qu'une seule instance de cette classe et retourne un objet de type Controle
-     * @param context
      * @return instance
      */
-    public static final Controle getInstance(Context context) {
+    // Pattern Singleton qui permet de ne créer qu'une seule instance de cette classe et retourne un objet de type Controle
+    public static final Controle getInstance() {
         if(Controle.instance == null) {
             Controle.instance = new Controle();
-            accesLocal = new AccesLocal(context);
-            wineBottle = accesLocal.getLastWineBottle();
         }
         return Controle.instance;
     }
 
     /**
-     *
-     * @param country
+     *  @param country
      * @param region
      * @param wineColor
      * @param domain
@@ -49,7 +46,7 @@ public class Controle {
      * @param estimate
      * @param image
      */
-    public void createWineBottle(String country, String region, Integer wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
+    public void createWineBottle(String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
         wineBottle = new WineBottle(new Date(), country, region, wineColor, domain, appellation, year, number, estimate, image);
         accesLocal.add(wineBottle);
     }

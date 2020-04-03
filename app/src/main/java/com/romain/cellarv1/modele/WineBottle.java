@@ -8,7 +8,7 @@ public class WineBottle {
     private Date dateMesure;
     private String country;
     private String region;
-    private Integer wineColor;
+    private String wineColor;
     private String domain;
     private String appellation;
     private Integer year;
@@ -17,7 +17,7 @@ public class WineBottle {
     private String image;
 
     // Constructeur
-    public WineBottle(Date dateMesure, String country, String region, Integer wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
+    public WineBottle(Date dateMesure, String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
         this.dateMesure = dateMesure;
         this.country = country;
         this.region = region;
@@ -55,11 +55,11 @@ public class WineBottle {
         this.region = region;
     }
 
-    public Integer getWineColor() {
+    public String getWineColor() {
         return wineColor;
     }
 
-    public void setWineColor(Integer wineColor) {
+    public void setWineColor(String wineColor) {
         this.wineColor = wineColor;
     }
 

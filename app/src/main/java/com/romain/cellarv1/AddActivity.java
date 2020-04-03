@@ -46,17 +46,17 @@ public class AddActivity extends AppCompatActivity {
     private Handler handler = new Handler();
 
     // Champs texte
-    AutoCompleteTextView txtCountry;
-    EditText txtRegion, txtDomain, txtAppellation;
-    EditText nbYear, nbNumber, nbEstimate;
-    ImageButton btnRed, btnRose, btnWhite, btnChamp;
-    FloatingActionButton btnAdd;
+    private AutoCompleteTextView txtCountry;
+    private EditText txtRegion, txtDomain, txtAppellation;
+    private EditText nbYear, nbNumber, nbEstimate;
+    private ImageButton btnRed, btnRose, btnWhite, btnChamp;
+    private FloatingActionButton btnAdd;
 
-    // Accès à la BDD
-    Controle controle;
+    // Déclaration du contrôleur
+    private Controle controle;
 
     /**
-     * Initialisation des liens avec les objets graphiques
+     * Méthode qui initialise les liens avec les objets graphiques
      */
     private void init() {
         txtCountry = (AutoCompleteTextView) findViewById(R.id.textCountry);
@@ -71,7 +71,6 @@ public class AddActivity extends AppCompatActivity {
         nbNumber = (EditText) findViewById(R.id.nbNumber);
         nbEstimate = (EditText) findViewById(R.id.nbEstimate);
         btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
-        this.controle = Controle.getInstance(this);
         addWineBottle();
     }
 
@@ -79,18 +78,64 @@ public class AddActivity extends AppCompatActivity {
      * Ajout d'une nouvelle bouteille
      */
     private void addWineBottle() {
-        //txtCountry.setText(controle.getCountry().toString());
-        //txtRegion.setText(controle.getRegion().toString());
+        ((FloatingActionButton) findViewById(R.id.btnAdd)).setOnClickListener(new FloatingActionButton.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String country = "";
+                String region = "";
+                String domain = "";
+                String appellation = "";
+                String wineColor = "";
+                Integer year = 0;
+                Integer number = 0;
+                Integer estimate = 0;
+                String image = "aucune image";
+                // Récupération des données saisies
+                try {
+                    country = txtCountry.getText().toString();
+                    region = txtRegion.getText().toString();
+                    domain = txtDomain.getText().toString();
+                    appellation = txtAppellation.getText().toString();
+                    if(btnRed.isSelected()) {
+                        wineColor = "Rouge";
+                    } else if(btnRose.isSelected()) {
+                        wineColor = "Rose";
+                    } else if(btnWhite.isSelected()) {
+                        wineColor = "Blanc";
+                    } else {
+                        wineColor = "Effervescent";
+                    }
+                    year = Integer.parseInt(nbYear.getText().toString());
+                    number = Integer.parseInt(nbNumber.getText().toString());
+                    estimate = Integer.parseInt(nbEstimate.getText().toString());
+
+
+                }catch(Exception e) {};
+                afficheResult(country, region, wineColor, domain, appellation, year, number, estimate, image);
+            }
+        });
     }
 
 
-
-    private void afficheResult(String country, String region, Integer wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
+    private void afficheResult(String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
         this.controle.createWineBottle(country, region, wineColor, domain, appellation, year, number, estimate, image);
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add);
 
+        // Création d'une instance de type Controle
+        this.controle = Controle.getInstance();
+        init();
+        recoverFABWineColor();
+        recoverJsonCountries();
+        pulsator();
+        progressBar();
+
+    }
 
     /**
      * Chargement et récupération des infos du fichier JSon
@@ -118,23 +163,18 @@ public class AddActivity extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(),countrylist.toString(),Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
-
-        progressBar();
-
+    private void recoverJsonCountries() {
         getJsonCountries();
         AutoCompleteTextView textCountries = (AutoCompleteTextView) findViewById(R.id.textCountry);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countrylist);
         textCountries.setAdapter(adapter);
+    }
 
+    private void recoverFABWineColor() {
         ImageButton redWineButton = (ImageButton) findViewById(R.id.redWineButton);
         ImageButton roseWineButton = (ImageButton) findViewById(R.id.roseWineButton);
         ImageButton whiteWineButton = (ImageButton) findViewById(R.id.whiteWineButton);
         ImageButton champWineButton = (ImageButton) findViewById(R.id.champWineButton);
-
         Intent intent = getIntent();
         if (intent != null) {
             String str = "";
@@ -161,15 +201,14 @@ public class AddActivity extends AppCompatActivity {
             }
 
         }
-
-        PulsatorLayout pulsatorLayout = (PulsatorLayout) findViewById(R.id.pulsator);
-        pulsatorLayout.start();
-
     }
 
+    private void pulsator() {
+        PulsatorLayout pulsatorLayout = (PulsatorLayout) findViewById(R.id.pulsator);
+        pulsatorLayout.start();
+    }
 
-    public void wineColorSelector(View view) {
-
+    protected void wineColorSelector(View view) {
         ImageButton redWineButton = (ImageButton) findViewById(R.id.redWineButton);
         ImageButton roseWineButton = (ImageButton) findViewById(R.id.roseWineButton);
         ImageButton whiteWineButton = (ImageButton) findViewById(R.id.whiteWineButton);
