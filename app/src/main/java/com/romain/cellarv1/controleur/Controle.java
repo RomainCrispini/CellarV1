@@ -1,11 +1,11 @@
 package com.romain.cellarv1.controleur;
 
 import android.content.Context;
-
 import com.romain.cellarv1.modele.AccesLocal;
 import com.romain.cellarv1.modele.WineBottle;
-
+import com.romain.cellarv1.outils.Serializer;
 import java.util.Date;
+
 
 public class Controle {
 
@@ -13,7 +13,9 @@ public class Controle {
     // Static car accessible par la classe et non pas par une instance de la classe
     private static Controle instance = null;
 
-    private WineBottle wineBottle;
+    private static WineBottle wineBottle;
+    private static String serializableFile = "saveWineBottle";
+
     private static AccesLocal accesLocal;
 
     /**
@@ -28,9 +30,10 @@ public class Controle {
      * @return instance
      */
     // Pattern Singleton qui permet de ne créer qu'une seule instance de cette classe et retourne un objet de type Controle
-    public static final Controle getInstance() {
+    public static final Controle getInstance(Context context) {
         if(Controle.instance == null) {
             Controle.instance = new Controle();
+            //recoverSerialize(context);
         }
         return Controle.instance;
     }
@@ -46,9 +49,91 @@ public class Controle {
      * @param estimate
      * @param image
      */
-    public void createWineBottle(String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
+    public void createWineBottle(String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image, Context context) {
         wineBottle = new WineBottle(new Date(), country, region, wineColor, domain, appellation, year, number, estimate, image);
-        accesLocal.add(wineBottle);
+        Serializer.serialize(serializableFile, wineBottle, context);
+        //accesLocal.add(wineBottle);
+    }
+
+    /**
+     * Récupération de l'objet sérialisé (la bouteille)
+     * @param context
+     */
+    private static void recoverSerialize(Context context) {
+        wineBottle = (WineBottle) Serializer.deSerialize(serializableFile, context);
+    }
+
+    // Getters de l'objet WineBottle pour SERIALISATION
+    public String getCountry() {
+        if(wineBottle == null) {
+            return null;
+        } else {
+            return wineBottle.getCountry();
+        }
+    }
+
+    public String getRegion() {
+        if(wineBottle == null) {
+            return null;
+        } else {
+            return wineBottle.getRegion();
+        }
+    }
+
+    public String getDomain() {
+        if(wineBottle == null) {
+            return null;
+        } else {
+            return wineBottle.getDomain();
+        }
+    }
+
+    public String getAppellation() {
+        if(wineBottle == null) {
+            return null;
+        } else {
+            return wineBottle.getAppellation();
+        }
+    }
+
+    public String getWineColor() {
+        if(wineBottle == null) {
+            return null;
+        } else {
+            return wineBottle.getWineColor();
+        }
+    }
+
+    public Integer getYear() {
+        if(wineBottle == null) {
+            return null;
+        } else {
+            return wineBottle.getYear();
+        }
+    }
+
+    public Integer getNumber() {
+        if(wineBottle == null) {
+            return null;
+        } else {
+            return wineBottle.getNumber();
+        }
+    }
+
+    public Integer getEstimate() {
+        if(wineBottle == null) {
+            return null;
+        } else {
+            return wineBottle.getEstimate();
+        }
+    }
+
+    public String getImage() {
+        if(wineBottle == null) {
+            return null;
+        } else {
+            return wineBottle.getImage();
+        }
     }
 
 }

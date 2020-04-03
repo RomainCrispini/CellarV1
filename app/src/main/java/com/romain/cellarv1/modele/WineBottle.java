@@ -1,11 +1,12 @@
 package com.romain.cellarv1.modele;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class WineBottle {
+public class WineBottle implements Serializable {
 
     // Propriétés
-    private Date dateMesure;
+    private Date dateAddNewBottle;
     private String country;
     private String region;
     private String wineColor;
@@ -17,8 +18,8 @@ public class WineBottle {
     private String image;
 
     // Constructeur
-    public WineBottle(Date dateMesure, String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
-        this.dateMesure = dateMesure;
+    public WineBottle(Date dateAddNewBottle, String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
+        this.dateAddNewBottle = dateAddNewBottle;
         this.country = country;
         this.region = region;
         this.wineColor = wineColor;
@@ -31,12 +32,12 @@ public class WineBottle {
     }
 
     // Getters et setters
-    public Date getDateMesure() {
-        return dateMesure;
+    public Date getDateAddNewBottle() {
+        return dateAddNewBottle;
     }
 
-    public void setDateMesure(Date dateMesure) {
-        this.dateMesure = dateMesure;
+    public void setDateAddNewBottle(Date dateAddNewBottle) {
+        this.dateAddNewBottle = dateAddNewBottle;
     }
 
     public String getCountry() {
@@ -115,7 +116,7 @@ public class WineBottle {
     @Override
     public String toString() {
         return "WineBottle{" +
-                "dateMesure=" + dateMesure +
+                "dateMesure=" + dateAddNewBottle +
                 ", country='" + country + '\'' +
                 ", region='" + region + '\'' +
                 ", wineColor=" + wineColor +

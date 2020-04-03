@@ -1,32 +1,28 @@
 package com.romain.cellarv1;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
-
 import android.content.Intent;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.romain.cellarv1.controleur.Controle;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 
 
@@ -43,7 +39,7 @@ public class AddActivity extends AppCompatActivity {
     int counter = 0;
     private ProgressBar progressBar;
     private int progressBarStatus = 0;
-    private Handler handler = new Handler();
+    //private Handler handler = new Handler();
 
     // Champs texte
     private AutoCompleteTextView txtCountry;
@@ -54,6 +50,13 @@ public class AddActivity extends AppCompatActivity {
 
     // Déclaration du contrôleur
     private Controle controle;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add);
+        init();
+    }
 
     /**
      * Méthode qui initialise les liens avec les objets graphiques
@@ -71,7 +74,13 @@ public class AddActivity extends AppCompatActivity {
         nbNumber = (EditText) findViewById(R.id.nbNumber);
         nbEstimate = (EditText) findViewById(R.id.nbEstimate);
         btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
+        this.controle = Controle.getInstance(this); // Création d'une instance de type Controle
         addWineBottle();
+        //recoverWineBottle();
+        recoverFABWineColor();
+        recoverJsonCountries();
+        pulsar();
+        progressBar();
     }
 
     /**
@@ -86,9 +95,9 @@ public class AddActivity extends AppCompatActivity {
                 String domain = "";
                 String appellation = "";
                 String wineColor = "";
-                Integer year = 0;
-                Integer number = 0;
-                Integer estimate = 0;
+                int year = 0;
+                int number = 0;
+                int estimate = 0;
                 String image = "aucune image";
                 // Récupération des données saisies
                 try {
@@ -109,7 +118,6 @@ public class AddActivity extends AppCompatActivity {
                     number = Integer.parseInt(nbNumber.getText().toString());
                     estimate = Integer.parseInt(nbEstimate.getText().toString());
 
-
                 }catch(Exception e) {};
                 afficheResult(country, region, wineColor, domain, appellation, year, number, estimate, image);
             }
@@ -118,23 +126,29 @@ public class AddActivity extends AppCompatActivity {
 
 
     private void afficheResult(String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
-        this.controle.createWineBottle(country, region, wineColor, domain, appellation, year, number, estimate, image);
+        this.controle.createWineBottle(country, region, wineColor, domain, appellation, year, number, estimate, image, this);
     }
 
+    /**
+     * Récupération de la wineBottle si elle a été SERIALISEE et si le champ pays n'était pas null
+     */
+    private void recoverWineBottle() {
+        if(controle.getCountry() != null) {
+            txtCountry.setText(controle.getCountry());
+            txtRegion.setText(controle.getRegion());
+            txtDomain.setText(controle.getDomain());
+            txtAppellation.setText(controle.getAppellation());
+            nbYear.setText(controle.getYear().toString());
+            nbNumber.setText(controle.getNumber().toString());
+            nbEstimate.setText(controle.getEstimate().toString());
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
-
-        // Création d'une instance de type Controle
-        this.controle = Controle.getInstance();
-        init();
-        recoverFABWineColor();
-        recoverJsonCountries();
-        pulsator();
-        progressBar();
-
+            //rdFemme.setChecked(true);
+            //if(controle.getSexe() == 1){
+            //    rdHomme.setChecked(true);
+            //}
+            // Simule le clic sur le bouton calcul
+            //((Button) findViewById(R.id.btnAdd)).performClick();
+        }
     }
 
     /**
@@ -203,12 +217,12 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
-    private void pulsator() {
+    private void pulsar() {
         PulsatorLayout pulsatorLayout = (PulsatorLayout) findViewById(R.id.pulsator);
         pulsatorLayout.start();
     }
 
-    protected void wineColorSelector(View view) {
+    public void wineColorSelector(View view) {
         ImageButton redWineButton = (ImageButton) findViewById(R.id.redWineButton);
         ImageButton roseWineButton = (ImageButton) findViewById(R.id.roseWineButton);
         ImageButton whiteWineButton = (ImageButton) findViewById(R.id.whiteWineButton);
@@ -270,7 +284,7 @@ public class AddActivity extends AppCompatActivity {
                 else {
                     progressBar.incrementProgressBy(-1);
                     //progressBar.setProgress(progressBar.getProgress() - 1);
-                    progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#282828"), android.graphics.PorterDuff.Mode.SRC_IN);
+                    //progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#282828"), android.graphics.PorterDuff.Mode.SRC_IN);
                     check = true;
                 }
             }
@@ -410,9 +424,6 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
-        if(!txtCountry.getText().toString().isEmpty() && !txtRegion.getText().toString().isEmpty()) {
-            progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#159700"), android.graphics.PorterDuff.Mode.SRC_IN);
-        }
         nbEstimate = (EditText) findViewById(R.id.nbEstimate);
         nbEstimate.addTextChangedListener(new TextWatcher() {
             @Override
@@ -439,6 +450,9 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+        //if(!txtCountry.getText().toString().isEmpty() && !txtRegion.getText().toString().isEmpty()) {
+        //    progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#159700"), android.graphics.PorterDuff.Mode.SRC_IN);
+        //}
         //txtCountry.getText().toString().isEmpty();
         //txtRegion.getText().toString().isEmpty();
         //txtDomain.getText().toString().isEmpty();
