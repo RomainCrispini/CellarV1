@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/dark_gradient_background"
-    tools:context=".AddActivity">
+    tools:context=".vue.AddActivity">
 
-    <com.romain.cellarv1.vue.CurvedBottomNavigationView
+    <com.romain.cellarv1.outils.CurvedBottomNavigationView
         android:id="@+id/curvedBottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1"
-        app:itemIconTint="@drawable/selector_curved_bottom_nav_view"
+        app:itemIconTint="@color/green_dark"
         app:menu="@menu/bottom_nav_menu">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,7 +38,7 @@
             app:borderWidth="1.5dp"
             app:elevation="10dp"
             app:fabSize="normal" />
-    </com.romain.cellarv1.vue.CurvedBottomNavigationView>
+    </com.romain.cellarv1.outils.CurvedBottomNavigationView>
 
 
     <ProgressBar

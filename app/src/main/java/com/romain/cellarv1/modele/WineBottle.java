@@ -3,6 +3,7 @@ package com.romain.cellarv1.modele;
 import java.io.Serializable;
 import java.util.Date;
 
+
 public class WineBottle implements Serializable {
 
     // Propriétés
@@ -112,7 +113,12 @@ public class WineBottle implements Serializable {
         return image;
     }
 
+    @Override
+    public String toString() {
+        return "Pays : " + country + ", Région : " + region + ", Couleur : " + wineColor + "\n";
+    }
 
+    /*
     @Override
     public String toString() {
         return "WineBottle{" +
@@ -127,5 +133,5 @@ public class WineBottle implements Serializable {
                 ", estimate=" + estimate +
                 ", image='" + image + '\'' +
                 '}';
-    }
+    }*/
 }

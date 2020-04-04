@@ -1,4 +1,4 @@
-package com.romain.cellarv1.vue;
+package com.romain.cellarv1.outils;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -117,4 +117,5 @@ public class CurvedBottomNavigationView extends BottomNavigationView {
         super.onDraw(canvas);
         canvas.drawPath(mPath, mPaint);
     }
+
 }

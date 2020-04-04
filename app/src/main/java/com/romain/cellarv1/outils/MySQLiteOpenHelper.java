@@ -40,9 +40,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.i("BDD", "Creation");
+        // Log.i("BDD", "Creation");
         db.execSQL(creation);
-        Log.i("BDD", "Fin Creation");
+        // Log.i("BDD", "Fin Creation");
     }
 
     /**

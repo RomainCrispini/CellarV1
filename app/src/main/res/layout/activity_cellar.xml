@@ -1,53 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CellarActivity"
-    android:focusable="false"
-    android:clickable="true">
-
-
-<com.google.android.material.textfield.TextInputLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="30dp"
-    app:helperText=""
-    app:hintTextColor="#fff"
-    android:background="@drawable/fond_textinput"
-    android:backgroundTint="@color/green_dark" >
+    android:background="@drawable/dark_gradient_background"
+    tools:context=".vue.CellarActivity">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/layoutEssaiText"
+    <com.romain.cellarv1.outils.CurvedBottomNavigationView
+        android:id="@+id/curvedBottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:hint="Essai"
-        android:textColorHint="#fff"
-        android:drawableRight="@drawable/ic_euro_symbol_black_24dp"
-        android:paddingRight="10dp"
-        android:backgroundTint="@color/transparent"/>
-</com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="false"
+        android:layout_centerHorizontal="true"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"
+        app:itemIconTint="@drawable/selector_curved_bottom_nav_view"
+        app:menu="@menu/bottom_nav_menu">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:padding="10dp"
-        app:boxBackgroundMode="outline"
-        app:counterEnabled="true"
-        app:errorEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/scan"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/green_dark"
-            android:hint="kjjlhjlhlj" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/green_very_dark"
+            android:tint="@color/green_dark"
+            android:src="@drawable/ic_photo_camera_black_24dp"
+            app:borderWidth="1.5dp"
+            app:elevation="10dp"
+            app:fabSize="normal" />
+    </com.romain.cellarv1.outils.CurvedBottomNavigationView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabMapBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/green_very_dark"
+            android:elevation="0dp"
+            android:src="@drawable/ic_map_black_24dp"
+            android:tint="@color/green_light"
+            app:elevation="0dp"
+            app:fabSize="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_horizontal">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabWineMenu"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_black_24dp"
+            android:tint="@color/green_light"
+            android:backgroundTint="@color/green_very_dark"
+            android:elevation="0dp"
+            app:fabSize="normal"
+            app:elevation="10dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabRed"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/red_wine"
+            android:backgroundTint="@color/green_very_dark"
+            android:elevation="0dp"
+            app:fabCustomSize="40dp"
+            app:maxImageSize="35dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabRose"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/rose_wine"
+            android:backgroundTint="@color/green_very_dark"
+            android:elevation="0dp"
+            app:fabCustomSize="40dp"
+            app:maxImageSize="35dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabWhite"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/white_wine"
+            android:backgroundTint="@color/green_very_dark"
+            android:elevation="0dp"
+            app:fabCustomSize="40dp"
+            app:maxImageSize="35dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabChamp"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/champ_wine"
+            android:backgroundTint="@color/green_very_dark"
+            android:elevation="0dp"
+            app:fabCustomSize="40dp"
+            app:maxImageSize="35dp" />
+    </LinearLayout>
 
 
+    <TextView
+        android:id="@+id/txtViewBDD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="350dp"
+        android:height="500dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btnViewBDD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BDD"
+        app:layout_constraintBottom_toTopOf="@+id/curvedBottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewBDD" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

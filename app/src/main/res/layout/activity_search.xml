@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/dark_gradient_background"
-    tools:context=".SearchActivity">
+    tools:context=".vue.SearchActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/float_ajout"

@@ -112,38 +112,38 @@
     </LinearLayout>
 
 
-    <com.romain.cellarv1.vue.CurvedBottomNavigationView
+    <com.romain.cellarv1.outils.CurvedBottomNavigationView
         android:id="@+id/curvedBottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
+        app:itemIconTint="@color/green_dark"
         app:labelVisibilityMode="unlabeled"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1"
-        app:itemIconTint="@drawable/selector_curved_bottom_nav_view"
+        app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_nav_menu">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/scan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
             android:backgroundTint="@color/green_very_dark"
-            android:tint="@color/green_dark"
+            android:orientation="vertical"
             android:src="@drawable/ic_photo_camera_black_24dp"
+            android:tint="@color/green_dark"
             app:borderWidth="1.5dp"
             app:elevation="10dp"
             app:fabSize="normal" />
 
-    </com.romain.cellarv1.vue.CurvedBottomNavigationView>
+    </com.romain.cellarv1.outils.CurvedBottomNavigationView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

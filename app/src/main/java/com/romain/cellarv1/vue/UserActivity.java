@@ -1,7 +1,6 @@
-package com.romain.cellarv1;
+package com.romain.cellarv1.vue;
 
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,45 +8,70 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.CompoundButton;
 import androidx.appcompat.widget.SwitchCompat;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.content.Loader;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.romain.cellarv1.vue.CurvedBottomNavigationView;
+import com.romain.cellarv1.R;
+import com.romain.cellarv1.outils.CurvedBottomNavigationView;
+
 
 public class UserActivity extends AppCompatActivity {
 
     // Initialisation de la Custom FAB et de ses caractéristiques
-    FloatingActionButton fabWineMenu, fabRed, fabRose, fabWhite, fabChamp;
-    OvershootInterpolator interpolator = new OvershootInterpolator();
-    Boolean isFABWineMenuOpen = false;
+    private FloatingActionButton fabWineMenu, fabRed, fabRose, fabWhite, fabChamp;
+    private OvershootInterpolator interpolator = new OvershootInterpolator();
+    private Boolean isFABWineMenuOpen = false;
 
     // Initialisation du switchDarkMode
-    SwitchCompat switchDarkMode = null;
-
-
+    private SwitchCompat switchDarkMode = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        init();
 
+    }
+
+    private void init() {
         CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
         curvedBottomNavigationView.setOnNavigationItemSelectedListener(customBottomNavListener);
+        initFabWineMenu();
+        initFabMapBack();
+        openFabWineMenu();
+        closeFabWineMenu();
+        actionFabWineMenu();
+        switchDarkMode();
 
+    }
+
+    private void switchDarkMode() {
+        SwitchCompat switchDarkMode = (SwitchCompat) findViewById(R.id.switchDarkMode);
+        switchDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    setTheme(R.style.AppTheme);
+                    Toast.makeText(UserActivity.this, "Switch DARK",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(UserActivity.this, "Switch LIGHT",Toast.LENGTH_SHORT).show();
+                    setTheme(R.style.AppTheme);
+                }
+            }
+        });
+    }
+
+    private void actionFabWineMenu() {
         FloatingActionButton fabMapBack = (FloatingActionButton) findViewById(R.id.fabMapBack);
         fabMapBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
-
-        initFabWineMenu();
 
         FloatingActionButton fabWineMenu = (FloatingActionButton) findViewById(R.id.fabWineMenu);
         fabWineMenu.setOnClickListener(new View.OnClickListener() {
@@ -93,26 +117,20 @@ public class UserActivity extends AppCompatActivity {
                 Toast.makeText(UserActivity.this, "FAB CHAMP",Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
-
-        SwitchCompat switchDarkMode = (SwitchCompat) findViewById(R.id.switchDarkMode);
-        switchDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    private void initFabMapBack() {
+        FloatingActionButton fabMapBack = (FloatingActionButton) findViewById(R.id.fabMapBack);
+        fabMapBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    setTheme(R.style.AppTheme);
-                    Toast.makeText(UserActivity.this, "Switch DARK",Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(UserActivity.this, "Switch LIGHT",Toast.LENGTH_SHORT).show();
-                    setTheme(R.style.AppTheme);
-                }
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
-
     }
 
     private void initFabWineMenu() {
-
         fabWineMenu = findViewById(R.id.fabWineMenu);
         fabRed = findViewById(R.id.fabRed);
         fabRose = findViewById(R.id.fabRose);
@@ -155,6 +173,7 @@ public class UserActivity extends AppCompatActivity {
 
     private CurvedBottomNavigationView.OnNavigationItemSelectedListener customBottomNavListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
+
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -166,7 +185,7 @@ public class UserActivity extends AppCompatActivity {
                             return true;
                         case R.id.cellar:
                             Toast.makeText(UserActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                             //overridePendingTransition(0, 0);
                             return true;
                         case R.id.scan:

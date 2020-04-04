@@ -19,22 +19,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".AddActivity"
+            android:name=".vue.AddActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".SearchActivity"
+            android:name=".vue.SearchActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".LikeActivity"
+            android:name=".vue.LikeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ScanActivity"
+            android:name=".vue.ScanActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserActivity"
+            android:name=".vue.UserActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CellarActivity"
+            android:name=".vue.CellarActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".vue.MainActivity"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/dark_gradient_background"
-    tools:context=".UserActivity">
+    tools:context=".vue.UserActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
     </LinearLayout>
 
 
-    <com.romain.cellarv1.vue.CurvedBottomNavigationView
+    <com.romain.cellarv1.outils.CurvedBottomNavigationView
         android:id="@+id/curvedBottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -133,7 +133,7 @@
             app:borderWidth="1.5dp"
             app:elevation="10dp"
             app:fabSize="normal" />
-    </com.romain.cellarv1.vue.CurvedBottomNavigationView>
+    </com.romain.cellarv1.outils.CurvedBottomNavigationView>
 
     <LinearLayout
         android:layout_width="match_parent"

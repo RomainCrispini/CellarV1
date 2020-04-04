@@ -1,9 +1,11 @@
 package com.romain.cellarv1.controleur;
 
 import android.content.Context;
+import android.widget.Toast;
 import com.romain.cellarv1.modele.AccesLocal;
 import com.romain.cellarv1.modele.WineBottle;
 import com.romain.cellarv1.outils.Serializer;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -16,6 +18,7 @@ public class Controle {
     private static WineBottle wineBottle;
     private static String serializableFile = "saveWineBottle";
     private static AccesLocal accesLocal; // Permet d'accéder à la classe AccesLocal
+    private static ArrayList<WineBottle> wineBottleList;
 
     /**
      * On créé un constructeur privé de manière à ne pas pouvoir en créer de nouveaux avec new
@@ -54,7 +57,14 @@ public class Controle {
         wineBottle = new WineBottle(new Date(), country, region, wineColor, domain, appellation, year, number, estimate, image);
         //Serializer.serialize(serializableFile, wineBottle, context);
         accesLocal.add(wineBottle);
+        Toast.makeText(context.getApplicationContext(), "Bouteille enregistrée !", Toast.LENGTH_LONG).show();
     }
+
+    //public ArrayList<WineBottle> recoverWineBottleList() {
+    //    accesLocal.recoverWineBottleList();
+    //    return wineBottleList;
+    //}
+
 
     /**
      * Récupération de l'objet sérialisé (la bouteille)

@@ -32,10 +32,8 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.romain.cellarv1.AddActivity;
-import com.romain.cellarv1.CellarActivity;
 import com.romain.cellarv1.R;
-import com.romain.cellarv1.UserActivity;
+import com.romain.cellarv1.outils.CurvedBottomNavigationView;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,9 +42,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
 
     // Initialisation de la Custom FAB et de ses caractéristiques
-    FloatingActionButton fabWineMenu, fabRed, fabRose, fabWhite, fabChamp;
-    OvershootInterpolator interpolator = new OvershootInterpolator();
-    Boolean isFABWineMenuOpen = false;
+    private FloatingActionButton fabWineMenu, fabRed, fabRose, fabWhite, fabChamp;
+    private OvershootInterpolator interpolator = new OvershootInterpolator();
+    private Boolean isFABWineMenuOpen = false;
 
     /**
      * AUTRES METHODES
@@ -65,6 +63,141 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private MapFragment mapFragment;
     private GoogleMap googleMap;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        init();
+        getFABWineMenuValue();
+
+    }
+
+    private void init() {
+        // FABWineMenu
+        fabWineMenu = findViewById(R.id.fabWineMenu);
+        fabRed = findViewById(R.id.fabRed);
+        fabRose = findViewById(R.id.fabRose);
+        fabWhite = findViewById(R.id.fabWhite);
+        fabChamp = findViewById(R.id.fabChamp);
+
+        fabWineMenu.setAlpha(1f);
+        fabRed.setAlpha(0f);
+        fabRose.setAlpha(0f);
+        fabWhite.setAlpha(0f);
+        fabChamp.setAlpha(0f);
+
+        fabRed.setTranslationY(-190f);
+        fabRose.setTranslationY(-340f);
+        fabWhite.setTranslationY(-510f);
+        fabChamp.setTranslationY(-670f);
+
+        // CurvedBottomNavigationView
+        CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
+        curvedBottomNavigationView.setOnNavigationItemSelectedListener(customBottomNavListener);
+
+        // Map Fragment
+        FragmentManager fragmentManager = getFragmentManager();
+        mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+    }
+
+    //public void addBottle(View view) {
+
+    //Intent intent = new Intent(MainActivity.this, AddActivity.class);
+    //startActivity(intent);
+    //setContentView(R.layout.activity_add);
+    //
+
+    private void getFABWineMenuValue() {
+        FloatingActionButton fabWineMenu = (FloatingActionButton) findViewById(R.id.fabWineMenu);
+        fabWineMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isFABWineMenuOpen) {
+                    closeFabWineMenu();
+                } else {
+                    openFabWineMenu();
+                }
+                Toast.makeText(getApplicationContext(), "FAB WINE MENU",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        FloatingActionButton fabRed = (FloatingActionButton) findViewById(R.id.fabRed);
+        fabRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("redWine", "redWine");
+                startActivity(intent);
+                closeFabWineMenu();
+                Toast.makeText(getApplicationContext(), "FAB ROUGE",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        FloatingActionButton fabRose = (FloatingActionButton) findViewById(R.id.fabRose);
+        fabRose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("roseWine", "roseWine");
+                startActivity(intent);
+                closeFabWineMenu();
+                Toast.makeText(getApplicationContext(), "FAB ROSE",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        FloatingActionButton fabWhite = (FloatingActionButton) findViewById(R.id.fabWhite);
+        fabWhite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("whiteWine", "whiteWine");
+                startActivity(intent);
+                closeFabWineMenu();
+                Toast.makeText(getApplicationContext(), "FAB BLANC",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        FloatingActionButton fabChamp = (FloatingActionButton) findViewById(R.id.fabChamp);
+        fabChamp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("champWine", "champWine");
+                startActivity(intent);
+                closeFabWineMenu();
+                Toast.makeText(getApplicationContext(), "FAB CHAMP",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void openFabWineMenu() {
+        isFABWineMenuOpen = !isFABWineMenuOpen;
+
+        fabWineMenu.animate().setInterpolator(interpolator).rotation(135f).setDuration(300).start();
+
+        fabRed.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabRose.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabWhite.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabChamp.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+    }
+
+    private void closeFabWineMenu() {
+        isFABWineMenuOpen = !isFABWineMenuOpen;
+
+        fabWineMenu.animate().setInterpolator(interpolator).rotation(0f).setDuration(300).start();
+
+        fabRed.animate().translationY(-190f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fabRose.animate().translationY(-340f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fabWhite.animate().translationY(-510f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fabChamp.animate().translationY(-670f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+    }
 
     private void validationPermissions() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -217,147 +350,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    //public void addBottle(View view) {
-
-        //Intent intent = new Intent(MainActivity.this, AddActivity.class);
-        //startActivity(intent);
-        //setContentView(R.layout.activity_add);
-    //
-
-
-    /**
-     * CUSTOM BOTTOM NAVIGATION VIEW
-     */
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // Map Fragment
-        FragmentManager fragmentManager = getFragmentManager();
-        mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
-        curvedBottomNavigationView.setOnNavigationItemSelectedListener(customBottomNavListener);
-
-        initFabWineMenu();
-
-        FloatingActionButton fabWineMenu = (FloatingActionButton) findViewById(R.id.fabWineMenu);
-        fabWineMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isFABWineMenuOpen) {
-                    closeFabWineMenu();
-                } else {
-                    openFabWineMenu();
-                }
-                Toast.makeText(MainActivity.this, "FAB WINE MENU",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        FloatingActionButton fabRed = (FloatingActionButton) findViewById(R.id.fabRed);
-        fabRed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("redWine", "redWine");
-                startActivity(intent);
-                Toast.makeText(MainActivity.this, "FAB ROUGE",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        FloatingActionButton fabRose = (FloatingActionButton) findViewById(R.id.fabRose);
-        fabRose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("roseWine", "roseWine");
-                startActivity(intent);
-                Toast.makeText(MainActivity.this, "FAB ROSE",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        FloatingActionButton fabWhite = (FloatingActionButton) findViewById(R.id.fabWhite);
-        fabWhite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("whiteWine", "whiteWine");
-                startActivity(intent);
-                Toast.makeText(MainActivity.this, "FAB BLANC",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        FloatingActionButton fabChamp = (FloatingActionButton) findViewById(R.id.fabChamp);
-        fabChamp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("champWine", "champWine");
-                startActivity(intent);
-                Toast.makeText(MainActivity.this, "FAB CHAMP",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-
-    private void initFabWineMenu() {
-
-        fabWineMenu = findViewById(R.id.fabWineMenu);
-        fabRed = findViewById(R.id.fabRed);
-        fabRose = findViewById(R.id.fabRose);
-        fabWhite = findViewById(R.id.fabWhite);
-        fabChamp = findViewById(R.id.fabChamp);
-
-        fabWineMenu.setAlpha(1f);
-        fabRed.setAlpha(0f);
-        fabRose.setAlpha(0f);
-        fabWhite.setAlpha(0f);
-        fabChamp.setAlpha(0f);
-
-        fabRed.setTranslationY(-190f);
-        fabRose.setTranslationY(-340f);
-        fabWhite.setTranslationY(-510f);
-        fabChamp.setTranslationY(-670f);
-    }
-
-    private void openFabWineMenu() {
-        isFABWineMenuOpen = !isFABWineMenuOpen;
-
-        fabWineMenu.animate().setInterpolator(interpolator).rotation(135f).setDuration(300).start();
-
-        fabRed.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabRose.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabWhite.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-        fabChamp.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-    }
-
-    private void closeFabWineMenu() {
-        isFABWineMenuOpen = !isFABWineMenuOpen;
-
-        fabWineMenu.animate().setInterpolator(interpolator).rotation(0f).setDuration(300).start();
-
-        fabRed.animate().translationY(-190f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
-        fabRose.animate().translationY(-340f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
-        fabWhite.animate().translationY(-510f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
-        fabChamp.animate().translationY(-670f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
-    }
-
-
-
-
     private CurvedBottomNavigationView.OnNavigationItemSelectedListener customBottomNavListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                    switch(item.getItemId()){
+                    switch (item.getItemId()) {
                         case R.id.user:
                             Toast.makeText(MainActivity.this, "USER", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
@@ -385,7 +383,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             return true;
                         default:
                             Toast.makeText(MainActivity.this, "BUG", Toast.LENGTH_SHORT).show();
-                     }
+                    }
                     return false;
                 }
             };

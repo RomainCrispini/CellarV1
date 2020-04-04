@@ -1,19 +1,24 @@
-package com.romain.cellarv1;
+package com.romain.cellarv1.vue;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-
+import android.widget.Toast;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.romain.cellarv1.R;
 import com.romain.cellarv1.controleur.Controle;
+import com.romain.cellarv1.outils.CurvedBottomNavigationView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -30,12 +35,10 @@ public class AddActivity extends AppCompatActivity {
      */
 
     // Liste pays
-    ArrayList<String> countrylist = new ArrayList<>();
+    private ArrayList<String> countrylist = new ArrayList<>();
 
     // ProgessBar
-    int counter = 0;
     private ProgressBar progressBar;
-    private int progressBarStatus = 0;
     //private Handler handler = new Handler();
 
     // Champs texte
@@ -56,9 +59,11 @@ public class AddActivity extends AppCompatActivity {
     }
 
     /**
-     * Méthode qui initialise les liens avec les objets graphiques
+     * Méthode qui initialise les liens avec les objets graphiques, et appelle toutes les méthodes
      */
     private void init() {
+        CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
+        curvedBottomNavigationView.setOnNavigationItemSelectedListener(customBottomNavListener);
         txtCountry = (AutoCompleteTextView) findViewById(R.id.textCountry);
         txtRegion = (EditText) findViewById(R.id.textRegion);
         btnRed = (ImageButton) findViewById(R.id.redWineButton);
@@ -98,37 +103,39 @@ public class AddActivity extends AppCompatActivity {
                 String image = "aucune image";
                 // Récupération des données saisies
                 try {
+                    if(btnRed.getAlpha() == 1f) {
+                        wineColor = "Rouge";
+                    } else if(btnRose.getAlpha() == 1f) {
+                        wineColor = "Rose";
+                    } else if(btnWhite.getAlpha() == 1f) {
+                        wineColor = "Blanc";
+                    } else if(btnChamp.getAlpha() == 1f) {
+                        wineColor = "Effervescent";
+                    }
                     country = txtCountry.getText().toString();
                     region = txtRegion.getText().toString();
                     domain = txtDomain.getText().toString();
                     appellation = txtAppellation.getText().toString();
-                    wineColor = null;
-                    /*if(btnRed.isSelected()) { ///                        FAUX
-                        wineColor = "Rouge";
-                    } else if(btnRose.isSelected()) {
-                        wineColor = "Rose";
-                    } else if(btnWhite.isSelected()) {
-                        wineColor = "Blanc";
-                    } else {
-                        wineColor = "Effervescent";
-                    }*/
                     year = Integer.parseInt(nbYear.getText().toString());
                     number = Integer.parseInt(nbNumber.getText().toString());
                     estimate = Integer.parseInt(nbEstimate.getText().toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                }catch(Exception e) {};
+
+                //controle.createWineBottle(country, region, wineColor, domain, appellation, year, number, estimate, image, getApplicationContext());
                 afficheResult(country, region, wineColor, domain, appellation, year, number, estimate, image);
             }
         });
     }
-
 
     private void afficheResult(String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
         this.controle.createWineBottle(country, region, wineColor, domain, appellation, year, number, estimate, image, this);
     }
 
     /**
-     * Récupération de la wineBottle si elle a été SERIALISEE et si le champ pays n'était pas null
+     * Récupération de la wineBottle si elle a été SERIALISEE et si le champ pays n'est pas null
      */
     private void recoverWineBottle() {
         if(controle.getCountry() != null) {
@@ -463,6 +470,45 @@ public class AddActivity extends AppCompatActivity {
         //}
 
     }
+
+    private CurvedBottomNavigationView.OnNavigationItemSelectedListener customBottomNavListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
+                    switch(item.getItemId()){
+                        case R.id.user:
+                            Toast.makeText(AddActivity.this, "USER", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            //overridePendingTransition(0, 0);
+                            return true;
+                        case R.id.cellar:
+                            Toast.makeText(AddActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            //overridePendingTransition(0, 0);
+                            return true;
+                        case R.id.scan:
+                            Toast.makeText(AddActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            //overridePendingTransition(0, 0);
+                            return true;
+                        case R.id.like:
+                            Toast.makeText(AddActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(getApplicationContext(), LikeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            //overridePendingTransition(0, 0);
+                            return true;
+                        case R.id.search:
+                            Toast.makeText(AddActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(getApplicationContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            //overridePendingTransition(0, 0);
+                            return true;
+                        default:
+                            Toast.makeText(AddActivity.this, "BUG", Toast.LENGTH_SHORT).show();
+                    }
+                    return false;
+                }
+            };
 
 
 
