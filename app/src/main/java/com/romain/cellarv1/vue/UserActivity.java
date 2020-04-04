@@ -10,7 +10,6 @@ import androidx.appcompat.widget.SwitchCompat;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
@@ -36,8 +35,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void init() {
-        CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
-        curvedBottomNavigationView.setOnNavigationItemSelectedListener(customBottomNavListener);
+        initCurvedNavigationView();
         initFabWineMenu();
         initFabMapBack();
         openFabWineMenu();
@@ -45,6 +43,47 @@ public class UserActivity extends AppCompatActivity {
         actionFabWineMenu();
         switchDarkMode();
 
+    }
+
+    private void initCurvedNavigationView() {
+        CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
+        curvedBottomNavigationView.setSelectedItemId(R.id.user);
+        curvedBottomNavigationView.setOnNavigationItemSelectedListener(new CurvedBottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.user:
+                        Toast.makeText(UserActivity.this, "USER", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        //overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.cellar:
+                        Toast.makeText(UserActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        //overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.scan:
+                        Toast.makeText(UserActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(getApplicationContext(), ScanActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        //overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.like:
+                        Toast.makeText(UserActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(getApplicationContext(), LikeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        //overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.search:
+                        Toast.makeText(UserActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(getApplicationContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        //overridePendingTransition(0, 0);
+                        return true;
+                    default:
+                        Toast.makeText(UserActivity.this, "BUG", Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
     }
 
     private void switchDarkMode() {
@@ -171,43 +210,6 @@ public class UserActivity extends AppCompatActivity {
         fabChamp.animate().translationY(-670f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
     }
 
-    private CurvedBottomNavigationView.OnNavigationItemSelectedListener customBottomNavListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                    switch(item.getItemId()){
-                        case R.id.user:
-                            Toast.makeText(UserActivity.this, "USER", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                            //overridePendingTransition(0, 0);
-                            return true;
-                        case R.id.cellar:
-                            Toast.makeText(UserActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                            //overridePendingTransition(0, 0);
-                            return true;
-                        case R.id.scan:
-                            Toast.makeText(UserActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                            //overridePendingTransition(0, 0);
-                            return true;
-                        case R.id.like:
-                            Toast.makeText(UserActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), LikeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                            //overridePendingTransition(0, 0);
-                            return true;
-                        case R.id.search:
-                            Toast.makeText(UserActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                            //overridePendingTransition(0, 0);
-                            return true;
-                        default:
-                            Toast.makeText(UserActivity.this, "BUG", Toast.LENGTH_SHORT).show();
-                    }
-                    return false;
-                }
-            };
 
 }

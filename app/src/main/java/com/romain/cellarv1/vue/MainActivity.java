@@ -17,11 +17,9 @@ import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -34,7 +32,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -69,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-        getFABWineMenuValue();
+
 
     }
 
@@ -92,14 +89,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         fabWhite.setTranslationY(-510f);
         fabChamp.setTranslationY(-670f);
 
-        // CurvedBottomNavigationView
-        CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
-        curvedBottomNavigationView.setOnNavigationItemSelectedListener(customBottomNavListener);
+
 
         // Map Fragment
         FragmentManager fragmentManager = getFragmentManager();
         mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        initCurvedNavigationView();
+        getFabWineMenuValue();
 
     }
 
@@ -110,7 +108,47 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //setContentView(R.layout.activity_add);
     //
 
-    private void getFABWineMenuValue() {
+    private void initCurvedNavigationView() {
+        CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
+        curvedBottomNavigationView.setOnNavigationItemSelectedListener(new CurvedBottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.user:
+                        //Toast.makeText(UserActivity.this, "USER", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        //overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.cellar:
+                        //Toast.makeText(UserActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        //overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.scan:
+                        //Toast.makeText(UserActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(getApplicationContext(), ScanActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        //overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.like:
+                        //Toast.makeText(UserActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(getApplicationContext(), LikeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        //overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.search:
+                        //Toast.makeText(UserActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(getApplicationContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        //overridePendingTransition(0, 0);
+                        return true;
+                    default:
+                        //Toast.makeText(UserActivity.this, "BUG", Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
+    }
+
+    private void getFabWineMenuValue() {
         FloatingActionButton fabWineMenu = (FloatingActionButton) findViewById(R.id.fabWineMenu);
         fabWineMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -350,42 +388,5 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    private CurvedBottomNavigationView.OnNavigationItemSelectedListener customBottomNavListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                    switch (item.getItemId()) {
-                        case R.id.user:
-                            Toast.makeText(MainActivity.this, "USER", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                            //overridePendingTransition(0, 0);
-                            return true;
-                        case R.id.cellar:
-                            Toast.makeText(MainActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                            //overridePendingTransition(0, 0);
-                            return true;
-                        case R.id.scan:
-                            Toast.makeText(MainActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                            //overridePendingTransition(0, 0);
-                            return true;
-                        case R.id.like:
-                            Toast.makeText(MainActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), LikeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                            //overridePendingTransition(0, 0);
-                            return true;
-                        case R.id.search:
-                            Toast.makeText(MainActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                            //overridePendingTransition(0, 0);
-                            return true;
-                        default:
-                            Toast.makeText(MainActivity.this, "BUG", Toast.LENGTH_SHORT).show();
-                    }
-                    return false;
-                }
-            };
 
 }
