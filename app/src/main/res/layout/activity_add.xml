@@ -253,7 +253,7 @@
 
         <EditText
             android:id="@+id/nbYear"
-            android:hint="Année"
+            android:hint="Millésime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/transparent"
