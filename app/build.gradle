@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.romain.cellarv1"
-        minSdkVersion 22
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -37,8 +37,14 @@ dependencies {
     // Librairie PulseButton
     implementation 'pl.bclogic:pulsator4droid:1.0.3'
 
-    // Résoud un bug avec un vrai téléphone
+    // CameraX core
+    //implementation "androidx.camera:camera-camera2:1.0.0-alpha10"
+    //implementation "androidx.camera:camera-camera2:${camerax_version}"
+
+    // Résoud un bug avec le téléphone de Nathalie
     // implementation 'com.google.android.gms:play-services-maps:16.1.0'
+
+
 
 
 }

@@ -5,11 +5,8 @@ import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.Toast;
-
-import com.romain.cellarv1.vue.ScanActivity;
-
 import java.io.IOException;
+import java.util.List;
 
 
 public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
@@ -28,8 +25,14 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
 
-
         Camera.Parameters params = camera.getParameters();
+
+        List<Camera.Size> sizes = params.getSupportedPictureSizes();
+        Camera.Size mSize = null;
+        for(Camera.Size size : sizes) {
+            mSize = size;
+        }
+
         // Change l'orientation de l'appareil photo
         if(this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
             params.set("orientation", "portrait");
@@ -41,7 +44,9 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
             params.setRotation(0);
         }
 
+        params.setPictureSize(mSize.width, mSize.height);
         camera.setParameters(params);
+
         try {
             camera.setPreviewDisplay(holder);
             //Toast.makeText(getContext(), "accès appareil photo OK", Toast.LENGTH_SHORT).show();
@@ -60,7 +65,8 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-
+        camera.stopPreview();
+        camera.release();
 
     }
 }
