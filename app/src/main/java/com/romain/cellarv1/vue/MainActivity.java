@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FloatingActionButton fabWineMenu, fabRed, fabRose, fabWhite, fabChamp;
     private OvershootInterpolator interpolator = new OvershootInterpolator();
     private Boolean isFABWineMenuOpen = false;
+    private FloatingActionButton fabScan;
 
     /**
      * AUTRES METHODES
@@ -65,7 +66,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fabScan = (FloatingActionButton) findViewById(R.id.scan);
+        fabScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ScanActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+            }
+        });
+
         init();
+
 
 
     }
@@ -89,8 +100,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         fabWhite.setTranslationY(-510f);
         fabChamp.setTranslationY(-670f);
 
-
-
         // Map Fragment
         FragmentManager fragmentManager = getFragmentManager();
         mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map);
@@ -109,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //
 
     private void initCurvedNavigationView() {
+
+
         CurvedBottomNavigationView curvedBottomNavigationView = findViewById(R.id.curvedBottomNavigationView);
         curvedBottomNavigationView.setOnNavigationItemSelectedListener(new CurvedBottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -127,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         return true;
                     case R.id.scan:
                         //Toast.makeText(UserActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(getApplicationContext(), ScanActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        startActivity(new Intent(getApplicationContext(), ScanActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                         //overridePendingTransition(0, 0);
                         return true;
                     case R.id.like:

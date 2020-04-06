@@ -8,6 +8,23 @@
     android:background="@drawable/dark_gradient_background"
     tools:context=".vue.AddActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/scan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/curvedBottomNavigationView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/green_very_dark"
+        android:src="@drawable/ic_photo_camera_black_24dp"
+        android:tint="@color/green_dark"
+        app:borderWidth="1.5dp"
+        app:elevation="10dp"
+        app:fabSize="normal" />
+
     <com.romain.cellarv1.outils.CurvedBottomNavigationView
         android:id="@+id/curvedBottomNavigationView"
         android:layout_width="match_parent"
@@ -24,20 +41,6 @@
         app:layout_constraintVertical_bias="1"
         app:itemIconTint="@color/green_dark"
         app:menu="@menu/bottom_nav_menu">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/scan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/green_very_dark"
-            android:tint="@color/green_dark"
-            android:src="@drawable/ic_photo_camera_black_24dp"
-            app:borderWidth="1.5dp"
-            app:elevation="10dp"
-            app:fabSize="normal" />
     </com.romain.cellarv1.outils.CurvedBottomNavigationView>
 
 
@@ -235,111 +238,124 @@
             app:layout_constraintStart_toStartOf="parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutYear"
+
+    <LinearLayout
+        android:id="@+id/layoutYearNumberEstimate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:orientation="horizontal"
-        app:helperText=""
-        app:hintTextColor="@color/green_light"
-        android:textColorHint="@color/green_light"
-        android:background="@drawable/fond_textinput"
-        android:backgroundTint="@color/green_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutAppellation">
 
-        <EditText
-            android:id="@+id/nbYear"
-            android:hint="Millésime"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutYear"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/transparent"
-            android:gravity="left"
-            android:textColor="@color/orange"
-            android:textCursorDrawable="@color/green_light"
-            android:padding="8dp"
-            android:textSize="14dp"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        app:helperText=""
-        app:hintTextColor="@color/green_light"
-        android:textColorHint="@color/green_light"
-        android:background="@drawable/fond_textinput"
-        android:backgroundTint="@color/green_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutYear">
-
-        <EditText
-            android:id="@+id/nbNumber"
-            android:hint="Quantité"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/transparent"
-            android:gravity="left"
-            android:textColor="@color/orange"
-            android:textCursorDrawable="@color/green_light"
-            android:padding="8dp"
-            android:inputType="number"
-            android:textSize="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutEstimate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        app:helperText=""
-        app:hintTextColor="@color/green_light"
-        android:textColorHint="@color/green_light"
-        android:background="@drawable/fond_textinput"
-        android:backgroundTint="@color/green_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutNumber">
-
-        <EditText
-            android:id="@+id/nbEstimate"
-            android:hint="Estimation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textColor="@color/orange"
-            android:textCursorDrawable="@color/green_light"
-            android:padding="8dp"
-            android:textSize="14dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/fond_textinput"
+            android:backgroundTint="@color/green_dark"
+            android:textColorHint="@color/green_light"
+            app:helperText=""
+            app:hintTextColor="@color/green_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:ems="10"
-            android:inputType="number"
-            android:drawableEnd="@drawable/ic_euro_symbol_black_24dp"
-            android:drawableTint="@color/green_light"
-            android:paddingRight="10dp"
-            android:backgroundTint="@color/transparent" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@+id/layoutAppellation">
+
+            <EditText
+                android:id="@+id/nbYear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/transparent"
+                android:gravity="left"
+                android:hint="Millésime"
+                android:inputType="number"
+                android:padding="8dp"
+                android:textColor="@color/orange"
+                android:textCursorDrawable="@color/green_light"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutNumber"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/fond_textinput"
+            android:backgroundTint="@color/green_dark"
+            android:textColorHint="@color/green_light"
+            app:helperText=""
+            app:hintTextColor="@color/green_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutYear">
+
+            <EditText
+                android:id="@+id/nbNumber"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/transparent"
+                android:drawableTint="@color/green_light"
+                android:ems="10"
+                android:hint="Quantité"
+                android:inputType="number"
+                android:padding="8dp"
+                android:textColor="@color/orange"
+                android:textCursorDrawable="@color/green_light"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutEstimate"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/fond_textinput"
+            android:backgroundTint="@color/green_dark"
+            android:orientation="horizontal"
+            android:textColorHint="@color/green_light"
+            app:helperText=""
+            app:hintTextColor="@color/green_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutNumber">
+
+            <EditText
+                android:id="@+id/nbEstimate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/transparent"
+                android:drawableEnd="@drawable/ic_euro_symbol_black_24dp"
+                android:drawableTint="@color/green_light"
+                android:ems="10"
+                android:hint="Estimation"
+                android:inputType="number"
+                android:padding="8dp"
+                android:textColor="@color/orange"
+                android:textCursorDrawable="@color/green_light"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/green_very_dark"
         android:elevation="0dp"
         android:src="@drawable/ic_add_black_24dp"
@@ -347,7 +363,7 @@
         app:fabSize="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutEstimate" />
+        app:layout_constraintBottom_toTopOf="@id/curvedBottomNavigationView" />
 
     <pl.bclogic.pulsator4droid.library.PulsatorLayout
         android:id="@+id/pulsator"

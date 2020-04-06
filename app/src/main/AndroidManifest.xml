@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.romain.cellarv1">
 
-
+    <!-- PERMISSIONS POUR ACCES APPAREIL PHOTO -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <!-- PERSMISSIONS POUR DONNEES CARTOGRAPHIQUES -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

@@ -2,6 +2,7 @@ package com.romain.cellarv1.vue;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,12 +11,13 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.AccesLocal;
 import com.romain.cellarv1.modele.WineBottle;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
+
 import java.util.List;
 
 
@@ -45,7 +47,7 @@ public class CellarActivity extends AppCompatActivity {
         txtViewBDD = (TextView) findViewById(R.id.txtViewBDD);
         accesLocal = new AccesLocal(this);
         List<WineBottle> wineBottleList = accesLocal.recoverWineBottleList();
-        for(int i = 0; i < wineBottleList.size(); i++) {
+        for (int i = 0; i < wineBottleList.size(); i++) {
             txtViewBDD.setText(wineBottleList.toString());
         }
         //WineBottle wineBottle = accesLocal.getLastWineBottle();
@@ -71,14 +73,9 @@ public class CellarActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                         //overridePendingTransition(0, 0);
                         return true;
-                    case R.id.cellar:
-                        //Toast.makeText(UserActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                        //overridePendingTransition(0, 0);
-                        return true;
                     case R.id.scan:
                         //Toast.makeText(UserActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(getApplicationContext(), ScanActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        startActivity(new Intent(getApplicationContext(), ScanActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                         //overridePendingTransition(0, 0);
                         return true;
                     case R.id.like:
@@ -99,17 +96,28 @@ public class CellarActivity extends AppCompatActivity {
         });
     }
 
+    private void initFabMapBack() {
+        FloatingActionButton fabMapBack = (FloatingActionButton) findViewById(R.id.fabMapBack);
+        fabMapBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void actionFabWineMenu() {
         FloatingActionButton fabWineMenu = (FloatingActionButton) findViewById(R.id.fabWineMenu);
         fabWineMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isFABWineMenuOpen) {
+                if (isFABWineMenuOpen) {
                     closeFabWineMenu();
                 } else {
                     openFabWineMenu();
                 }
-                Toast.makeText(getApplicationContext(), "FAB WINE MENU",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "FAB WINE MENU", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -122,7 +130,7 @@ public class CellarActivity extends AppCompatActivity {
                 intent.putExtra("redWine", "redWine");
                 startActivity(intent);
                 closeFabWineMenu();
-                Toast.makeText(CellarActivity.this, "FAB ROUGE",Toast.LENGTH_SHORT).show();
+                Toast.makeText(CellarActivity.this, "FAB ROUGE", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -135,7 +143,7 @@ public class CellarActivity extends AppCompatActivity {
                 intent.putExtra("roseWine", "roseWine");
                 startActivity(intent);
                 closeFabWineMenu();
-                Toast.makeText(CellarActivity.this, "FAB ROSE",Toast.LENGTH_SHORT).show();
+                Toast.makeText(CellarActivity.this, "FAB ROSE", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -148,7 +156,7 @@ public class CellarActivity extends AppCompatActivity {
                 intent.putExtra("whiteWine", "whiteWine");
                 startActivity(intent);
                 closeFabWineMenu();
-                Toast.makeText(CellarActivity.this, "FAB BLANC",Toast.LENGTH_SHORT).show();
+                Toast.makeText(CellarActivity.this, "FAB BLANC", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -161,18 +169,7 @@ public class CellarActivity extends AppCompatActivity {
                 intent.putExtra("champWine", "champWine");
                 startActivity(intent);
                 closeFabWineMenu();
-                Toast.makeText(CellarActivity.this, "FAB CHAMP",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void initFabMapBack() {
-        FloatingActionButton fabMapBack = (FloatingActionButton) findViewById(R.id.fabMapBack);
-        fabMapBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                Toast.makeText(CellarActivity.this, "FAB CHAMP", Toast.LENGTH_SHORT).show();
             }
         });
     }

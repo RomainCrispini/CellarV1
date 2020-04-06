@@ -490,7 +490,7 @@ public class AddActivity extends AppCompatActivity {
                             return true;
                         case R.id.scan:
                             Toast.makeText(AddActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                             //overridePendingTransition(0, 0);
                             return true;
                         case R.id.like:

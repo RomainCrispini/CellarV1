@@ -53,11 +53,6 @@ public class UserActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 switch (item.getItemId()) {
-                    case R.id.user:
-                        Toast.makeText(UserActivity.this, "USER", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                        //overridePendingTransition(0, 0);
-                        return true;
                     case R.id.cellar:
                         Toast.makeText(UserActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
@@ -65,7 +60,7 @@ public class UserActivity extends AppCompatActivity {
                         return true;
                     case R.id.scan:
                         Toast.makeText(UserActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(getApplicationContext(), ScanActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        startActivity(new Intent(getApplicationContext(), ScanActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                         //overridePendingTransition(0, 0);
                         return true;
                     case R.id.like:

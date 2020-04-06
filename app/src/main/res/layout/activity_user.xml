@@ -102,6 +102,22 @@
             app:maxImageSize="35dp" />
     </LinearLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/scan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/curvedBottomNavigationView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/green_very_dark"
+        android:src="@drawable/ic_photo_camera_black_24dp"
+        android:tint="@color/green_dark"
+        app:borderWidth="1.5dp"
+        app:elevation="10dp"
+        app:fabSize="normal" />
 
     <com.romain.cellarv1.outils.CurvedBottomNavigationView
         android:id="@+id/curvedBottomNavigationView"
@@ -119,20 +135,6 @@
         app:layout_constraintVertical_bias="1"
         app:itemIconTint="@drawable/selector_curved_bottom_nav_view"
         app:menu="@menu/bottom_nav_menu">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/scan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/green_very_dark"
-            android:tint="@color/green_dark"
-            android:src="@drawable/ic_add_black_24dp"
-            app:borderWidth="1.5dp"
-            app:elevation="10dp"
-            app:fabSize="normal" />
     </com.romain.cellarv1.outils.CurvedBottomNavigationView>
 
     <LinearLayout
