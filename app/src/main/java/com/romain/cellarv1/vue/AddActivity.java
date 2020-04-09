@@ -1,12 +1,14 @@
 package com.romain.cellarv1.vue;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -16,6 +18,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
@@ -28,10 +31,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.controleur.Controle;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
@@ -55,13 +60,16 @@ public class AddActivity extends AppCompatActivity {
      * Propriétés
      */
 
-    // Appareil photo
+    // Appareil photo et gallery
     private String photoPath = null;
-    //private static final int CAMERA_PERM_CODE = 101;
-    private static final int CAMERA_REQUEST_CODE = 102;
-    private static final int GALLERY_REQUEST_CODE = 103;
+    private static final int GALLERY_READ_REQUEST_PERMISSION = 100;
+    private static final int CAMERA_REQUEST_PERMISSION = 101;
+    // private static final int GALLERY_WRITE_REQUEST_PERMISSION = 102;
+    private static final int CAMERA_REQUEST_CODE = 103;
+    private static final int GALLERY_REQUEST_CODE = 104;
     private ImageView scanImageView;
     private FloatingActionButton scan;
+    private LinearLayout layapp;
 
     // Gallery
     private Button btnGallery;
@@ -91,8 +99,9 @@ public class AddActivity extends AppCompatActivity {
 
         FloatingActionButton scan = (FloatingActionButton) findViewById(R.id.scan);
 
-        Button btnGallery = (Button) findViewById(R.id.btnGallery);
-        ImageView scanImageView = (ImageView) findViewById(R.id.scanImageView);
+        LinearLayout layapp = (LinearLayout) findViewById(R.id.layoutYearNumberEstimate);
+
+
 
     }
 
@@ -116,6 +125,11 @@ public class AddActivity extends AppCompatActivity {
         nbEstimate = (EditText) findViewById(R.id.nbEstimate);
         btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
         this.controle = Controle.getInstance(this); // Création d'une instance de type Controle
+
+        Button btnGallery = (Button) findViewById(R.id.btnGallery);
+        ImageView scanImageView = (ImageView) findViewById(R.id.scanImageView);
+
+
         addWineBottle();
         recoverWineBottle();
         recoverFABWineColor();
@@ -128,16 +142,65 @@ public class AddActivity extends AppCompatActivity {
 
 
 
+
     public void accesGallery(View view) {
-        // Accès à la gallery du tel
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE);
+        // Permission pour accès Gallery
+        if(ActivityCompat.checkSelfPermission(AddActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            // Accès à la gallery du tel
+            Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE);
+        } else {
+            galleryRequestPermission();
+        }
     }
 
+    private void galleryRequestPermission() {
+        if(ActivityCompat.shouldShowRequestPermissionRationale(AddActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            new AlertDialog.Builder(AddActivity.this)
+                    .setTitle("Permission")
+                    .setMessage("Cellar requiert votre permission pour accéder à votre galerie d'images")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(AddActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, GALLERY_READ_REQUEST_PERMISSION);
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
 
+        } else {
+            ActivityCompat.requestPermissions(AddActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, GALLERY_READ_REQUEST_PERMISSION);
+        }
+    }
 
+    private void cameraRequestPermission() {
+        if(ActivityCompat.shouldShowRequestPermissionRationale(AddActivity.this, Manifest.permission.CAMERA)) {
+            new AlertDialog.Builder(AddActivity.this)
+                    .setTitle("Permission")
+                    .setMessage("Cellar requiert votre permission pour accéder à votre appareil photo")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(AddActivity.this, new String[] {Manifest.permission.CAMERA}, CAMERA_REQUEST_PERMISSION);
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
 
-
+        } else {
+            ActivityCompat.requestPermissions(AddActivity.this, new String[] {Manifest.permission.CAMERA}, CAMERA_REQUEST_PERMISSION);
+        }
+    }
 
     // Au retour de la sélection d'une image (après appel de startactivityforresult)
     @Override
@@ -177,27 +240,32 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void takePicture(View view) {
-        // Crée un intent pour ouvrir une fenêtre pour prendre la photo
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Test pour contrôler que l'intent peut être géré
-        if(intent.resolveActivity(getPackageManager()) != null) {
-            // Créer un nom de fichier unique
-            String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-            try {
-                File photoFile = File.createTempFile("photo" + time, ".jpg", photoDir);
-                // Enregistrer le chemin complet
-                photoPath = photoFile.getAbsolutePath();
-                // Créer l'URI
-                Uri photoUri = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", photoFile);
-                // Transfert uri vers l'intent pour enregistrement photo dans fichier temporaire
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                // Ouvrir l'activity par rapport à l'intent
-                startActivityForResult(intent, CAMERA_REQUEST_CODE);
-            } catch(IOException e) {
-                e.printStackTrace();
+        if(ActivityCompat.checkSelfPermission(AddActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            // Crée un intent pour ouvrir une fenêtre pour prendre la photo
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            // Test pour contrôler que l'intent peut être géré
+            if(intent.resolveActivity(getPackageManager()) != null) {
+                // Créer un nom de fichier unique
+                String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                try {
+                    File photoFile = File.createTempFile("photo" + time, ".jpg", photoDir);
+                    // Enregistrer le chemin complet
+                    photoPath = photoFile.getAbsolutePath();
+                    // Créer l'URI
+                    Uri photoUri = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", photoFile);
+                    // Transfert uri vers l'intent pour enregistrement photo dans fichier temporaire
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                    // Ouvrir l'activity par rapport à l'intent
+                    startActivityForResult(intent, CAMERA_REQUEST_CODE);
+                } catch(IOException e) {
+                    e.printStackTrace();
+                }
             }
+        } else {
+            cameraRequestPermission();
         }
+
     }
 
     private Bitmap changeSizeBitmap(Bitmap bitmap, float proportion) {

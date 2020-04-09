@@ -2,6 +2,7 @@ package com.romain.cellarv1.vue;
 
 import android.Manifest;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -18,6 +19,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,7 +30,6 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
@@ -44,17 +45,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Boolean isFABWineMenuOpen = false;
     private FloatingActionButton fabScan;
 
-    /**
-     * AUTRES METHODES
-     */
-
-
-    /**
-     * CARTOGRAPHIE
-     */
-
-    // Déclaration d'une permission à activer
-    private static final int PERMS_CALL_ID = 1234;
+    // Déclaration permission map
+    private static final int MAP_REQUEST_PERMISSION = 100;
 
     private LocationManager locmanager;
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -66,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mapRequestPermission();
 
         fabScan = (FloatingActionButton) findViewById(R.id.scan);
         fabScan.setOnClickListener(new View.OnClickListener() {
@@ -248,6 +242,36 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         fabChamp.animate().translationY(-670f).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
     }
 
+
+
+    private void mapRequestPermission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Permission")
+                    .setMessage("Cellar requiert votre permission pour accéder à votre position")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(MainActivity.this, new String[] {
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION}, MAP_REQUEST_PERMISSION);
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+
+        } else {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, MAP_REQUEST_PERMISSION);
+        }
+    }
+
+
     private void validationPermissions() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -256,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             ActivityCompat.requestPermissions(this, new String[] {
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION
-            }, PERMS_CALL_ID);
+            }, MAP_REQUEST_PERMISSION);
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -266,6 +290,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
+
+
+
 
         //locmanager = (LocationManager) getSystemService(LOCATION_SERVICE);
         //if (locmanager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -281,20 +309,41 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+
+
+
+
     @Override
     protected void onResume() {
         super.onResume();
         validationPermissions();
+        //mapRequestPermission();
     }
+
+
+
+
+
+
 
     // Méthode activée quand une demande d'activation des permissions est proposée
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == PERMS_CALL_ID){
+        if(requestCode == MAP_REQUEST_PERMISSION){
+            //mapRequestPermission();
             validationPermissions();
         }
     }
+
+
+
+
+
+
+
+
+
 
     @Override
     protected void onPause() {
@@ -318,6 +367,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //    });
 
     //}
+
+
 
 
     // Ces quatre méthodes issues de l'implémentation LocationListener sont à redéfinir :
