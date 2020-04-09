@@ -2,16 +2,32 @@ package com.romain.cellarv1.vue;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.content.Intent;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,9 +38,14 @@ import com.romain.cellarv1.outils.CurvedBottomNavigationView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 
 
@@ -33,6 +54,17 @@ public class AddActivity extends AppCompatActivity {
     /**
      * Propriétés
      */
+
+    // Appareil photo
+    private String photoPath = null;
+    //private static final int CAMERA_PERM_CODE = 101;
+    private static final int CAMERA_REQUEST_CODE = 102;
+    private static final int GALLERY_REQUEST_CODE = 103;
+    private ImageView scanImageView;
+    private FloatingActionButton scan;
+
+    // Gallery
+    private Button btnGallery;
 
     // Liste pays
     private ArrayList<String> countrylist = new ArrayList<>();
@@ -56,7 +88,14 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         init();
+
+        FloatingActionButton scan = (FloatingActionButton) findViewById(R.id.scan);
+
+        Button btnGallery = (Button) findViewById(R.id.btnGallery);
+        ImageView scanImageView = (ImageView) findViewById(R.id.scanImageView);
+
     }
+
 
     /**
      * Méthode qui initialise les liens avec les objets graphiques, et appelle toutes les méthodes
@@ -83,7 +122,151 @@ public class AddActivity extends AppCompatActivity {
         recoverJsonCountries();
         pulsar();
         progressBar();
+
     }
+
+
+
+
+    public void accesGallery(View view) {
+        // Accès à la gallery du tel
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE);
+    }
+
+
+
+
+
+
+    // Au retour de la sélection d'une image (après appel de startactivityforresult)
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ImageView scanImageView = (ImageView) findViewById(R.id.scanImageView); // DOIT ETRE DECLAREE ICI !!!!!!!!!!!!!!!!!!!!!!
+        // Vérification du bon code de retour et l'état du retour ok
+        switch (requestCode) {
+            case CAMERA_REQUEST_CODE :
+                // Récupération de l'image
+                Bitmap imageCamera = BitmapFactory.decodeFile(photoPath);
+                // Afficher l'image
+                scanImageView.setImageBitmap(imageCamera);
+                break;
+            case GALLERY_REQUEST_CODE : // Vérifie si une image est récupérée
+                // Accès à l'image à partir de data
+                Uri selectedImage = data.getData();
+                // Mémorisation du path précis
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                // Curseur d'accès au chemin de l'image
+                Cursor cursor = this.getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                // Position sur la première ligne (normalement une seule)
+                cursor.moveToFirst();
+                // Récupération du chemin précis de l'image
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                String imgPath = cursor.getString(columnIndex);
+                cursor.close();
+                // Récupération de l'image
+                Bitmap imageGallery = BitmapFactory.decodeFile(imgPath);
+                // Redimentionner l'image
+                imageGallery = changeSizeBitmap(imageGallery, 0.5f);
+                // Affichage de l'image
+                scanImageView.setImageBitmap(imageGallery);
+                break;
+        }
+
+    }
+
+    public void takePicture(View view) {
+        // Crée un intent pour ouvrir une fenêtre pour prendre la photo
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Test pour contrôler que l'intent peut être géré
+        if(intent.resolveActivity(getPackageManager()) != null) {
+            // Créer un nom de fichier unique
+            String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            try {
+                File photoFile = File.createTempFile("photo" + time, ".jpg", photoDir);
+                // Enregistrer le chemin complet
+                photoPath = photoFile.getAbsolutePath();
+                // Créer l'URI
+                Uri photoUri = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", photoFile);
+                // Transfert uri vers l'intent pour enregistrement photo dans fichier temporaire
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                // Ouvrir l'activity par rapport à l'intent
+                startActivityForResult(intent, CAMERA_REQUEST_CODE);
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private Bitmap changeSizeBitmap(Bitmap bitmap, float proportion) {
+        // Métrique qui permet de récupérer les dimensions de l'écran
+        DisplayMetrics metrics = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        // Taille de l'écran (et affecter les proportions)
+        float screenHeight = metrics.heightPixels*proportion;
+        float screenWidth = metrics.widthPixels*proportion;
+        // Taille de l'image
+        float bitmapHeight = bitmap.getHeight();
+        float bitmapWidth = bitmap.getWidth();
+        // Calcul du ratio en tre taille image et écran
+        float ratioHeight = screenHeight/bitmapHeight;
+        float ratioWidth = screenWidth/bitmapWidth;
+        // Récupération du plus petit ratio
+        float ratio = Math.min(ratioHeight, ratioWidth);
+        // Redimentionnement de l'image par rapport au ratio
+        bitmap = Bitmap.createScaledBitmap(bitmap, (int) (bitmapWidth*ratio), (int) (bitmapHeight*ratio), true);
+        // envoie la nouvelle image
+        return bitmap;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+    public void askCameraPermissions(View view) {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+        } else {
+            openCamera();
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == CAMERA_PERM_CODE) {
+            if(grantResults.length < 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            } else {
+                Toast.makeText(this, "L'accès à la caméra est requis", Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+    private void openCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ImageView scanImageView = (ImageView) findViewById(R.id.scanImageView); // DOIT ETRE DECLAREE ICI !!!!!!!!!!!!!!!!!!!!!!
+        if(requestCode == CAMERA_REQUEST_CODE) {
+            Bitmap image = (Bitmap) data.getExtras().get("data");
+            scanImageView.setImageBitmap(image);
+        }
+    }
+     */
 
     /**
      * Ajout d'une nouvelle bouteille
@@ -475,8 +658,6 @@ public class AddActivity extends AppCompatActivity {
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
                     switch(item.getItemId()){
                         case R.id.user:
                             Toast.makeText(AddActivity.this, "USER", Toast.LENGTH_SHORT).show();
@@ -490,7 +671,7 @@ public class AddActivity extends AppCompatActivity {
                             return true;
                         case R.id.scan:
                             Toast.makeText(AddActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            //startActivity(new Intent(getApplicationContext(), ScanActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                             //overridePendingTransition(0, 0);
                             return true;
                         case R.id.like:

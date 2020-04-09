@@ -4,9 +4,13 @@
     package="com.romain.cellarv1">
 
     <!-- PERMISSIONS POUR ACCES APPAREIL PHOTO ET STOCKAGE LOCAL-->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera2.full" />
+    <uses-feature android:name="android.harware.camera.autofocus" />
+
+    <!-- PERMISSIONS POUR ACCES LECTURE/ECRITURE AU STOCKAGE LOCAL-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!-- PERSMISSIONS POUR DONNEES CARTOGRAPHIQUES -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -51,6 +55,17 @@
 
         <!-- API GOOGLE MAPS KEY -->
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBKGJeoNXT27cA5LAkQj6bd8rKP51VzvYU" />
+
+        <!-- DECLARATION DU PROVIDER POUR ACCES AU FICHIER TEMPORAIRE DES PHOTOS -->
+        <provider
+            android:authorities="${applicationId}.provider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
 
     </application>
 
