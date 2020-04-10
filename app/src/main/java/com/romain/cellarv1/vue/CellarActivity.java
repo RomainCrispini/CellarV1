@@ -2,29 +2,25 @@ package com.romain.cellarv1.vue;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.AccesLocal;
 import com.romain.cellarv1.modele.WineBottle;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
-
 import java.util.List;
 
 
 public class CellarActivity extends AppCompatActivity {
 
     private TextView txtViewBDD;
-    private Button btnViewBDD;
     private AccesLocal accesLocal;
     //private Controle controle;
 
@@ -45,13 +41,12 @@ public class CellarActivity extends AppCompatActivity {
     private void init() {
 
         txtViewBDD = (TextView) findViewById(R.id.txtViewBDD);
+        txtViewBDD.setMovementMethod(new ScrollingMovementMethod()); // Méthode qui rend la textView scrollable
         accesLocal = new AccesLocal(this);
         List<WineBottle> wineBottleList = accesLocal.recoverWineBottleList();
         for (int i = 0; i < wineBottleList.size(); i++) {
             txtViewBDD.setText(wineBottleList.toString());
         }
-        //WineBottle wineBottle = accesLocal.getLastWineBottle();
-        //txtViewBDD.append(wineBottle.toString());
 
         initFabWineMenu();
         initFabMapBack();
