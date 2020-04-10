@@ -71,7 +71,7 @@ public class AddActivity extends AppCompatActivity {
     private LinearLayout layapp;
 
     // Gallery
-    private Button btnGallery;
+    private FloatingActionButton btnGallery;
 
     // Liste pays
     private ArrayList<String> countrylist = new ArrayList<>();
@@ -87,10 +87,6 @@ public class AddActivity extends AppCompatActivity {
     private ImageButton btnRed, btnRose, btnWhite, btnChamp;
     private FloatingActionButton btnAdd;
 
-    private TextView txtEssai;
-    private Button btnEssai;
-
-
     // Déclaration du contrôleur
     private Controle controle;
 
@@ -105,27 +101,6 @@ public class AddActivity extends AppCompatActivity {
         FloatingActionButton scan = (FloatingActionButton) findViewById(R.id.scan);
 
         scanImageView = (ImageView) findViewById(R.id.scanImageView);
-        btnEssai = (Button) findViewById(R.id.btnEssai);
-        txtEssai = (TextView) findViewById(R.id.txtEssai);
-        btnEssai.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Tools tool = new Tools();
-                Bitmap bitmap = ((BitmapDrawable)scanImageView.getDrawable()).getBitmap();
-                txtEssai.setText(tool.bitmapToString(bitmap));
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -151,14 +126,14 @@ public class AddActivity extends AppCompatActivity {
         btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
         this.controle = Controle.getInstance(this); // Création d'une instance de type Controle
 
-        Button btnGallery = (Button) findViewById(R.id.btnGallery);
+        FloatingActionButton btnGallery = (FloatingActionButton) findViewById(R.id.btnGallery);
         ImageView scanImageView = (ImageView) findViewById(R.id.scanImageView);
 
         addWineBottle();
         recoverWineBottle();
         recoverFABWineColor();
         recoverJsonCountries();
-        pulsar();
+        //pulsar();
         progressBar();
 
     }
@@ -491,10 +466,12 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
+    /*
     private void pulsar() {
         PulsatorLayout pulsatorLayout = (PulsatorLayout) findViewById(R.id.pulsator);
         pulsatorLayout.start();
     }
+     */
 
     public void wineColorSelector(View view) {
         ImageButton redWineButton = (ImageButton) findViewById(R.id.redWineButton);
