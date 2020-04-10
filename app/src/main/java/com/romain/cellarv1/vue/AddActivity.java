@@ -4,25 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -33,16 +30,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.controleur.Controle;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
+import com.romain.cellarv1.outils.Tools;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +50,6 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 
 
@@ -88,8 +87,14 @@ public class AddActivity extends AppCompatActivity {
     private ImageButton btnRed, btnRose, btnWhite, btnChamp;
     private FloatingActionButton btnAdd;
 
+    private TextView txtEssai;
+    private Button btnEssai;
+
+
     // Déclaration du contrôleur
     private Controle controle;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +104,27 @@ public class AddActivity extends AppCompatActivity {
 
         FloatingActionButton scan = (FloatingActionButton) findViewById(R.id.scan);
 
-        LinearLayout layapp = (LinearLayout) findViewById(R.id.layoutYearNumberEstimate);
+        scanImageView = (ImageView) findViewById(R.id.scanImageView);
+        btnEssai = (Button) findViewById(R.id.btnEssai);
+        txtEssai = (TextView) findViewById(R.id.txtEssai);
+        btnEssai.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Tools tool = new Tools();
+                Bitmap bitmap = ((BitmapDrawable)scanImageView.getDrawable()).getBitmap();
+                txtEssai.setText(tool.bitmapToString(bitmap));
+            }
+        });
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -128,7 +153,6 @@ public class AddActivity extends AppCompatActivity {
 
         Button btnGallery = (Button) findViewById(R.id.btnGallery);
         ImageView scanImageView = (ImageView) findViewById(R.id.scanImageView);
-
 
         addWineBottle();
         recoverWineBottle();
@@ -289,19 +313,6 @@ public class AddActivity extends AppCompatActivity {
         return bitmap;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         /*
     public void askCameraPermissions(View view) {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -351,7 +362,8 @@ public class AddActivity extends AppCompatActivity {
                 int year = 0;
                 int number = 0;
                 int estimate = 0;
-                String image = "aucune image";
+                String image = "";
+
                 // Récupération des données saisies
                 try {
                     if(btnRed.getAlpha() == 1f) {
@@ -370,9 +382,15 @@ public class AddActivity extends AppCompatActivity {
                     year = Integer.parseInt(nbYear.getText().toString());
                     number = Integer.parseInt(nbNumber.getText().toString());
                     estimate = Integer.parseInt(nbEstimate.getText().toString());
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                Tools tool = new Tools();
+                Bitmap bitmap = ((BitmapDrawable)scanImageView.getDrawable()).getBitmap();
+                image = (tool.bitmapToString(bitmap));
+
 
 
                 //controle.createWineBottle(country, region, wineColor, domain, appellation, year, number, estimate, image, getApplicationContext());

@@ -115,7 +115,7 @@ public class WineBottle implements Serializable {
 
     @Override
     public String toString() {
-        return "Pays : " + country + ", Région : " + region + ", Couleur : " + wineColor + "\n";
+        return "Pays : " + country + ", Région : " + region + ", Couleur : " + wineColor + image + "\n";
     }
 
     /*
