@@ -8,6 +8,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -15,7 +16,8 @@ import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.AccesLocal;
 import com.romain.cellarv1.modele.WineBottle;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
-import java.util.List;
+import com.romain.cellarv1.outils.MyAdapterCellarListView;
+import java.util.ArrayList;
 
 
 public class CellarActivity extends AppCompatActivity {
@@ -23,6 +25,13 @@ public class CellarActivity extends AppCompatActivity {
     private TextView txtViewBDD;
     private AccesLocal accesLocal;
     //private Controle controle;
+
+    // Initialisation de la listView
+    private ListView listViewBDD;
+    private MyAdapterCellarListView myAdapterCellarListView;
+    private ArrayList<WineBottle> wineBottleList;
+
+
 
     // Initialisation de la Custom FAB et de ses caractéristiques
     private FloatingActionButton fabWineMenu, fabRed, fabRose, fabWhite, fabChamp;
@@ -36,17 +45,51 @@ public class CellarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cellar);
         init();
 
+        listViewBDD = (ListView) findViewById(R.id.listViewBDD);
+
+
+        loadWineBottleInListView();
+
+
+
+
     }
+
+    private void loadWineBottleInListView() {
+
+        accesLocal = new AccesLocal(this);
+        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.recoverWineBottleList();
+
+        myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
+        listViewBDD.setAdapter(myAdapterCellarListView);
+        myAdapterCellarListView.notifyDataSetChanged();
+    }
+
+
+
+
+
+
+
+
+
+
 
     private void init() {
 
         txtViewBDD = (TextView) findViewById(R.id.txtViewBDD);
+
+
         txtViewBDD.setMovementMethod(new ScrollingMovementMethod()); // Méthode qui rend la textView scrollable
+
+        /*
         accesLocal = new AccesLocal(this);
         List<WineBottle> wineBottleList = accesLocal.recoverWineBottleList();
         for (int i = 0; i < wineBottleList.size(); i++) {
             txtViewBDD.setText(wineBottleList.toString());
         }
+
+         */
 
         initFabWineMenu();
         initFabMapBack();

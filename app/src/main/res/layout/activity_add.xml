@@ -23,7 +23,7 @@
 
         android:backgroundTint="@color/green_very_dark"
         android:src="@drawable/ic_photo_camera_black_24dp"
-        android:tint="@color/green_dark"
+        android:tint="@color/green_light"
         app:borderWidth="1.5dp"
         app:elevation="10dp"
         app:fabSize="normal" />
@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1"
-        app:itemIconTint="@color/green_dark"
+        app:itemIconTint="@color/green_light"
         app:menu="@menu/bottom_nav_menu">
     </com.romain.cellarv1.outils.CurvedBottomNavigationView>
 
@@ -354,7 +354,7 @@
                 android:ems="10"
                 android:gravity="left"
                 android:layout_marginLeft="5dp"
-                android:hint="  Estimation      €"
+                android:hint="  Estimation"
                 android:padding="0dp"
                 android:inputType="number"
                 android:textColor="@color/orange"

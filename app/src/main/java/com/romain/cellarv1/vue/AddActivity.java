@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -96,6 +97,8 @@ public class AddActivity extends AppCompatActivity {
         FloatingActionButton scan = (FloatingActionButton) findViewById(R.id.scan);
 
         scanImageView = (ImageView) findViewById(R.id.scanImageView);
+
+
 
 
     }
@@ -334,6 +337,7 @@ public class AddActivity extends AppCompatActivity {
                 int estimate = 0;
                 String image = "";
 
+                Tools tool = new Tools();
                 // Récupération des données saisies
                 try {
                     if(btnRed.getAlpha() == 1f) {
@@ -352,14 +356,23 @@ public class AddActivity extends AppCompatActivity {
                     year = Integer.parseInt(nbYear.getText().toString());
                     number = Integer.parseInt(nbNumber.getText().toString());
                     estimate = Integer.parseInt(nbEstimate.getText().toString());
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                Tools tool = new Tools();
-                Bitmap bitmap = ((BitmapDrawable)scanImageView.getDrawable()).getBitmap();
-                image = (tool.bitmapToString(bitmap));
+                try {
+                    Bitmap bitmap = ((BitmapDrawable) scanImageView.getDrawable()).getBitmap();
+                    image = (tool.bitmapToString(bitmap));
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+
+
+
 
 
 

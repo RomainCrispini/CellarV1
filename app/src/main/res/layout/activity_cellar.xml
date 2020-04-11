@@ -141,15 +141,22 @@
 
     <TextView
         android:id="@+id/txtViewBDD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="350dp"
-        android:height="500dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/listViewBDD" />
+
+    <ListView
+        android:id="@+id/listViewBDD"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
