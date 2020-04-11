@@ -9,6 +9,16 @@
     android:background="@drawable/dark_gradient_background"
     tools:context=".vue.CellarActivity">
 
+    <ListView
+        android:id="@+id/listViewBDD"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/scan"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,26 +147,5 @@
             app:fabCustomSize="40dp"
             app:maxImageSize="35dp" />
     </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/txtViewBDD"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scrollbars="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/listViewBDD" />
-
-    <ListView
-        android:id="@+id/listViewBDD"
-        android:layout_width="wrap_content"
-        android:layout_height="400dp"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

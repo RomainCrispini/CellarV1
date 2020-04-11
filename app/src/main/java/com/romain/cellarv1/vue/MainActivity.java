@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 } else {
                     openFabWineMenu();
                 }
-                Toast.makeText(getApplicationContext(), "FAB WINE MENU",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "FAB WINE MENU",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 intent.putExtra("redWine", "redWine");
                 startActivity(intent);
                 closeFabWineMenu();
-                Toast.makeText(getApplicationContext(), "FAB ROUGE",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "FAB ROUGE",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 intent.putExtra("roseWine", "roseWine");
                 startActivity(intent);
                 closeFabWineMenu();
-                Toast.makeText(getApplicationContext(), "FAB ROSE",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "FAB ROSE",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 intent.putExtra("whiteWine", "whiteWine");
                 startActivity(intent);
                 closeFabWineMenu();
-                Toast.makeText(getApplicationContext(), "FAB BLANC",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "FAB BLANC",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 intent.putExtra("champWine", "champWine");
                 startActivity(intent);
                 closeFabWineMenu();
-                Toast.makeText(getApplicationContext(), "FAB CHAMP",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "FAB CHAMP",Toast.LENGTH_SHORT).show();
             }
         });
     }

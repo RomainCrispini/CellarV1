@@ -57,7 +57,7 @@ public class Controle {
         wineBottle = new WineBottle(new Date(), country, region, wineColor, domain, appellation, year, number, estimate, image);
         //Serializer.serialize(serializableFile, wineBottle, context);
         accesLocal.add(wineBottle);
-        Toast.makeText(context.getApplicationContext(), "Bouteille enregistrée !", Toast.LENGTH_LONG).show();
+        //Toast.makeText(context.getApplicationContext(), "Bouteille enregistrée !", Toast.LENGTH_LONG).show();
     }
 
     //public ArrayList<WineBottle> recoverWineBottleList() {

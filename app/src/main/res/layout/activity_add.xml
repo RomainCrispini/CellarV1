@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/dark_gradient_background"
-    tools:context=".vue.AddActivity">
+    tools:context=".vue.AddActivity"
+    android:id="@+id/mainLayout">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/scan"
@@ -42,7 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1"
-        app:itemIconTint="@color/green_light"
+        app:itemIconTint="@color/green_dark"
         app:menu="@menu/bottom_nav_menu">
     </com.romain.cellarv1.outils.CurvedBottomNavigationView>
 
@@ -50,7 +51,7 @@
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -58,9 +59,7 @@
         android:indeterminate="false"
         android:layout_marginBottom="10dp"
         android:progressTint="@color/orange"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        >
-
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal" >
     </ProgressBar>
 
     <com.google.android.material.textfield.TextInputLayout

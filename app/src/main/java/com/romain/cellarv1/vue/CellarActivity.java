@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 public class CellarActivity extends AppCompatActivity {
 
-    private TextView txtViewBDD;
     private AccesLocal accesLocal;
     //private Controle controle;
 
@@ -77,10 +76,7 @@ public class CellarActivity extends AppCompatActivity {
 
     private void init() {
 
-        txtViewBDD = (TextView) findViewById(R.id.txtViewBDD);
-
-
-        txtViewBDD.setMovementMethod(new ScrollingMovementMethod()); // Méthode qui rend la textView scrollable
+        //txtViewBDD.setMovementMethod(new ScrollingMovementMethod()); // Méthode qui rend la textView scrollable
 
         /*
         accesLocal = new AccesLocal(this);

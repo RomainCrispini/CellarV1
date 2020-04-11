@@ -3,6 +3,7 @@ package com.romain.cellarv1.vue;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import android.Manifest;
@@ -21,11 +22,13 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +36,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.controleur.Controle;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
@@ -75,6 +79,9 @@ public class AddActivity extends AppCompatActivity {
     // ProgessBar
     private ProgressBar progressBar;
     //private Handler handler = new Handler();
+
+    // Snackbar
+    private ConstraintLayout mainLayout;
 
     // Champs texte
     private AutoCompleteTextView txtCountry;
@@ -126,6 +133,8 @@ public class AddActivity extends AppCompatActivity {
 
         FloatingActionButton btnGallery = (FloatingActionButton) findViewById(R.id.btnGallery);
         ImageView scanImageView = (ImageView) findViewById(R.id.scanImageView);
+
+        mainLayout = findViewById(R.id.mainLayout);
 
         addWineBottle();
         recoverWineBottle();
@@ -367,19 +376,20 @@ public class AddActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
-
-
-
-
-
-
-
-
-                //controle.createWineBottle(country, region, wineColor, domain, appellation, year, number, estimate, image, getApplicationContext());
                 afficheResult(country, region, wineColor, domain, appellation, year, number, estimate, image);
+
+                Snackbar.make(mainLayout, "Bouteille enregistrée !", Snackbar.LENGTH_LONG)
+                        .setAction("Annuler", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //TODO
+                            }
+                        })
+                        .setActionTextColor(getResources().getColor(R.color.orange))
+                        .show();
             }
         });
+
     }
 
     private void afficheResult(String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
