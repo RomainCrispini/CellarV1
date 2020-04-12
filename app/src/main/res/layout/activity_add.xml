@@ -55,77 +55,92 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/layoutPays"
+        app:layout_constraintBottom_toTopOf="@+id/layoutCountryRegion"
         android:indeterminate="false"
         android:layout_marginBottom="10dp"
         android:progressTint="@color/orange"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal" >
     </ProgressBar>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutPays"
+    <LinearLayout
+        android:id="@+id/layoutCountryRegion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        app:helperText=""
-        app:hintTextColor="@color/green_light"
-        android:textColorHint="@color/green_light"
-        android:background="@drawable/fond_textinput"
-        android:backgroundTint="@color/green_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressBar">
+        app:layout_constraintTop_toBottomOf="@+id/progressBar">
 
-        <AutoCompleteTextView
-            android:id="@+id/textCountry"
-            android:background="@null"
-            android:hint="Pays"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutPays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/transparent"
-            android:gravity="center"
-            android:textColor="@color/orange"
-            android:textCursorDrawable="@color/green_light"
-            android:textSize="14dp"
-            android:inputType="text"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/fond_textinput"
+            android:backgroundTint="@color/green_dark"
+            android:orientation="horizontal"
+            android:textColorHint="@color/green_light"
+            app:helperText=""
+            app:hintTextColor="@color/green_light"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressBar">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutRegion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        app:helperText=""
-        app:hintTextColor="@color/green_light"
-        android:textColorHint="@color/green_light"
-        android:background="@drawable/fond_textinput"
-        android:backgroundTint="@color/green_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutPays">
+            <AutoCompleteTextView
+                android:id="@+id/textCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:backgroundTint="@color/transparent"
+                android:gravity="center"
+                android:hint="Pays"
+                android:inputType="text"
+                android:textColor="@color/orange"
+                android:textCursorDrawable="@color/green_light"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/textRegion"
-            android:background="@null"
-            android:hint="Région"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutRegion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/transparent"
-            android:gravity="center"
-            android:textColor="@color/orange"
-            android:textCursorDrawable="@color/green_light"
-            android:textSize="14dp"
-            android:inputType="text"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/fond_textinput"
+            android:backgroundTint="@color/green_dark"
+            android:orientation="horizontal"
+            android:textColorHint="@color/green_light"
+            app:helperText=""
+            app:hintTextColor="@color/green_light"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutPays">
 
+            <EditText
+                android:id="@+id/textRegion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:backgroundTint="@color/transparent"
+                android:gravity="center"
+                android:hint="Région"
+                android:inputType="text"
+                android:textColor="@color/orange"
+                android:textCursorDrawable="@color/green_light"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layoutWineColor"
@@ -136,7 +151,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintTop_toBottomOf="@+id/layoutRegion">
+        app:layout_constraintTop_toBottomOf="@+id/layoutCountryRegion">
 
         <ImageButton
             android:id="@+id/redWineButton"
@@ -403,7 +418,7 @@
             android:backgroundTint="@color/green_very_dark"
             android:elevation="0dp"
             android:src="@drawable/ic_add_black_24dp"
-            android:tint="@color/green_light"
+            android:tint="@color/orange"
             app:fabSize="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

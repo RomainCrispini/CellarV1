@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import android.Manifest;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -104,6 +107,8 @@ public class AddActivity extends AppCompatActivity {
         FloatingActionButton scan = (FloatingActionButton) findViewById(R.id.scan);
 
         scanImageView = (ImageView) findViewById(R.id.scanImageView);
+
+
 
 
 
@@ -336,6 +341,7 @@ public class AddActivity extends AppCompatActivity {
         ((FloatingActionButton) findViewById(R.id.btnAdd)).setOnClickListener(new FloatingActionButton.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String country = "";
                 String region = "";
                 String domain = "";
@@ -348,6 +354,10 @@ public class AddActivity extends AppCompatActivity {
 
                 Tools tool = new Tools();
                 // Récupération des données saisies
+
+                if(txtRegion.length() == 0) {
+                    txtRegion.setError("blabla");
+                }
                 try {
                     if(btnRed.getAlpha() == 1f) {
                         wineColor = "Rouge";
@@ -378,15 +388,25 @@ public class AddActivity extends AppCompatActivity {
 
                 afficheResult(country, region, wineColor, domain, appellation, year, number, estimate, image);
 
-                Snackbar.make(mainLayout, "Bouteille enregistrée !", Snackbar.LENGTH_LONG)
-                        .setAction("Annuler", new View.OnClickListener() {
+
+
+
+                Snackbar snackbar = Snackbar.make(mainLayout, "Bouteille enregistrée !", Snackbar.LENGTH_INDEFINITE);
+                snackbar.setAction("Annuler", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                //TODO
+                                //TODO REMOVE THE LAST BOTTLE
                             }
                         })
-                        .setActionTextColor(getResources().getColor(R.color.orange))
-                        .show();
+                        .setActionTextColor(getResources().getColor(R.color.orange));
+
+                // On change la couleur du texte de la Snackbar
+                View snackbarView = snackbar.getView();
+                TextView tv = (TextView) snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
+                tv.setTextColor(Color.parseColor("#67828f"));
+                // On change la couleur du background de la Snackbar
+                snackbarView.setBackgroundColor(Color.parseColor("#2F3B40"));
+                snackbar.setDuration(4000).show();
             }
         });
 
@@ -741,32 +761,32 @@ public class AddActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch(item.getItemId()){
                         case R.id.user:
-                            Toast.makeText(AddActivity.this, "USER", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(AddActivity.this, "USER", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                             //overridePendingTransition(0, 0);
                             return true;
                         case R.id.cellar:
-                            Toast.makeText(AddActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(AddActivity.this, "CELLAR", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), CellarActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                             //overridePendingTransition(0, 0);
                             return true;
                         case R.id.scan:
-                            Toast.makeText(AddActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(AddActivity.this, "SCAN", Toast.LENGTH_SHORT).show();
                             //startActivity(new Intent(getApplicationContext(), ScanActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                             //overridePendingTransition(0, 0);
                             return true;
                         case R.id.like:
-                            Toast.makeText(AddActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(AddActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
                             //startActivity(new Intent(getApplicationContext(), LikeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                             //overridePendingTransition(0, 0);
                             return true;
                         case R.id.search:
-                            Toast.makeText(AddActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(AddActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
                             //startActivity(new Intent(getApplicationContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                             //overridePendingTransition(0, 0);
                             return true;
                         default:
-                            Toast.makeText(AddActivity.this, "BUG", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(AddActivity.this, "BUG", Toast.LENGTH_SHORT).show();
                     }
                     return false;
                 }
