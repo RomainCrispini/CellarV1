@@ -123,7 +123,7 @@
         android:backgroundTint="@color/green_very_dark"
         android:src="@drawable/ic_photo_camera_black_24dp"
         android:tint="@color/green_dark"
-        app:borderWidth="1.5dp"
+        app:borderWidth="0.5dp"
         app:elevation="10dp"
         app:fabSize="normal" />
 

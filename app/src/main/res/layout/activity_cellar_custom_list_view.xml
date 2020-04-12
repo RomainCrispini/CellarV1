@@ -16,7 +16,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             app:cardCornerRadius="25dp"
             app:cardBackgroundColor="@color/green_very_dark">
 
@@ -35,7 +37,7 @@
             android:id="@+id/countryListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="Pays" />
 
@@ -43,7 +45,7 @@
             android:id="@+id/regionListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="Région" />
 
@@ -51,7 +53,7 @@
             android:id="@+id/appellationListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="Appellation" />
 
