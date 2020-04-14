@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,7 +53,6 @@ public class CellarActivity extends AppCompatActivity {
 
 
 
-
     }
 
     private void loadWineBottleInListView() {
@@ -62,6 +63,12 @@ public class CellarActivity extends AppCompatActivity {
         myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
         listViewBDD.setAdapter(myAdapterCellarListView);
         myAdapterCellarListView.notifyDataSetChanged();
+
+
+
+
+
+
     }
 
 

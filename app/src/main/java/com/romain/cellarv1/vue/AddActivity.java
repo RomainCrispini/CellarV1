@@ -42,6 +42,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.controleur.Controle;
+import com.romain.cellarv1.modele.WineBottle;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
 import com.romain.cellarv1.outils.Tools;
 import org.json.JSONException;
@@ -359,6 +360,7 @@ public class AddActivity extends AppCompatActivity {
                     txtRegion.setError("blabla");
                 }
                 try {
+
                     if(btnRed.getAlpha() == 1f) {
                         wineColor = "Rouge";
                     } else if(btnRose.getAlpha() == 1f) {
@@ -368,6 +370,8 @@ public class AddActivity extends AppCompatActivity {
                     } else if(btnChamp.getAlpha() == 1f) {
                         wineColor = "Effervescent";
                     }
+
+
                     country = txtCountry.getText().toString();
                     region = txtRegion.getText().toString();
                     domain = txtDomain.getText().toString();
@@ -406,7 +410,7 @@ public class AddActivity extends AppCompatActivity {
                 tv.setTextColor(Color.parseColor("#67828f"));
                 // On change la couleur du background de la Snackbar
                 snackbarView.setBackgroundColor(Color.parseColor("#2F3B40"));
-                snackbar.setDuration(4000).show();
+                snackbar.setDuration(3000).show();
             }
         });
 
