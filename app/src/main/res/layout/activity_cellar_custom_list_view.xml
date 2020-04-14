@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
@@ -26,38 +27,44 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="10dp"
+                app:cardElevation="0dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                app:cardCornerRadius="27dp"
-                app:cardBackgroundColor="@color/green_very_dark">
+                app:cardBackgroundColor="@color/grey_light"
+                app:cardCornerRadius="30dp">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardCornerRadius="25dp"
-                    app:cardBackgroundColor="@color/green_very_dark">
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="27dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/grey_light">
 
                     <ImageView
                         android:id="@+id/imageWineColorListView"
                         android:layout_width="55dp"
                         android:layout_height="55dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:src="@mipmap/launcher" />
-
+                        android:elevation="0dp"
+                        android:layout_gravity="center" />
                 </androidx.cardview.widget.CardView>
 
-                <ImageView
-                    android:id="@+id/imageBottleListView"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:src="@mipmap/launcher" />
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/green_dark">
+
+                    <ImageView
+                        android:id="@+id/imageBottleListView"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:elevation="0dp"
+                        android:layout_gravity="center" />
+                </androidx.cardview.widget.CardView>
 
             </androidx.cardview.widget.CardView>
 

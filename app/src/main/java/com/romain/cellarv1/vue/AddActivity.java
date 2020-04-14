@@ -15,6 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.content.Intent;
@@ -108,6 +109,8 @@ public class AddActivity extends AppCompatActivity {
         FloatingActionButton scan = (FloatingActionButton) findViewById(R.id.scan);
 
         scanImageView = (ImageView) findViewById(R.id.scanImageView);
+
+
 
 
 
@@ -290,7 +293,7 @@ public class AddActivity extends AppCompatActivity {
         // Taille de l'image
         float bitmapHeight = bitmap.getHeight();
         float bitmapWidth = bitmap.getWidth();
-        // Calcul du ratio en tre taille image et écran
+        // Calcul du ratio entre taille image et écran
         float ratioHeight = screenHeight/bitmapHeight;
         float ratioWidth = screenWidth/bitmapWidth;
         // Récupération du plus petit ratio
@@ -343,6 +346,22 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if(txtCountry.getText().toString().equals("")) {
+                    //btnAdd.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.green_light));
+
+
+                    txtRegion.setError("tt");
+                    Drawable warning = getResources().getDrawable(R.drawable.ic_add_black_24dp);
+                    //add an error icon to yur drawable files
+                    warning.setBounds(0, 0, warning.getIntrinsicWidth(), warning.getIntrinsicHeight());
+
+                    txtRegion.setCompoundDrawables(null,null, warning,null);
+                    //txtRegion.setErrorColor(Color.BLUE);
+                    btnAdd.setBackgroundColor(Color.RED);
+                }
+
+
+
                 String country = "";
                 String region = "";
                 String domain = "";
@@ -356,9 +375,7 @@ public class AddActivity extends AppCompatActivity {
                 Tools tool = new Tools();
                 // Récupération des données saisies
 
-                if(txtRegion.length() == 0) {
-                    txtRegion.setError("blabla");
-                }
+
                 try {
 
                     if(btnRed.getAlpha() == 1f) {
@@ -557,6 +574,7 @@ public class AddActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         //holder.progressBar.isIndeterminate(false);
         progressBar.setMax(7);
+        progressBar.setProgress(0);
 
         txtCountry = (AutoCompleteTextView) findViewById(R.id.textCountry);
         txtCountry.addTextChangedListener(new TextWatcher() {
@@ -742,6 +760,9 @@ public class AddActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+
+
+
 
         //if(!txtCountry.getText().toString().isEmpty() && !txtRegion.getText().toString().isEmpty()) {
         //    progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#159700"), android.graphics.PorterDuff.Mode.SRC_IN);
