@@ -124,7 +124,12 @@ public class UserActivity extends AppCompatActivity {
         fabRed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(UserActivity.this, "FAB ROUGE",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("redWine", "redWine");
+                startActivity(intent);
+                closeFabWineMenu();
+                //Toast.makeText(UserActivity.this, "FAB ROUGE",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -132,7 +137,12 @@ public class UserActivity extends AppCompatActivity {
         fabRose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(UserActivity.this, "FAB ROSE",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("roseWine", "roseWine");
+                startActivity(intent);
+                closeFabWineMenu();
+                //Toast.makeText(UserActivity.this, "FAB ROSE",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -140,7 +150,12 @@ public class UserActivity extends AppCompatActivity {
         fabWhite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(UserActivity.this, "FAB BLANC",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("whiteWine", "whiteWine");
+                startActivity(intent);
+                closeFabWineMenu();
+                //Toast.makeText(UserActivity.this, "FAB BLANC",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -148,7 +163,12 @@ public class UserActivity extends AppCompatActivity {
         fabChamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(UserActivity.this, "FAB CHAMP",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("champWine", "champWine");
+                startActivity(intent);
+                closeFabWineMenu();
+                //Toast.makeText(UserActivity.this, "FAB CHAMP",Toast.LENGTH_SHORT).show();
             }
         });
     }
