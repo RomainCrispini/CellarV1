@@ -1,13 +1,21 @@
 package com.romain.cellarv1.vue;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.AccesLocal;
 import com.romain.cellarv1.modele.WineBottle;
@@ -18,13 +26,12 @@ import java.util.ArrayList;
 
 public class CellarActivity extends AppCompatActivity {
 
-    private AccesLocal accesLocal;
-    //private Controle controle;
-
-    // Initialisation de la listView
-    private ListView listViewBDD;
-    private MyAdapterCellarListView myAdapterCellarListView;
-    private ArrayList<WineBottle> wineBottleList;
+    // Initialisation des Tabs
+    private CellarPageAdapter cellarPageAdapter;
+    private TabLayout cellarTabLayout;
+    private ViewPager viewPager;
+    private CellarListFragment cellarListFragment;
+    private CellarStatsFragment cellarStatsFragment;
 
     // Initialisation du menu bis
     private OvershootInterpolator interpolator = new OvershootInterpolator();
@@ -36,10 +43,19 @@ public class CellarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cellar);
         init();
+        initTabs();
+        //loadWineBottleInListView();
 
-        loadWineBottleInListView();
+
+
+
+
+
+
+
 
     }
+
 
     private void init() {
 
@@ -57,26 +73,27 @@ public class CellarActivity extends AppCompatActivity {
         initCurvedNavigationView();
 
         FrameLayout sortMenu = (FrameLayout) findViewById(R.id.sortMenu);
-        sortMenu.setTranslationY(150f);
+        sortMenu.setTranslationY(200f);
         sortMenu.animate().translationY(0f).setInterpolator(interpolator).setDuration(1500).start();
 
-        listViewBDD = (ListView) findViewById(R.id.listViewBDD);
-        listViewBDD.setAlpha(0f);
-        listViewBDD.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(2000).start();
 
     }
 
-    private void loadWineBottleInListView() {
 
-        accesLocal = new AccesLocal(this);
-        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.recoverWineBottleList();
+    private void initTabs() {
+        ViewPager viewPager = (ViewPager) findViewById(R.id.cellarViewPager);
+        TabLayout cellarTabLayout = (TabLayout) findViewById(R.id.cellarTabLayout);
 
-        myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
-        listViewBDD.setAdapter(myAdapterCellarListView);
-        myAdapterCellarListView.notifyDataSetChanged();
+        cellarListFragment = new CellarListFragment();
+        cellarStatsFragment = new CellarStatsFragment();
 
+        cellarTabLayout.setupWithViewPager(viewPager);
 
+        CellarPageAdapter cellarPageAdapter = new CellarPageAdapter(getSupportFragmentManager(), 0);
 
+        cellarPageAdapter.addFragment(cellarListFragment, "List");
+        cellarPageAdapter.addFragment(cellarStatsFragment, "Stats");
+        viewPager.setAdapter(cellarPageAdapter);
     }
 
     private void initCurvedNavigationView() {
@@ -114,6 +131,8 @@ public class CellarActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 
 }
