@@ -28,7 +28,7 @@ public class CellarActivity extends AppCompatActivity {
 
     // Initialisation du menu bis
     private OvershootInterpolator interpolator = new OvershootInterpolator();
-    private FrameLayout menuBis;
+    private FrameLayout sortMenu;
 
 
     @Override
@@ -56,9 +56,9 @@ public class CellarActivity extends AppCompatActivity {
 
         initCurvedNavigationView();
 
-        FrameLayout menuBis = (FrameLayout) findViewById(R.id.menuBis);
-        menuBis.setTranslationY(150f);
-        menuBis.animate().translationY(0f).setInterpolator(interpolator).setDuration(1500).start();
+        FrameLayout sortMenu = (FrameLayout) findViewById(R.id.sortMenu);
+        sortMenu.setTranslationY(150f);
+        sortMenu.animate().translationY(0f).setInterpolator(interpolator).setDuration(1500).start();
 
         listViewBDD = (ListView) findViewById(R.id.listViewBDD);
         listViewBDD.setAlpha(0f);

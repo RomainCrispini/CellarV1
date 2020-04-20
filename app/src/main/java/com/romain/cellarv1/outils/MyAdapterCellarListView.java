@@ -68,16 +68,16 @@ public class MyAdapterCellarListView extends BaseAdapter {
 
         switch(wineBottle.getWineColor().trim()) {
             case "Rouge" :
-                imageWineColor.setImageResource(R.drawable.red_wine);
+                imageWineColor.setImageResource(R.drawable.red_wine_listview);
                 break;
             case "Rose" :
-                imageWineColor.setImageResource(R.drawable.rose_wine);
+                imageWineColor.setImageResource(R.drawable.rose_wine_listview);
                 break;
             case "Blanc" :
-                imageWineColor.setImageResource(R.drawable.white_wine);
+                imageWineColor.setImageResource(R.drawable.white_wine_listview);
                 break;
             case "Effervescent" :
-                imageWineColor.setImageResource(R.drawable.champ_wine);
+                imageWineColor.setImageResource(R.drawable.champ_wine_listview);
                 break;
         }
 
