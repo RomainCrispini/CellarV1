@@ -1,10 +1,7 @@
 package com.romain.cellarv1.vue;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -12,16 +9,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
-import android.widget.ListView;
 
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.romain.cellarv1.R;
-import com.romain.cellarv1.modele.AccesLocal;
-import com.romain.cellarv1.modele.WineBottle;
+import com.romain.cellarv1.outils.CellarPageAdapter;
+import com.romain.cellarv1.outils.CellarTabsTransition;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
-import com.romain.cellarv1.outils.MyAdapterCellarListView;
-import java.util.ArrayList;
 
 
 public class CellarActivity extends AppCompatActivity {
@@ -57,6 +50,7 @@ public class CellarActivity extends AppCompatActivity {
     }
 
 
+
     private void init() {
 
         //txtViewBDD.setMovementMethod(new ScrollingMovementMethod()); // Méthode qui rend la textView scrollable
@@ -71,6 +65,10 @@ public class CellarActivity extends AppCompatActivity {
          */
 
         initCurvedNavigationView();
+
+        TabLayout cellarTabLayout = (TabLayout) findViewById(R.id.cellarTabLayout);
+        cellarTabLayout.setTranslationY(-200f);
+        cellarTabLayout.animate().translationY(0f).setInterpolator(interpolator).setDuration(1500).start();
 
         FrameLayout sortMenu = (FrameLayout) findViewById(R.id.sortMenu);
         sortMenu.setTranslationY(200f);
@@ -93,6 +91,9 @@ public class CellarActivity extends AppCompatActivity {
 
         cellarPageAdapter.addFragment(cellarListFragment, "List");
         cellarPageAdapter.addFragment(cellarStatsFragment, "Stats");
+
+        viewPager.setPageTransformer(true, new CellarTabsTransition());
+
         viewPager.setAdapter(cellarPageAdapter);
     }
 
