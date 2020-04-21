@@ -6,14 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
-import android.widget.FrameLayout;
 import android.widget.ListView;
-
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.AccesLocal;
 import com.romain.cellarv1.modele.WineBottle;
 import com.romain.cellarv1.outils.MyAdapterCellarListView;
-
 import java.util.ArrayList;
 
 /**
@@ -87,7 +84,6 @@ public class CellarListFragment extends Fragment {
         return cellarListFragment;
 
     }
-
 
     private void loadWineBottleInListView() {
 

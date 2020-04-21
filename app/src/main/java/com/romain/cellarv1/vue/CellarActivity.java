@@ -10,11 +10,18 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
+import android.widget.ListView;
+
 import com.google.android.material.tabs.TabLayout;
 import com.romain.cellarv1.R;
+import com.romain.cellarv1.modele.AccesLocal;
+import com.romain.cellarv1.modele.WineBottle;
 import com.romain.cellarv1.outils.CellarPageAdapter;
 import com.romain.cellarv1.outils.CellarTabsTransition;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
+import com.romain.cellarv1.outils.MyAdapterCellarListView;
+
+import java.util.ArrayList;
 
 
 public class CellarActivity extends AppCompatActivity {
@@ -36,6 +43,8 @@ public class CellarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cellar);
         init();
+
+        ListView listViewBDD = (ListView) findViewById(R.id.listViewBDD);
 
     }
 
@@ -75,24 +84,22 @@ public class CellarActivity extends AppCompatActivity {
 
         viewPager.setAdapter(cellarPageAdapter);
 
-        cellarTabLayout.getTabAt(0).setIcon(R.drawable.ic_euro_symbol_black_24dp);
+        cellarTabLayout.getTabAt(0).setIcon(R.drawable.ic_add_black_24dp);
         cellarTabLayout.getTabAt(1).setIcon(R.drawable.ic_euro_symbol_black_24dp);
 
-        cellarTabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
-        cellarTabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_IN);
+        cellarTabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.green_light), PorterDuff.Mode.SRC_IN);
+        cellarTabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
 
 
         cellarTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                //cellarTabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
-                tab.getIcon().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+                tab.getIcon().setColorFilter(Color.parseColor("#67828f"), PorterDuff.Mode.SRC_IN);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                //cellarTabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_IN);
-                tab.getIcon().setColorFilter(Color.parseColor("#a8a8a8"), PorterDuff.Mode.SRC_IN);
+                tab.getIcon().setColorFilter(Color.parseColor("#4F656F"), PorterDuff.Mode.SRC_IN);
             }
 
             @Override

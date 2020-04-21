@@ -19,14 +19,20 @@
         app:layout_constraintTop_toBottomOf="@id/cellarTabLayout"
         app:layout_constraintBottom_toTopOf="@id/sortMenu" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/green_middle_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/cellarTabLayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/green_middle_dark"
-
-        app:tabIconTint="@color/orange"
-        app:tabIndicatorColor="@color/green"
+        app:tabIndicatorColor="@color/green_middle_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -75,8 +81,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:backgroundTint="@color/transparent"
-                    android:scaleType="center"
-                    android:src="@drawable/ic_map_black_24dp"
+                    android:scaleType="centerCrop"
+                    android:padding="11dp"
+                    android:src="@drawable/icone_menubis_map"
                     android:tint="@color/green_middle_light" />
             </androidx.cardview.widget.CardView>
 
@@ -96,6 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:padding="8dp"
                     android:backgroundTint="@color/transparent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/icone_menubis_color"
@@ -129,7 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="8dp"
+                    android:padding="13dp"
                     android:backgroundTint="@color/transparent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/icone_menubis_millesime"
@@ -152,7 +160,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="8dp"
+                    android:padding="13dp"
                     android:backgroundTint="@color/transparent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/icone_menubis_apogee"
