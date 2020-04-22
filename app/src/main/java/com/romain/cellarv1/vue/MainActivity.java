@@ -2,6 +2,7 @@ package com.romain.cellarv1.vue;
 
 import android.Manifest;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +33,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.internal.NavigationMenuItemView;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
 import java.io.IOException;
@@ -111,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //setContentView(R.layout.activity_add);
     //
 
+
     private void initCurvedNavigationView() {
 
 
@@ -145,8 +149,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         //startActivity(new Intent(getApplicationContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                         //overridePendingTransition(0, 0);
                         return true;
-                    default:
-                        //Toast.makeText(UserActivity.this, "BUG", Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }

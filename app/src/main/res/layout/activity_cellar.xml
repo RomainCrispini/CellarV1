@@ -57,7 +57,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:background="@color/green_middle_dark"
-        android:layout_height="120dp">
+        android:layout_height="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,15 +65,15 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="top"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="6dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/green_very_dark"
-                app:cardCornerRadius="20dp"
+                app:cardCornerRadius="15dp"
                 app:cardElevation="0dp">
 
                 <ImageButton
@@ -82,28 +82,28 @@
                     android:layout_gravity="center"
                     android:backgroundTint="@color/transparent"
                     android:scaleType="centerCrop"
-                    android:padding="11dp"
+                    android:padding="13dp"
                     android:src="@drawable/icone_menubis_map"
                     android:tint="@color/green_middle_light" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="top"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="6dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/green_very_dark"
-                app:cardCornerRadius="20dp"
+                app:cardCornerRadius="15dp"
                 app:cardElevation="0dp">
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="8dp"
+                    android:padding="12dp"
                     android:backgroundTint="@color/transparent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/icone_menubis_color"
@@ -113,31 +113,31 @@
 
             <ImageView
                 android:layout_width="20dp"
-                android:layout_height="16dp"
+                android:layout_height="12dp"
                 android:layout_weight="1"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/icone_menubis_fleches"
                 android:tint="@color/green_middle_light"/>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="top"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="6dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/green_very_dark"
-                app:cardCornerRadius="20dp"
+                app:cardCornerRadius="15dp"
                 app:cardElevation="0dp">
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="13dp"
+                    android:padding="16dp"
                     android:backgroundTint="@color/transparent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/icone_menubis_millesime"
@@ -145,22 +145,22 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="top"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="6dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/green_very_dark"
-                app:cardCornerRadius="20dp"
+                app:cardCornerRadius="15dp"
                 app:cardElevation="0dp">
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="13dp"
+                    android:padding="16dp"
                     android:backgroundTint="@color/transparent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/icone_menubis_apogee"
@@ -175,12 +175,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/curvedBottomNavigationView"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:maxImageSize="31dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/green_very_dark"
-        android:src="@drawable/ic_photo_camera_black_24dp"
+        android:src="@drawable/icon_navbar_scan"
         android:tint="@color/green_dark"
         app:borderWidth="0.5dp"
         app:elevation="10dp"
@@ -193,6 +194,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
+        app:itemIconSize="31dp"
+        android:paddingTop="20dp"
         app:labelVisibilityMode="unlabeled"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -35,6 +35,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
+        app:itemIconSize="31dp"
+        android:paddingTop="20dp"
         app:labelVisibilityMode="unlabeled"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"

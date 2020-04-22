@@ -84,8 +84,8 @@ public class CellarActivity extends AppCompatActivity {
 
         viewPager.setAdapter(cellarPageAdapter);
 
-        cellarTabLayout.getTabAt(0).setIcon(R.drawable.ic_add_black_24dp);
-        cellarTabLayout.getTabAt(1).setIcon(R.drawable.ic_euro_symbol_black_24dp);
+        cellarTabLayout.getTabAt(0).setIcon(R.drawable.icone_menu_tabs_list);
+        cellarTabLayout.getTabAt(1).setIcon(R.drawable.icone_menu_tabs_stats);
 
         cellarTabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.green_light), PorterDuff.Mode.SRC_IN);
         cellarTabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
