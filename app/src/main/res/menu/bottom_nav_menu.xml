@@ -10,7 +10,6 @@
         android:title="" />
 
     <item android:id="@+id/scan"
-        android:icon="@drawable/icon_navbar_scan"
         android:title="" />
 
     <item android:id="@+id/like"

@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.AccesLocal;
 import com.romain.cellarv1.modele.WineBottle;
@@ -24,6 +27,11 @@ public class CellarListFragment extends Fragment {
 
     private ListView listViewBDD;
     private OvershootInterpolator interpolator = new OvershootInterpolator();
+
+    private ImageButton sortMap;
+    private ImageButton sortColor;
+    private ImageButton sortYear;
+    private ImageButton sortApogee;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,15 +81,18 @@ public class CellarListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View cellarListFragment = inflater.inflate(R.layout.fragment_cellar_list, container, false);
-
         listViewBDD = (ListView) cellarListFragment.findViewById(R.id.listViewBDD);
         listViewBDD.setAlpha(0f);
         listViewBDD.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(2000).start();
         loadWineBottleInListView();
-
-
         // Inflate the layout for this fragment
+
+        sortMap = (ImageButton) cellarListFragment.findViewById(R.id.sortMap);
+
+
         return cellarListFragment;
+
+
 
     }
 

@@ -94,7 +94,88 @@ public class AccesLocal {
         return wineBottleList;
     }
 
-    public List<WineBottle> mapSortWineBottleList() {
+    public List<WineBottle> sortMapWineBottleList() {
+        List<WineBottle> wineBottleList = new ArrayList<>(); ////////////////////// Affiche des crochets et des virgules avec sa méthode toString()
+        bd = accesBD.getReadableDatabase();
+        WineBottle wineBottle;
+        String requete = "select * from bottle order by country asc";
+        Cursor cursor = bd.rawQuery(requete, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            Date date = new Date();
+            String country = cursor.getString(1);
+            String region = cursor.getString(2);
+            String winecolor = cursor.getString(3);
+            String domain = cursor.getString(4);
+            String appellation = cursor.getString(5);
+            Integer year = cursor.getInt(6);
+            Integer number = cursor.getInt(7);
+            Integer estimate = cursor.getInt(8);
+            String image = cursor.getString(9);
+            wineBottle = new WineBottle(date, country, region, winecolor, domain, appellation, year, number, estimate, image);
+            wineBottleList.add(wineBottle);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return wineBottleList;
+    }
+
+    public List<WineBottle> sortColorWineBottleList() {
+        List<WineBottle> wineBottleList = new ArrayList<>(); ////////////////////// Affiche des crochets et des virgules avec sa méthode toString()
+        bd = accesBD.getReadableDatabase();
+        WineBottle wineBottle;
+        String requete = "select * from bottle order by winecolor desc";
+        Cursor cursor = bd.rawQuery(requete, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            Date date = new Date();
+            String country = cursor.getString(1);
+            String region = cursor.getString(2);
+            String winecolor = cursor.getString(3);
+            String domain = cursor.getString(4);
+            String appellation = cursor.getString(5);
+            Integer year = cursor.getInt(6);
+            Integer number = cursor.getInt(7);
+            Integer estimate = cursor.getInt(8);
+            String image = cursor.getString(9);
+            wineBottle = new WineBottle(date, country, region, winecolor, domain, appellation, year, number, estimate, image);
+            wineBottleList.add(wineBottle);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return wineBottleList;
+    }
+
+    public List<WineBottle> sortYearWineBottleList() {
+        List<WineBottle> wineBottleList = new ArrayList<>(); ////////////////////// Affiche des crochets et des virgules avec sa méthode toString()
+        bd = accesBD.getReadableDatabase();
+        WineBottle wineBottle;
+        String requete = "select * from bottle order by year desc";
+        Cursor cursor = bd.rawQuery(requete, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            Date date = new Date();
+            String country = cursor.getString(1);
+            String region = cursor.getString(2);
+            String winecolor = cursor.getString(3);
+            String domain = cursor.getString(4);
+            String appellation = cursor.getString(5);
+            Integer year = cursor.getInt(6);
+            Integer number = cursor.getInt(7);
+            Integer estimate = cursor.getInt(8);
+            String image = cursor.getString(9);
+            wineBottle = new WineBottle(date, country, region, winecolor, domain, appellation, year, number, estimate, image);
+            wineBottleList.add(wineBottle);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return wineBottleList;
+    }
+
+    /**
+     * TODO
+     */
+    public List<WineBottle> sortApogeeWineBottleList() {
         List<WineBottle> wineBottleList = new ArrayList<>(); ////////////////////// Affiche des crochets et des virgules avec sa méthode toString()
         bd = accesBD.getReadableDatabase();
         WineBottle wineBottle;

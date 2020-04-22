@@ -77,6 +77,8 @@
                 app:cardElevation="0dp">
 
                 <ImageButton
+                    android:id="@+id/sortMap"
+                    android:onClick="loadSortMapWineBottleInListView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -100,6 +102,8 @@
                 app:cardElevation="0dp">
 
                 <ImageButton
+                    android:id="@+id/sortColor"
+                    android:onClick="loadSortColorWineBottleInListView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -112,6 +116,8 @@
 
 
             <ImageView
+                android:id="@+id/sortRecover"
+                android:onClick="loadRecoverWineBottleInListView"
                 android:layout_width="20dp"
                 android:layout_height="12dp"
                 android:layout_weight="1"
@@ -134,6 +140,8 @@
                 app:cardElevation="0dp">
 
                 <ImageButton
+                    android:id="@+id/sortYear"
+                    android:onClick="loadSortYearWineBottleInListView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -157,6 +165,8 @@
                 app:cardElevation="0dp">
 
                 <ImageButton
+                    android:id="@+id/sortApogee"
+                    android:onClick="loadSortApogeeWineBottleInListView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
