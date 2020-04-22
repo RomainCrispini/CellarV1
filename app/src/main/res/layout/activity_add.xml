@@ -15,15 +15,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/curvedBottomNavigationView"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:maxImageSize="31dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="8dp"
 
+
         android:onClick="takePicture"
 
         android:backgroundTint="@color/green_very_dark"
-        android:src="@drawable/ic_photo_camera_black_24dp"
+        android:src="@drawable/icon_navbar_scan"
         android:tint="@color/green_light"
         app:borderWidth="0.5dp"
         app:elevation="10dp"
@@ -37,6 +39,8 @@
         android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
         app:labelVisibilityMode="unlabeled"
+        app:itemIconSize="31dp"
+        android:paddingTop="20dp"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

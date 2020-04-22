@@ -5,7 +5,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import android.Manifest;
 import android.content.DialogInterface;
@@ -20,30 +19,25 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.controleur.Controle;
-import com.romain.cellarv1.modele.WineBottle;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
 import com.romain.cellarv1.outils.Tools;
 import org.json.JSONException;
@@ -55,7 +49,6 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 
 
 public class AddActivity extends AppCompatActivity {
@@ -802,16 +795,14 @@ public class AddActivity extends AppCompatActivity {
                             return true;
                         case R.id.like:
                             //Toast.makeText(AddActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), LikeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            startActivity(new Intent(getApplicationContext(), LikeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                             //overridePendingTransition(0, 0);
                             return true;
                         case R.id.search:
                             //Toast.makeText(AddActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                            startActivity(new Intent(getApplicationContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                             //overridePendingTransition(0, 0);
                             return true;
-                        default:
-                            //Toast.makeText(AddActivity.this, "BUG", Toast.LENGTH_SHORT).show();
                     }
                     return false;
                 }

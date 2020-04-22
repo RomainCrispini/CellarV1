@@ -196,16 +196,14 @@ public class CellarActivity extends AppCompatActivity {
                         return true;
                     case R.id.like:
                         //Toast.makeText(UserActivity.this, "LIKE", Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(getApplicationContext(), LikeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        startActivity(new Intent(getApplicationContext(), LikeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                         //overridePendingTransition(0, 0);
                         return true;
                     case R.id.search:
                         //Toast.makeText(UserActivity.this, "SEARCH", Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(getApplicationContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        startActivity(new Intent(getApplicationContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                         //overridePendingTransition(0, 0);
                         return true;
-                    default:
-                        //Toast.makeText(UserActivity.this, "BUG", Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
