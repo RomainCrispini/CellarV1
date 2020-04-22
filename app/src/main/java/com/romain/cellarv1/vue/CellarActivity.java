@@ -14,8 +14,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import com.google.android.material.tabs.TabLayout;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.AccesLocal;
@@ -24,7 +22,6 @@ import com.romain.cellarv1.outils.CellarPageAdapter;
 import com.romain.cellarv1.outils.CellarTabsTransition;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
 import com.romain.cellarv1.outils.MyAdapterCellarListView;
-
 import java.util.ArrayList;
 
 
@@ -55,64 +52,8 @@ public class CellarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cellar);
         init();
-
         ListView listViewBDD = (ListView) findViewById(R.id.listViewBDD);
 
-    }
-
-    public void loadSortMapWineBottleInListView(View view) {
-        ListView listViewBDD = (ListView) findViewById(R.id.listViewBDD);
-        accesLocal = new AccesLocal(getApplicationContext());
-        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.sortMapWineBottleList();
-
-        //MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
-        MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(getApplicationContext(), wineBottleList);
-        listViewBDD.setAdapter(myAdapterCellarListView);
-        myAdapterCellarListView.notifyDataSetChanged();
-    }
-
-    public void loadSortColorWineBottleInListView(View view) {
-        ListView listViewBDD = (ListView) findViewById(R.id.listViewBDD);
-        accesLocal = new AccesLocal(getApplicationContext());
-        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.sortColorWineBottleList();
-
-        //MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
-        MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(getApplicationContext(), wineBottleList);
-        listViewBDD.setAdapter(myAdapterCellarListView);
-        myAdapterCellarListView.notifyDataSetChanged();
-    }
-
-    public void loadRecoverWineBottleInListView(View view) {
-        ListView listViewBDD = (ListView) findViewById(R.id.listViewBDD);
-        accesLocal = new AccesLocal(getApplicationContext());
-        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.recoverWineBottleList();
-
-        //MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
-        MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(getApplicationContext(), wineBottleList);
-        listViewBDD.setAdapter(myAdapterCellarListView);
-        myAdapterCellarListView.notifyDataSetChanged();
-    }
-
-    public void loadSortYearWineBottleInListView(View view) {
-        ListView listViewBDD = (ListView) findViewById(R.id.listViewBDD);
-        accesLocal = new AccesLocal(getApplicationContext());
-        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.sortYearWineBottleList();
-
-        //MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
-        MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(getApplicationContext(), wineBottleList);
-        listViewBDD.setAdapter(myAdapterCellarListView);
-        myAdapterCellarListView.notifyDataSetChanged();
-    }
-
-    public void loadSortApogeeWineBottleInListView(View view) {
-        ListView listViewBDD = (ListView) findViewById(R.id.listViewBDD);
-        accesLocal = new AccesLocal(getApplicationContext());
-        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.sortColorWineBottleList(); //////????????????????????????????????????????
-
-        //MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
-        MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(getApplicationContext(), wineBottleList);
-        listViewBDD.setAdapter(myAdapterCellarListView);
-        myAdapterCellarListView.notifyDataSetChanged();
     }
 
     private void init() {
@@ -131,6 +72,134 @@ public class CellarActivity extends AppCompatActivity {
 
         initTabs();
 
+        menuBisSelectedItems();
+
+    }
+
+    private void menuBisSelectedItems() {
+
+        final ImageButton sortMap = (ImageButton) findViewById(R.id.sortMap);
+        final ImageButton sortColor = (ImageButton) findViewById(R.id.sortColor);
+        final ImageButton sortYear = (ImageButton) findViewById(R.id.sortYear);
+        final ImageButton sortApogee = (ImageButton) findViewById(R.id.sortApogee);
+        final ImageView sortRecover = (ImageView) findViewById(R.id.sortRecover);
+
+
+        sortMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadSortMapWineBottleInListView();
+                sortMap.setColorFilter(getApplicationContext().getColor(R.color.green_light), PorterDuff.Mode.SRC_IN);
+                sortColor.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortRecover.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortYear.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortApogee.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+            }
+        });
+
+        sortColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadSortColorWineBottleInListView();
+                sortMap.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortColor.setColorFilter(getApplicationContext().getColor(R.color.green_light), PorterDuff.Mode.SRC_IN);
+                sortRecover.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortYear.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortApogee.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+            }
+        });
+
+        sortRecover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadRecoverWineBottleInListView();
+                sortMap.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortColor.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortRecover.setColorFilter(getApplicationContext().getColor(R.color.green_light), PorterDuff.Mode.SRC_IN);
+                sortYear.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortApogee.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+            }
+        });
+
+        sortYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadSortYearWineBottleInListView();
+                sortMap.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortColor.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortRecover.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortYear.setColorFilter(getApplicationContext().getColor(R.color.green_light), PorterDuff.Mode.SRC_IN);
+                sortApogee.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+            }
+        });
+
+        sortApogee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadSortApogeeWineBottleInListView();
+                sortMap.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortColor.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortRecover.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortYear.setColorFilter(getApplicationContext().getColor(R.color.green_middle_light), PorterDuff.Mode.SRC_IN);
+                sortApogee.setColorFilter(getApplicationContext().getColor(R.color.green_light), PorterDuff.Mode.SRC_IN);
+            }
+        });
+    }
+
+    private void loadSortMapWineBottleInListView() {
+
+        ListView listViewBDD = (ListView) findViewById(R.id.listViewBDD);
+        accesLocal = new AccesLocal(getApplicationContext());
+        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.sortMapWineBottleList();
+
+        //MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
+        MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(getApplicationContext(), wineBottleList);
+        listViewBDD.setAdapter(myAdapterCellarListView);
+        myAdapterCellarListView.notifyDataSetChanged();
+    }
+
+    private void loadSortColorWineBottleInListView() {
+        ListView listViewBDD = (ListView) findViewById(R.id.listViewBDD);
+        accesLocal = new AccesLocal(getApplicationContext());
+        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.sortColorWineBottleList();
+
+        //MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
+        MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(getApplicationContext(), wineBottleList);
+        listViewBDD.setAdapter(myAdapterCellarListView);
+        myAdapterCellarListView.notifyDataSetChanged();
+    }
+
+    private void loadRecoverWineBottleInListView() {
+        ListView listViewBDD = (ListView) findViewById(R.id.listViewBDD);
+        accesLocal = new AccesLocal(getApplicationContext());
+        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.recoverWineBottleList();
+
+        //MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
+        MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(getApplicationContext(), wineBottleList);
+        listViewBDD.setAdapter(myAdapterCellarListView);
+        myAdapterCellarListView.notifyDataSetChanged();
+    }
+
+    private void loadSortYearWineBottleInListView() {
+        ListView listViewBDD = (ListView) findViewById(R.id.listViewBDD);
+        accesLocal = new AccesLocal(getApplicationContext());
+        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.sortYearWineBottleList();
+
+        //MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
+        MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(getApplicationContext(), wineBottleList);
+        listViewBDD.setAdapter(myAdapterCellarListView);
+        myAdapterCellarListView.notifyDataSetChanged();
+    }
+
+    private void loadSortApogeeWineBottleInListView() {
+        ListView listViewBDD = (ListView) findViewById(R.id.listViewBDD);
+        accesLocal = new AccesLocal(getApplicationContext());
+        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.sortColorWineBottleList(); //////????????????????????????????????????????
+
+        //MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
+        MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(getApplicationContext(), wineBottleList);
+        listViewBDD.setAdapter(myAdapterCellarListView);
+        myAdapterCellarListView.notifyDataSetChanged();
     }
 
     private void initTabs() {
