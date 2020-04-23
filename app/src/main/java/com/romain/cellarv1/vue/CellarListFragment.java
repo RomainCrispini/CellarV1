@@ -85,7 +85,6 @@ public class CellarListFragment extends Fragment {
         listViewBDD.setAlpha(0f);
         listViewBDD.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(2000).start();
         loadWineBottleInListView();
-        // Inflate the layout for this fragment
 
         sortMap = (ImageButton) cellarListFragment.findViewById(R.id.sortMap);
 

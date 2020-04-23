@@ -158,6 +158,7 @@
             android:layout_marginBottom="1dp"
             android:layout_marginRight="3dp"
             android:text="Light Mode"
+            android:fontFamily="@font/roboto"
             android:textColor="@color/grey_light"
             android:textSize="12sp"/>
 
@@ -179,6 +180,7 @@
             android:layout_marginBottom="1dp"
             android:layout_marginLeft="8dp"
             android:text="Dark Mode"
+            android:fontFamily="@font/roboto"
             tools:ignore="MissingConstraints"
             android:textSize="12sp" />
     </LinearLayout>

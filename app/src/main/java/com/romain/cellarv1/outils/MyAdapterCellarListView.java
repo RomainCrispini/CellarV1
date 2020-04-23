@@ -1,18 +1,14 @@
 package com.romain.cellarv1.outils;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.WineBottle;
-import com.romain.cellarv1.vue.CellarActivity;
 
 import java.util.ArrayList;
 
@@ -43,9 +39,6 @@ public class MyAdapterCellarListView extends BaseAdapter {
         return position;
     }
 
-
-    private String essai;
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -56,6 +49,8 @@ public class MyAdapterCellarListView extends BaseAdapter {
         TextView country = (TextView) convertView.findViewById(R.id.countryListView);
         TextView region = (TextView) convertView.findViewById(R.id.regionListView);
         TextView appellation = (TextView) convertView.findViewById(R.id.appellationListView);
+        TextView domain = (TextView) convertView.findViewById(R.id.domainListView);
+        TextView year = (TextView) convertView.findViewById(R.id.yearListView);
 
         WineBottle wineBottle = arrayList.get(position);
 
@@ -65,6 +60,8 @@ public class MyAdapterCellarListView extends BaseAdapter {
         country.setText(wineBottle.getCountry());
         region.setText(wineBottle.getRegion());
         appellation.setText((wineBottle.getAppellation()));
+        domain.setText((wineBottle.getDomain()));
+        year.setText((wineBottle.getYear().toString()));
 
         switch(wineBottle.getWineColor().trim()) {
             case "Rouge" :
