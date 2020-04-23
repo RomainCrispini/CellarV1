@@ -2,18 +2,16 @@ package com.romain.cellarv1.vue;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.Toast;
-
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.AccesLocal;
 import com.romain.cellarv1.modele.WineBottle;
-import com.romain.cellarv1.outils.MyAdapterCellarListView;
+import com.romain.cellarv1.outils.MyAdapterCellarRecyclerView;
 import java.util.ArrayList;
 
 /**
@@ -25,13 +23,11 @@ public class CellarListFragment extends Fragment {
 
     private AccesLocal accesLocal;
 
-    private ListView listViewBDD;
-    private OvershootInterpolator interpolator = new OvershootInterpolator();
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
-    private ImageButton sortMap;
-    private ImageButton sortColor;
-    private ImageButton sortYear;
-    private ImageButton sortApogee;
+    private OvershootInterpolator interpolator = new OvershootInterpolator();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,32 +75,28 @@ public class CellarListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View cellarListFragment = inflater.inflate(R.layout.fragment_cellar_list, container, false);
-        listViewBDD = (ListView) cellarListFragment.findViewById(R.id.listViewBDD);
-        listViewBDD.setAlpha(0f);
-        listViewBDD.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(2000).start();
-        loadWineBottleInListView();
+        mRecyclerView = (RecyclerView) cellarListFragment.findViewById(R.id.cellarRecyclerView);
 
-        sortMap = (ImageButton) cellarListFragment.findViewById(R.id.sortMap);
-
+        loadWineBottleInRecycleView();
 
         return cellarListFragment;
 
-
-
     }
 
-    private void loadWineBottleInListView() {
+    private void loadWineBottleInRecycleView() {
 
-        //accesLocal = new AccesLocal(this);
         accesLocal = new AccesLocal(getContext());
-        ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.recoverWineBottleList();
+        ArrayList<WineBottle> wineBottleArrayList = (ArrayList<WineBottle>) accesLocal.recoverWineBottleList();
 
-        //MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(this, wineBottleList);
-        MyAdapterCellarListView myAdapterCellarListView = new MyAdapterCellarListView(getContext(), wineBottleList);
-        listViewBDD.setAdapter(myAdapterCellarListView);
-        myAdapterCellarListView.notifyDataSetChanged();
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mAdapter = new MyAdapterCellarRecyclerView(wineBottleArrayList);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mRecyclerView.setAlpha(0f);
+        mRecyclerView.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(2500).start();
 
     }
 

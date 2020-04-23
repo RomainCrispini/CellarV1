@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.WineBottle;
-
 import java.util.ArrayList;
 
 

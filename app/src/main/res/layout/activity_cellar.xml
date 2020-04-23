@@ -12,12 +12,12 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/cellarViewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@id/sortMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cellarTabLayout"
-        app:layout_constraintBottom_toTopOf="@id/sortMenu" />
+        app:layout_constraintTop_toBottomOf="@id/cellarTabLayout" />
 
     <FrameLayout
         android:layout_width="match_parent"
