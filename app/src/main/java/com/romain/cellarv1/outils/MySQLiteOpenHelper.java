@@ -19,7 +19,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             + "year INTEGER,"
             + "number INTEGER,"
             + "estimate INTEGER,"
-            + "image TEXT);";
+            + "image TEXT,"
+            + "like INTEGER);";
 
 
 

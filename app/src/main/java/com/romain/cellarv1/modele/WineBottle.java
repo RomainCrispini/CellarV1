@@ -17,9 +17,10 @@ public class WineBottle implements Serializable {
     private Integer number;
     private Integer estimate;
     private String image;
+    private Integer like;
 
     // Constructeur
-    public WineBottle(Date dateAddNewBottle, String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
+    public WineBottle(Date dateAddNewBottle, String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image, Integer like) {
         this.dateAddNewBottle = dateAddNewBottle;
         this.country = country;
         this.region = region;
@@ -30,9 +31,18 @@ public class WineBottle implements Serializable {
         this.number = number;
         this.estimate = estimate;
         this.image = image;
+        this.like = like;
     }
 
     // Getters et setters
+    public Integer getLike() {
+        return like;
+    }
+
+    public void setLike(Integer like) {
+        this.like = like;
+    }
+
     public Date getDateAddNewBottle() {
         return dateAddNewBottle;
     }

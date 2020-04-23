@@ -24,24 +24,29 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="995801e9-04d4-4113-9495-706bc3745f00">
-        <schema name="main" object-types="view, dataset trigger, table, constraint, index, column" />
+      <connection connection-id="2d3fb97a-5210-4615-bd73-9e8db94b8cb9">
+        <schema name="" object-types="column, dataset trigger, view, table, constraint, index" />
+        <schema name="main" object-types="view, table" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="995801e9-04d4-4113-9495-706bc3745f00">
-      <console name="Cellar" type="STANDARD" schema="main" session="Main" />
+    <connection id="2d3fb97a-5210-4615-bd73-9e8db94b8cb9">
+      <console name="Cellar" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="995801e9-04d4-4113-9495-706bc3745f00" />
+    <connection id="2d3fb97a-5210-4615-bd73-9e8db94b8cb9" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="995801e9-04d4-4113-9495-706bc3745f00" dataset="main.bottle" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="2d3fb97a-5210-4615-bd73-9e8db94b8cb9" dataset=".bottle" active-filter-id="">
+      <filter id="335487a2-0f24-47a8-ae22-dcfcfa0afff5" name="Select All" temporary="false" custom-name="false" type="custom">
+        <condition />
+      </filter>
+    </filter-actions>
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -66,10 +71,10 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="995801e9-04d4-4113-9495-706bc3745f00" active="true">
+      <connection id="2d3fb97a-5210-4615-bd73-9e8db94b8cb9" active="true">
         <database>
           <name value="Cellar" />
-          <description value="" />
+          <description value="cellar" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
           <database-version value="3.21" />
@@ -81,7 +86,8 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="$PROJECT_DIR$/../../cellar.sqlite" schema="main" />
+            <file path="sqlite.db" schema="main" />
+            <file path="$PROJECT_DIR$/../../cellar.sqlite" schema="" />
           </files>
           <type value="NONE" />
           <user value="" />

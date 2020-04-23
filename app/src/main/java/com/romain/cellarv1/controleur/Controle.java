@@ -52,9 +52,10 @@ public class Controle {
      * @param number
      * @param estimate
      * @param image
+     * @param like
      */
-    public void createWineBottle(String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image, Context context) {
-        wineBottle = new WineBottle(new Date(), country, region, wineColor, domain, appellation, year, number, estimate, image);
+    public void createWineBottle(String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image, Integer like, Context context) {
+        wineBottle = new WineBottle(new Date(), country, region, wineColor, domain, appellation, year, number, estimate, image, like);
         //Serializer.serialize(serializableFile, wineBottle, context);
         accesLocal.add(wineBottle);
         //Toast.makeText(context.getApplicationContext(), "Bouteille enregistrée !", Toast.LENGTH_LONG).show();
@@ -144,6 +145,14 @@ public class Controle {
             return null;
         } else {
             return wineBottle.getImage();
+        }
+    }
+
+    public Integer getLike() {
+        if(wineBottle == null) {
+            return null;
+        } else {
+            return wineBottle.getLike();
         }
     }
 

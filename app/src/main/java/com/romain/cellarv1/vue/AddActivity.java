@@ -364,6 +364,7 @@ public class AddActivity extends AppCompatActivity {
                 int number = 0;
                 int estimate = 0;
                 String image = "";
+                int like = 0;
 
                 Tools tool = new Tools();
                 // Récupération des données saisies
@@ -400,7 +401,7 @@ public class AddActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                afficheResult(country, region, wineColor, domain, appellation, year, number, estimate, image);
+                afficheResult(country, region, wineColor, domain, appellation, year, number, estimate, image, like);
 
 
 
@@ -426,8 +427,8 @@ public class AddActivity extends AppCompatActivity {
 
     }
 
-    private void afficheResult(String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image) {
-        this.controle.createWineBottle(country, region, wineColor, domain, appellation, year, number, estimate, image, this);
+    private void afficheResult(String country, String region, String wineColor, String domain, String appellation, Integer year, Integer number, Integer estimate, String image, Integer like) {
+        this.controle.createWineBottle(country, region, wineColor, domain, appellation, year, number, estimate, image, like,  this);
     }
 
     /**
