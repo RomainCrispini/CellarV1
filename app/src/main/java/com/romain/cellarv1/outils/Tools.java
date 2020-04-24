@@ -1,9 +1,17 @@
 package com.romain.cellarv1.outils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.util.Log;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.romain.cellarv1.R;
+
 import java.io.ByteArrayOutputStream;
 
 

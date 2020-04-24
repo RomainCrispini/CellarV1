@@ -1,17 +1,24 @@
 package com.romain.cellarv1.vue;
 
+import android.content.Context;
 import android.os.Bundle;
+
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.view.animation.OvershootInterpolator;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.AccesLocal;
 import com.romain.cellarv1.modele.WineBottle;
 import com.romain.cellarv1.outils.MyAdapterCellarRecyclerView;
+import com.romain.cellarv1.outils.Tools;
+
 import java.util.ArrayList;
 
 /**
@@ -26,6 +33,8 @@ public class CellarListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    private CardView pastilleImageBottle;
 
     private OvershootInterpolator interpolator = new OvershootInterpolator();
 
@@ -77,8 +86,13 @@ public class CellarListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View cellarListFragment = inflater.inflate(R.layout.fragment_cellar_list, container, false);
         mRecyclerView = (RecyclerView) cellarListFragment.findViewById(R.id.cellarRecyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
+
+        pastilleImageBottle = (CardView) cellarListFragment.findViewById(R.id.pastilleImageBottle);
 
         loadWineBottleInRecycleView();
+
+        //runLayoutFragmentAnimation();
 
         return cellarListFragment;
 
@@ -86,18 +100,40 @@ public class CellarListFragment extends Fragment {
 
     private void loadWineBottleInRecycleView() {
 
+        //Context context = mRecyclerView.getContext();
+
         accesLocal = new AccesLocal(getContext());
         ArrayList<WineBottle> wineBottleArrayList = (ArrayList<WineBottle>) accesLocal.recoverWineBottleList();
 
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getContext());
+
+        //mLayoutManager = new LinearLayoutManager(getContext());
+        //mRecyclerView.setLayoutManager(mLayoutManager);
+
         mAdapter = new MyAdapterCellarRecyclerView(getContext(), wineBottleArrayList);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+
         mRecyclerView.setAdapter(mAdapter);
 
-        mRecyclerView.setAlpha(0f);
-        mRecyclerView.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(2500).start();
+
+        //mRecyclerView.setAlpha(0f);
+        //mRecyclerView.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(2500).start();
 
     }
+
+    /*
+    public void runLayoutFragmentAnimation() {
+
+        Context context = mRecyclerView.getContext();
+
+        LayoutAnimationController layoutAnimationController = AnimationUtils.loadLayoutAnimation(context, R.anim.slide_layout_cardview);
+        mRecyclerView.setLayoutAnimation(layoutAnimationController);
+        mRecyclerView.getAdapter().notifyDataSetChanged();
+        mRecyclerView.scheduleLayoutAnimation();
+
+    }
+
+     */
+
+
 
 }

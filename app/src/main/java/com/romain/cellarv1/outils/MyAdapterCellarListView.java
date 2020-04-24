@@ -45,7 +45,6 @@ public class MyAdapterCellarListView extends BaseAdapter {
 
         ImageView imageWineColor = (ImageView) convertView.findViewById(R.id.imageWineColorListView);
         ImageView image = (ImageView) convertView.findViewById(R.id.imageBottleListView);
-        TextView country = (TextView) convertView.findViewById(R.id.countryListView);
         TextView region = (TextView) convertView.findViewById(R.id.regionListView);
         TextView appellation = (TextView) convertView.findViewById(R.id.appellationListView);
         TextView domain = (TextView) convertView.findViewById(R.id.domainListView);
@@ -56,7 +55,6 @@ public class MyAdapterCellarListView extends BaseAdapter {
         Tools tools = new Tools();
         image.setImageBitmap(tools.stringToBitmap(wineBottle.getImage()));
 
-        country.setText(wineBottle.getCountry());
         region.setText(wineBottle.getRegion());
         appellation.setText((wineBottle.getAppellation()));
         domain.setText((wineBottle.getDomain()));

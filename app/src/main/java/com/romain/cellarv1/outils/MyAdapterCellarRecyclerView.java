@@ -1,17 +1,25 @@
 package com.romain.cellarv1.outils;
 
 import android.content.Context;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.WineBottle;
+import com.romain.cellarv1.vue.CellarActivity;
+
 import java.util.ArrayList;
 
 
@@ -31,27 +39,26 @@ public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterC
 
         public ImageView imageWineColor;
         public ImageView image;
-        public TextView country;
         public TextView region;
         public TextView appellation;
         public TextView domain;
         public TextView year;
 
-        public CardView pastilleImageBottle;
         public CardView cardView;
+        public CardView pastilleImageBottle;
+
 
         public CellarViewHolder(@NonNull View itemView) {
             super(itemView);
             imageWineColor = itemView.findViewById(R.id.imageWineColorListView);
             image = itemView.findViewById(R.id.imageBottleListView);
-            country = itemView.findViewById(R.id.countryListView);
             region = itemView.findViewById(R.id.regionListView);
             appellation = itemView.findViewById(R.id.appellationListView);
             domain = itemView.findViewById(R.id.domainListView);
             year = itemView.findViewById(R.id.yearListView);
 
-            pastilleImageBottle = itemView.findViewById(R.id.pastilleImageBottle);
             cardView = itemView.findViewById(R.id.cardView);
+            pastilleImageBottle = itemView.findViewById(R.id.pastilleImageBottle);
 
         }
     }
@@ -67,11 +74,13 @@ public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterC
     @Override
     public void onBindViewHolder(@NonNull CellarViewHolder holder, int position) {
 
-        // On applique l'animation sur l'image de la bouteille
-        holder.pastilleImageBottle.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.popup_image_cardview));
+        //Glide.with(mContext).load(wineBottleArrayList.get(position).getImage()).into(holder.cardView);
+
+        // On applique l'animation sur la pastille de la bouteille
+        holder.pastilleImageBottle.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.slide_image_cardview));
 
         // On applique l'animation sur la CardView
-        holder.cardView.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_animation_cardview));
+        holder.cardView.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.slide_animation_cardview));
 
         // On set les infos dans le cardview layout
         WineBottle currentItem = wineBottleArrayList.get(position);
@@ -79,7 +88,6 @@ public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterC
         Tools tools = new Tools();
 
         holder.image.setImageBitmap(tools.stringToBitmap(currentItem.getImage()));
-        holder.country.setText(currentItem.getCountry());
         holder.region.setText(currentItem.getRegion());
         holder.appellation.setText(currentItem.getAppellation());
         holder.domain.setText(currentItem.getDomain());
