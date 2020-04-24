@@ -8,16 +8,6 @@
     android:orientation="vertical"
     tools:context=".vue.CellarStatsFragment">
 
-    <!--
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cellarRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" /> -->
-
     <TextView
         android:text="STATS A VENIR..."
         android:gravity="center"

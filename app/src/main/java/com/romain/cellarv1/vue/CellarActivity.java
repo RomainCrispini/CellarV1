@@ -2,7 +2,6 @@ package com.romain.cellarv1.vue;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
@@ -15,7 +14,6 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import com.google.android.material.tabs.TabLayout;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.AccesLocal;
@@ -23,9 +21,7 @@ import com.romain.cellarv1.modele.WineBottle;
 import com.romain.cellarv1.outils.CellarPageAdapter;
 import com.romain.cellarv1.outils.CellarTabsTransition;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
-import com.romain.cellarv1.outils.MyAdapterCellarListView;
 import com.romain.cellarv1.outils.MyAdapterCellarRecyclerView;
-
 import java.util.ArrayList;
 
 
@@ -159,7 +155,7 @@ public class CellarActivity extends AppCompatActivity {
         accesLocal = new AccesLocal(getApplicationContext());
         ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.sortMapWineBottleList();
 
-        MyAdapterCellarRecyclerView myAdapterCellarRecyclerView = new MyAdapterCellarRecyclerView(wineBottleList);
+        MyAdapterCellarRecyclerView myAdapterCellarRecyclerView = new MyAdapterCellarRecyclerView(getApplicationContext(), wineBottleList);
         cellarRecyclerView.setAdapter(myAdapterCellarRecyclerView);
         myAdapterCellarRecyclerView.notifyDataSetChanged();
     }
@@ -170,7 +166,7 @@ public class CellarActivity extends AppCompatActivity {
         accesLocal = new AccesLocal(getApplicationContext());
         ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.sortColorWineBottleList();
 
-        MyAdapterCellarRecyclerView myAdapterCellarRecyclerView = new MyAdapterCellarRecyclerView(wineBottleList);
+        MyAdapterCellarRecyclerView myAdapterCellarRecyclerView = new MyAdapterCellarRecyclerView(getApplicationContext(), wineBottleList);
         cellarRecyclerView.setAdapter(myAdapterCellarRecyclerView);
         myAdapterCellarRecyclerView.notifyDataSetChanged();
     }
@@ -181,7 +177,7 @@ public class CellarActivity extends AppCompatActivity {
         accesLocal = new AccesLocal(getApplicationContext());
         ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.recoverWineBottleList();
 
-        MyAdapterCellarRecyclerView myAdapterCellarRecyclerView = new MyAdapterCellarRecyclerView(wineBottleList);
+        MyAdapterCellarRecyclerView myAdapterCellarRecyclerView = new MyAdapterCellarRecyclerView(getApplicationContext(), wineBottleList);
         cellarRecyclerView.setAdapter(myAdapterCellarRecyclerView);
         myAdapterCellarRecyclerView.notifyDataSetChanged();
     }
@@ -192,7 +188,7 @@ public class CellarActivity extends AppCompatActivity {
         accesLocal = new AccesLocal(getApplicationContext());
         ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.sortYearWineBottleList();
 
-        MyAdapterCellarRecyclerView myAdapterCellarRecyclerView = new MyAdapterCellarRecyclerView(wineBottleList);
+        MyAdapterCellarRecyclerView myAdapterCellarRecyclerView = new MyAdapterCellarRecyclerView(getApplicationContext(), wineBottleList);
         cellarRecyclerView.setAdapter(myAdapterCellarRecyclerView);
         myAdapterCellarRecyclerView.notifyDataSetChanged();
     }
@@ -204,7 +200,7 @@ public class CellarActivity extends AppCompatActivity {
         accesLocal = new AccesLocal(getApplicationContext());
         ArrayList<WineBottle> wineBottleList = (ArrayList<WineBottle>) accesLocal.sortMapWineBottleList();
 
-        MyAdapterCellarRecyclerView myAdapterCellarRecyclerView = new MyAdapterCellarRecyclerView(wineBottleList);
+        MyAdapterCellarRecyclerView myAdapterCellarRecyclerView = new MyAdapterCellarRecyclerView(getApplicationContext(), wineBottleList);
         cellarRecyclerView.setAdapter(myAdapterCellarRecyclerView);
         myAdapterCellarRecyclerView.notifyDataSetChanged();
     }

@@ -10,13 +10,13 @@
     tools:context=".vue.LikeActivity">
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/cellarViewPager"
+        android:id="@+id/likeViewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constrainedHeight="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cellarTabLayout"
+        app:layout_constraintTop_toBottomOf="@id/likeTabLayout"
         app:layout_constraintBottom_toTopOf="@id/sortMenu" />
 
     <FrameLayout
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/cellarTabLayout"
+        android:id="@+id/likeTabLayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/green_middle_dark"

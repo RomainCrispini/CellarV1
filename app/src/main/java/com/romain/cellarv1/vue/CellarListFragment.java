@@ -91,7 +91,7 @@ public class CellarListFragment extends Fragment {
 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new MyAdapterCellarRecyclerView(wineBottleArrayList);
+        mAdapter = new MyAdapterCellarRecyclerView(getContext(), wineBottleArrayList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 

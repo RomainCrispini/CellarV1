@@ -1,11 +1,14 @@
 package com.romain.cellarv1.outils;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.WineBottle;
@@ -14,11 +17,14 @@ import java.util.ArrayList;
 
 public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterCellarRecyclerView.CellarViewHolder> {
 
-    private ArrayList<WineBottle> wineBottleArrayList;
+    ArrayList<WineBottle> wineBottleArrayList;
+
+    Context mContext;
 
     // Constructeur
-    public MyAdapterCellarRecyclerView(ArrayList<WineBottle> arrayList) {
+    public MyAdapterCellarRecyclerView(Context mContext, ArrayList<WineBottle> arrayList) {
         wineBottleArrayList = arrayList;
+        this.mContext = mContext;
     }
 
     public static class CellarViewHolder extends RecyclerView.ViewHolder {
@@ -31,6 +37,9 @@ public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterC
         public TextView domain;
         public TextView year;
 
+        public CardView pastilleImageBottle;
+        public CardView cardView;
+
         public CellarViewHolder(@NonNull View itemView) {
             super(itemView);
             imageWineColor = itemView.findViewById(R.id.imageWineColorListView);
@@ -40,19 +49,31 @@ public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterC
             appellation = itemView.findViewById(R.id.appellationListView);
             domain = itemView.findViewById(R.id.domainListView);
             year = itemView.findViewById(R.id.yearListView);
+
+            pastilleImageBottle = itemView.findViewById(R.id.pastilleImageBottle);
+            cardView = itemView.findViewById(R.id.cardView);
+
         }
     }
 
     @NonNull
     @Override
-    public CellarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_cellar_custom_list_view, parent, false);
+    public CellarViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        View v = LayoutInflater.from(mContext).inflate(R.layout.activity_cellar_custom_list_view, viewGroup, false);
         CellarViewHolder cellarViewHolder = new CellarViewHolder(v);
         return cellarViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull CellarViewHolder holder, int position) {
+
+        // On applique l'animation sur l'image de la bouteille
+        holder.pastilleImageBottle.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.popup_image_cardview));
+
+        // On applique l'animation sur la CardView
+        holder.cardView.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_animation_cardview));
+
+        // On set les infos dans le cardview layout
         WineBottle currentItem = wineBottleArrayList.get(position);
 
         Tools tools = new Tools();

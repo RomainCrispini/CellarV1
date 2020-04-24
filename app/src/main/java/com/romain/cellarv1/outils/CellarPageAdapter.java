@@ -42,7 +42,5 @@ public class CellarPageAdapter extends FragmentPagerAdapter {
         //return fragmentTitle.get(position);
     }
 
-
-
 }
 
