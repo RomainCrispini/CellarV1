@@ -1,6 +1,7 @@
 package com.romain.cellarv1.vue;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -13,13 +14,18 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Toast;
+
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.AccesLocal;
 import com.romain.cellarv1.modele.WineBottle;
 import com.romain.cellarv1.outils.MyAdapterCellarRecyclerView;
+import com.romain.cellarv1.outils.MyButtonClickListener;
+import com.romain.cellarv1.outils.MySwipeHelper;
 import com.romain.cellarv1.outils.Tools;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,7 +100,53 @@ public class CellarListFragment extends Fragment {
 
         //runLayoutFragmentAnimation();
 
+        MySwipeHelper swipeHelper = new MySwipeHelper(getContext(), mRecyclerView, 200) {
+            @Override
+            public void instanciateMyButton(final RecyclerView.ViewHolder viewHolder, List<MyButton> buffer) {
+                buffer.add(new MyButton(getContext(),
+                        "Delete",
+                        30,
+                        0,
+                        Color.parseColor("#FF3C30"),
+                        new MyButtonClickListener() {
+                            @Override
+                            public void onClick(int pos) {
+
+
+                                takeOutBottleRecyclerView();
+                                Toast.makeText(getContext(), "Bouteille sortie", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                ));
+
+                buffer.add(new MyButton(getContext(),
+                        "Update",
+                        30,
+                        R.drawable.essai,
+                        Color.parseColor("#FF9502"),
+                        new MyButtonClickListener() {
+                            @Override
+                            public void onClick(int pos) {
+                            addLikeToABottle();
+                                Toast.makeText(getContext(), "Ajouté dans Like", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                ));
+
+            }
+        };
+
+
         return cellarListFragment;
+
+    }
+
+
+    private void takeOutBottleRecyclerView() {
+
+    }
+
+    private void addLikeToABottle() {
 
     }
 

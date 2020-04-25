@@ -21,6 +21,7 @@ import com.romain.cellarv1.modele.WineBottle;
 import com.romain.cellarv1.vue.CellarActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterCellarRecyclerView.CellarViewHolder> {

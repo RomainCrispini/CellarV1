@@ -1,5 +1,5 @@
 package com.romain.cellarv1.outils;
 
-interface MyButtonClickListener {
+public interface MyButtonClickListener {
     void onClick(int pos);
 }

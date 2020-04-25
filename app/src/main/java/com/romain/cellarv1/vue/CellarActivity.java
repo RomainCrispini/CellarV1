@@ -14,6 +14,8 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.google.android.material.tabs.TabLayout;
 import com.romain.cellarv1.R;
 import com.romain.cellarv1.modele.AccesLocal;
@@ -22,7 +24,12 @@ import com.romain.cellarv1.outils.CellarPageAdapter;
 import com.romain.cellarv1.outils.CellarTabsTransition;
 import com.romain.cellarv1.outils.CurvedBottomNavigationView;
 import com.romain.cellarv1.outils.MyAdapterCellarRecyclerView;
+import com.romain.cellarv1.outils.MyButtonClickListener;
+import com.romain.cellarv1.outils.MySwipeHelper;
+import com.romain.cellarv1.outils.Tools;
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class CellarActivity extends AppCompatActivity {
@@ -56,6 +63,7 @@ public class CellarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cellar);
         init();
         //cellarRecyclerView = (RecyclerView) findViewById(R.id.cellarRecyclerView);
+
 
     }
 
