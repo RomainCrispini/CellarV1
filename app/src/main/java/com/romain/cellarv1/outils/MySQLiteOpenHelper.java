@@ -3,7 +3,6 @@ package com.romain.cellarv1.outils;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
@@ -52,6 +51,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + "bottle");
+        onCreate(db);
 
     }
 }

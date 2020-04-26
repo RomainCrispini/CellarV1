@@ -1,6 +1,10 @@
 package com.romain.cellarv1.outils;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -29,6 +34,7 @@ public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterC
     ArrayList<WineBottle> wineBottleArrayList;
 
     Context mContext;
+    Cursor mCursor;
 
     // Constructeur
     public MyAdapterCellarRecyclerView(Context mContext, ArrayList<WineBottle> arrayList) {
@@ -48,6 +54,8 @@ public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterC
         public CardView cardView;
         public CardView pastilleImageBottle;
 
+        public ImageButton essai;
+
 
         public CellarViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +69,8 @@ public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterC
             cardView = itemView.findViewById(R.id.cardView);
             pastilleImageBottle = itemView.findViewById(R.id.pastilleImageBottle);
 
+            essai = itemView.findViewById(R.id.essai);
+
         }
     }
 
@@ -69,11 +79,16 @@ public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterC
     public CellarViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.activity_cellar_custom_list_view, viewGroup, false);
         CellarViewHolder cellarViewHolder = new CellarViewHolder(v);
+        //return new CellarViewHolder(v);
         return cellarViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull CellarViewHolder holder, int position) {
+
+        if(!mCursor.moveToPosition(position)) {
+            return;
+        }
 
         //Glide.with(mContext).load(wineBottleArrayList.get(position).getImage()).into(holder.cardView);
 
@@ -86,14 +101,19 @@ public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterC
         // On set les infos dans le cardview layout
         WineBottle currentItem = wineBottleArrayList.get(position);
 
-        Tools tools = new Tools();
+        //long id = mCursor.getLong(mCursor.getColumnIndex());
 
+        Tools tools = new Tools();
         holder.image.setImageBitmap(tools.stringToBitmap(currentItem.getImage()));
+
         holder.region.setText(currentItem.getRegion());
         holder.appellation.setText(currentItem.getAppellation());
         holder.domain.setText(currentItem.getDomain());
         holder.year.setText(currentItem.getYear().toString());
 
+        //holder.essai.setBackgroundColor(Color.YELLOW);
+
+        // On set la couleur du vin sous la pastille de l'image de l'étiquette
         switch(currentItem.getWineColor().trim()) {
             case "Rouge" :
                 holder.imageWineColor.setImageResource(R.drawable.red_wine_listview);
@@ -109,6 +129,16 @@ public class MyAdapterCellarRecyclerView extends RecyclerView.Adapter<MyAdapterC
                 break;
         }
 
+        // On set la CardView d'un coeur si la bouteille est like
+        switch(currentItem.getLike()) {
+            case 0 :
+                holder.essai.setImageResource(R.drawable.icon_like_cardview);
+                holder.essai.setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
+                break;
+            case 1 :
+                holder.essai.setImageResource(R.drawable.icon_navbar_scan);
+                break;
+        }
 
     }
 

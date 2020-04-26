@@ -53,6 +53,7 @@ public class CellarActivity extends AppCompatActivity {
     private ImageButton sortApogee;
     private ImageView sortRecover;
 
+
     // Initialisation du RecyclerView du Tab1
     //private RecyclerView cellarRecyclerView;
 
@@ -63,6 +64,7 @@ public class CellarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cellar);
         init();
         //cellarRecyclerView = (RecyclerView) findViewById(R.id.cellarRecyclerView);
+
 
 
     }

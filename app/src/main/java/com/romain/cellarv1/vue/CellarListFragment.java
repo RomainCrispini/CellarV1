@@ -1,6 +1,7 @@
 package com.romain.cellarv1.vue;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.romain.cellarv1.R;
@@ -35,14 +38,15 @@ import java.util.List;
 public class CellarListFragment extends Fragment {
 
     private AccesLocal accesLocal;
+    private Cursor mCursor;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private CardView pastilleImageBottle;
-
     private OvershootInterpolator interpolator = new OvershootInterpolator();
+
+    //private ImageButton essai;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -90,11 +94,10 @@ public class CellarListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View cellarListFragment = inflater.inflate(R.layout.fragment_cellar_list, container, false);
         mRecyclerView = (RecyclerView) cellarListFragment.findViewById(R.id.cellarRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
-
-        pastilleImageBottle = (CardView) cellarListFragment.findViewById(R.id.pastilleImageBottle);
 
         loadWineBottleInRecycleView();
 
@@ -112,7 +115,12 @@ public class CellarListFragment extends Fragment {
                             @Override
                             public void onClick(int pos) {
 
+                                //String deletedItem = null;
+                                int position = viewHolder.getAdapterPosition();
+                                ArrayList<WineBottle> wineBottleArrayList = (ArrayList<WineBottle>) accesLocal.recoverWineBottleList();
 
+                                wineBottleArrayList.remove(position);
+                                mAdapter.notifyItemRemoved(position);
                                 takeOutBottleRecyclerView();
                                 Toast.makeText(getContext(), "Bouteille sortie", Toast.LENGTH_SHORT).show();
                             }
@@ -122,12 +130,14 @@ public class CellarListFragment extends Fragment {
                 buffer.add(new MyButton(getContext(),
                         "Update",
                         30,
-                        R.drawable.essai,
+                        0, //R.drawable.essai,
                         Color.parseColor("#FF9502"),
                         new MyButtonClickListener() {
                             @Override
                             public void onClick(int pos) {
-                            addLikeToABottle();
+
+
+                                addLikeToABottle();
                                 Toast.makeText(getContext(), "Ajouté dans Like", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -144,9 +154,12 @@ public class CellarListFragment extends Fragment {
 
     private void takeOutBottleRecyclerView() {
 
+        //long id = mCursor.getLong(mCursor.getColumnIndex(dateaddnewbottle));
     }
 
     private void addLikeToABottle() {
+
+
 
     }
 

@@ -31,7 +31,7 @@ public class LikeActivity extends AppCompatActivity {
     private TabLayout cellarTabLayout;
     private ViewPager viewPager;
     private CellarListFragment cellarListFragment;
-    private CellarStatsFragment cellarStatsFragment;
+    private LikeWishlistFragment likeWishlistFragment;
 
     // Initialisation du menu bis
     private OvershootInterpolator interpolator = new OvershootInterpolator();
@@ -71,7 +71,7 @@ public class LikeActivity extends AppCompatActivity {
         final TabLayout cellarTabLayout = (TabLayout) findViewById(R.id.likeTabLayout);
 
         cellarListFragment = new CellarListFragment();
-        cellarStatsFragment = new CellarStatsFragment();
+        likeWishlistFragment = new LikeWishlistFragment();
 
 
         cellarTabLayout.setupWithViewPager(viewPager);
@@ -80,7 +80,7 @@ public class LikeActivity extends AppCompatActivity {
         viewPager.setPageTransformer(true, new CellarTabsTransition());
 
         cellarPageAdapter.addFragment(cellarListFragment, "List");
-        cellarPageAdapter.addFragment(cellarStatsFragment, "Stats");
+        cellarPageAdapter.addFragment(likeWishlistFragment, "Stats");
 
         viewPager.setAdapter(cellarPageAdapter);
 

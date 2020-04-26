@@ -37,33 +37,6 @@ public class AccesLocal {
         bd.execSQL(requete);
     }
 
-    /**
-     * Récupération de la dernière bouteille de la BDD
-     * @return wineBottle
-     */
-    public WineBottle getLastWineBottle() {
-        bd = accesBD.getReadableDatabase();
-        WineBottle wineBottle = null;
-        String requete = "select * from bottle";
-        Cursor cursor = bd.rawQuery(requete, null);
-        cursor.moveToLast();
-        if(!cursor.isAfterLast()) {
-            Date date = new Date();
-            String country = cursor.getString(1);
-            String region = cursor.getString(2);
-            String winecolor = cursor.getString(3);
-            String domain = cursor.getString(4);
-            String appellation = cursor.getString(5);
-            Integer year = cursor.getInt(6);
-            Integer number = cursor.getInt(7);
-            Integer estimate = cursor.getInt(8);
-            String image = cursor.getString(9);
-            Integer like = cursor.getInt(10);
-            wineBottle = new WineBottle(date, country, region, winecolor, domain, appellation, year, number, estimate, image, like);
-        }
-        cursor.close();
-        return wineBottle;
-    }
 
     /**
      * Récupération de la liste des bouteilles enregistrées dans le cellier
@@ -205,5 +178,35 @@ public class AccesLocal {
         }
         cursor.close();
         return wineBottleList;
+    }
+
+
+
+    /**
+     * Récupération de la dernière bouteille de la BDD
+     * @return wineBottle
+     */
+    public WineBottle getLastWineBottle() {
+        bd = accesBD.getReadableDatabase();
+        WineBottle wineBottle = null;
+        String requete = "select * from bottle";
+        Cursor cursor = bd.rawQuery(requete, null);
+        cursor.moveToLast();
+        if(!cursor.isAfterLast()) {
+            Date date = new Date();
+            String country = cursor.getString(1);
+            String region = cursor.getString(2);
+            String winecolor = cursor.getString(3);
+            String domain = cursor.getString(4);
+            String appellation = cursor.getString(5);
+            Integer year = cursor.getInt(6);
+            Integer number = cursor.getInt(7);
+            Integer estimate = cursor.getInt(8);
+            String image = cursor.getString(9);
+            Integer like = cursor.getInt(10);
+            wineBottle = new WineBottle(date, country, region, winecolor, domain, appellation, year, number, estimate, image, like);
+        }
+        cursor.close();
+        return wineBottle;
     }
 }
